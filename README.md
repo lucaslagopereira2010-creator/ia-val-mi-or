@@ -26,9 +26,12 @@ flotante en la esquina, como las de muchas webs).
 
 ## 🚀 Probarlo en 30 segundos
 
-Abre el archivo **`index.html`** en tu navegador (doble clic). Verás una página de
-demostración con el asistente incrustado y la burbuja flotante. Escribe una pregunta o
-pulsa uno de los ejemplos.
+**La forma más fácil:** abre el archivo **`asistente-edvm.html`** (doble clic). Es un
+archivo **único y autónomo** con todo incluido: no necesita nada más y puedes incluso
+enviarlo por email o WhatsApp para que otros lo prueben.
+
+También puedes abrir **`index.html`**, una página de demostración más completa con el
+asistente incrustado y la burbuja flotante.
 
 > Consejo: para que los enlaces y todo funcione igual que en producción, puedes servir
 > la carpeta con un servidor local sencillo:
@@ -43,13 +46,16 @@ pulsa uno de los ejemplos.
 
 ```
 .
-├── index.html                  ← Página de demostración (ábrela para probar)
+├── asistente-edvm.html         ← ⭐ ARCHIVO ÚNICO listo para probar (ábrelo)
+├── index.html                  ← Página de demostración completa
 ├── embed.html                  ← Ejemplo mínimo de integración (3 líneas)
 │
 ├── asistente/                  ← El asistente (esto es lo que se integra en la web)
 │   ├── base-conocimiento.js    ← ⭐ TODA la información del club (se edita aquí)
 │   ├── edvm-chat.js            ← Motor del chat e interfaz
 │   └── edvm-chat.css           ← Estilos (blanco/rojo del club)
+│
+├── build-standalone.js         ← Regenera el archivo único (node build-standalone.js)
 │
 ├── api/
 │   └── chat.js                 ← Backend OPCIONAL para el modo con la API de Claude
@@ -61,6 +67,11 @@ pulsa uno de los ejemplos.
 ├── .env.example                ← Plantilla de variables de entorno (clave API)
 └── README.md
 ```
+
+> Tras editar la información o los estilos, regenera el archivo único con:
+> ```bash
+> node build-standalone.js
+> ```
 
 ---
 
@@ -188,7 +199,11 @@ del texto es seguro (no rompe con los precios, escapa HTML, genera bien los enla
 
 Resumen de lo que tiene cargado (todo editable en `base-conocimiento.js`):
 
-- **Club**: escuela de fútbol desde 1996, +27 equipos, categorías de biberones a aficionados.
+- **Club**: escuela de fútbol desde 1996, cerca de una treintena de equipos (más de 27),
+  de biberones a aficionados, federado en la Real Federación Galega de Fútbol (sede en
+  A Ramallosa, Nigrán; históricamente «Val Miñor - Caixanova»).
+- **El Val Miñor y Nigrán** *(información de internet)*: la comarca (Nigrán, Baiona y
+  Gondomar), el río Miñor, las Rías Baixas, y Nigrán con sus playas (América, Patos, Panxón).
 - **Campus de verano 2026** (Grupo PEREIRA): turnos, horarios, cuota (70 €), servicios
   opcionales e inscripción.
 - **Socios**: abono familiar (30 €) e individual (20 €), alta y recogida del carnet.

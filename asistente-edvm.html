@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asistente Virtual · E.D. Val Miñor Nigrán</title>
+<meta name="description" content="Asistente virtual de la Escuela Deportiva Val Miñor Nigrán.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ---- Estilos de la página ---- */
+:root{
+  --rojo:#cc0000; --rojo-mid:#a80000; --rojo-vivo:#ff2b2b; --rojo-osc:#8a0000;
+  --rojo-claro:#fff0f1; --texto:#181821; --sub:#5a5a68; --borde:rgba(20,20,30,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Barlow',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  color:var(--texto);line-height:1.6;
+  background:
+    radial-gradient(1200px 500px at 50% -10%, #ffe3e4 0%, transparent 60%),
+    linear-gradient(180deg,#fff 0%,#f6f7f9 100%);
+  min-height:100vh;
+}
+.page{max-width:560px;margin:0 auto;padding:2.4rem 1.2rem 3rem;}
+
+/* Cabecera */
+.head{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:1.4rem;}
+.head-shield{width:78px;height:78px;background:#fff;border-radius:50%;padding:9px;
+  box-shadow:0 12px 30px -8px rgba(204,0,0,.45),0 4px 10px rgba(0,0,0,.1);margin-bottom:.9rem;}
+.head-shield svg{width:100%;height:100%;}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid rgba(204,0,0,.2);
+  color:var(--rojo);padding:5px 14px;border-radius:20px;font-size:.68rem;letter-spacing:2px;
+  text-transform:uppercase;font-weight:700;margin-bottom:.9rem;box-shadow:0 2px 8px rgba(204,0,0,.08);}
+h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2.2rem,7vw,3rem);
+  line-height:1;letter-spacing:.5px;}
+h1 .red{color:var(--rojo-vivo);}
+.lead{color:var(--sub);font-size:1rem;max-width:440px;margin:.8rem auto 0;}
+
+/* Ejemplos */
+.ejemplos{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin:1.4rem 0 .4rem;}
+.ej{background:#fff;border:1.5px solid rgba(204,0,0,.22);color:var(--rojo);border-radius:18px;
+  padding:8px 14px;font-size:.82rem;font-weight:600;cursor:pointer;font-family:inherit;
+  transition:all .2s;box-shadow:0 2px 6px rgba(204,0,0,.06);}
+.ej:hover{background:linear-gradient(135deg,#ff2b2b,#cc0000);color:#fff;border-color:transparent;
+  transform:translateY(-2px);box-shadow:0 6px 16px rgba(204,0,0,.3);}
+
+/* Chat */
+.chat-box{margin-top:1.3rem;}
+
+/* Pie */
+.foot{text-align:center;margin-top:1.8rem;font-size:.85rem;color:var(--sub);line-height:1.9;}
+.foot a{color:var(--rojo);font-weight:600;text-decoration:none;}
+.foot a:hover{text-decoration:underline;}
+.foot .sep{opacity:.4;margin:0 .4rem;}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="head">
+    <div class="head-shield">
+      <svg viewBox="0 0 50 58" xmlns="http://www.w3.org/2000/svg">
+        <path d="M25 2 L48 12 L48 32 C48 44 25 56 25 56 C25 56 2 44 2 32 L2 12 Z" fill="#cc0000" stroke="#fff" stroke-width="2.5"/>
+        <rect x="2" y="30" width="46" height="13" fill="#181821"/>
+        <text x="25" y="24" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="11" fill="#fff">ED</text>
+        <text x="25" y="41" text-anchor="middle" font-family="Barlow Condensed" font-weight="700" font-size="7.5" fill="#fff">VAL MIÑOR</text>
+      </svg>
+    </div>
+    <span class="eyebrow">⚽ Escuela de Fútbol · Desde 1996</span>
+    <h1>Asistente <span class="red">Virtual</span></h1>
+    <p class="lead">Pregúntame lo que necesites sobre la <strong>E.D. Val Miñor Nigrán</strong>: campus, inscripciones, cuotas, socios, camisetas y mucho más.</p>
+  </div>
+
+  <div class="ejemplos" id="ejemplos">
+    <button class="ej" type="button">¿Cuándo es el campus de verano?</button>
+    <button class="ej" type="button">¿Cómo me hago socio?</button>
+    <button class="ej" type="button">¿Qué es el Val Miñor?</button>
+    <button class="ej" type="button">Número de cuenta</button>
+  </div>
+
+  <div class="chat-box">
+    <div id="chat-edvm"></div>
+  </div>
+
+  <div class="foot">
+    <a href="mailto:info@edvmnigran.com">info@edvmnigran.com</a>
+    <span class="sep">·</span>
+    <a href="https://wa.me/34610186460">WhatsApp 610 186 460</a><br>
+    🤍❤️ E.D. Val Miñor Nigrán
+  </div>
+</div>
+
+<!-- ================= ASISTENTE (todo incluido) ================= -->
+<style>
+/* ============================================================================
+   Asistente Virtual E.D. Val Miñor Nigrán — Estilos del widget
+   Identidad visual del club: blanco y rojo, tipografías Barlow, escudo.
+   Diseño cuidado: degradados, profundidad, microanimaciones.
+   Todo va prefijado con .edvm- para no interferir con la web donde se embeba.
+   ============================================================================ */
+
+.edvm-chat,
+.edvm-chat *,
+.edvm-launcher,
+.edvm-launcher * {
+  box-sizing: border-box;
+}
+
+.edvm-chat {
+  /* Paleta del club */
+  --edvm-rojo: #cc0000;
+  --edvm-rojo-mid: #a80000;
+  --edvm-rojo-vivo: #ff2b2b;
+  --edvm-rojo-osc: #8a0000;
+  --edvm-rojo-claro: #fff0f1;
+  --edvm-blanco: #ffffff;
+  --edvm-gris: #f6f7f9;
+  --edvm-gris-tarjeta: #f9fafb;
+  --edvm-texto: #181821;
+  --edvm-sub: #5a5a68;
+  --edvm-borde: rgba(20, 20, 30, 0.08);
+  --edvm-sombra: 0 24px 60px -12px rgba(140, 0, 0, 0.28), 0 8px 24px rgba(0, 0, 0, 0.12);
+  --edvm-grad: linear-gradient(135deg, #ff2b2b 0%, #cc0000 55%, #8a0000 100%);
+
+  font-family: "Barlow", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--edvm-texto);
+}
+
+/* ============================================================
+   BOTÓN FLOTANTE (burbuja)
+   ============================================================ */
+.edvm-launcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 2147483000;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: var(--edvm-grad);
+  box-shadow: 0 10px 28px rgba(204, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s;
+  padding: 0;
+  animation: edvm-flotar 3.5s ease-in-out infinite;
+}
+.edvm-launcher::after {
+  /* anillo de pulso */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--edvm-rojo-vivo);
+  opacity: 0;
+  animation: edvm-anillo 3s ease-out infinite;
+}
+.edvm-launcher:hover {
+  transform: translateY(-4px) scale(1.06);
+  box-shadow: 0 16px 36px rgba(204, 0, 0, 0.55), 0 4px 10px rgba(0, 0, 0, 0.25);
+  animation-play-state: paused;
+}
+.edvm-launcher svg {
+  width: 34px;
+  height: 34px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+.edvm-launcher .edvm-launcher-close {
+  display: none;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1;
+}
+.edvm-chat.is-open .edvm-launcher {
+  animation: none;
+}
+.edvm-chat.is-open .edvm-launcher::after {
+  display: none;
+}
+.edvm-chat.is-open .edvm-launcher svg {
+  display: none;
+}
+.edvm-chat.is-open .edvm-launcher .edvm-launcher-close {
+  display: block;
+}
+@keyframes edvm-flotar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes edvm-anillo {
+  0% { transform: scale(1); opacity: 0.7; }
+  70% { transform: scale(1.5); opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Insignia de "1" cuando hay un mensaje de bienvenida sin leer */
+.edvm-launcher-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 11px;
+  background: #181821;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================================
+   PANEL DE CHAT
+   ============================================================ */
+.edvm-panel {
+  position: fixed;
+  bottom: 104px;
+  right: 24px;
+  z-index: 2147483000;
+  width: 392px;
+  max-width: calc(100vw - 32px);
+  height: 620px;
+  max-height: calc(100vh - 140px);
+  background: var(--edvm-blanco);
+  border-radius: 20px;
+  border: 1px solid var(--edvm-borde);
+  box-shadow: var(--edvm-sombra);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform-origin: bottom right;
+  opacity: 0;
+  transform: translateY(20px) scale(0.94);
+  pointer-events: none;
+  transition: opacity 0.28s ease, transform 0.32s cubic-bezier(.34,1.4,.64,1);
+}
+.edvm-chat.is-open .edvm-panel {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Modo "inline": el chat va incrustado en la página (no flotante) */
+.edvm-chat.edvm-inline {
+  position: relative;
+}
+.edvm-chat.edvm-inline .edvm-panel {
+  position: relative;
+  bottom: auto;
+  right: auto;
+  width: 100%;
+  max-width: 100%;
+  height: 600px;
+  max-height: 82vh;
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  box-shadow: 0 18px 50px -18px rgba(140, 0, 0, 0.22), 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* ---- Cabecera ---- */
+.edvm-header {
+  position: relative;
+  background: var(--edvm-grad);
+  color: #fff;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.edvm-header::after {
+  /* brillo diagonal sutil */
+  content: "";
+  position: absolute;
+  top: -60%;
+  right: -10%;
+  width: 60%;
+  height: 220%;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
+  transform: rotate(20deg);
+  pointer-events: none;
+}
+.edvm-header-shield {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 50%;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+  position: relative;
+  z-index: 1;
+}
+.edvm-header-shield svg {
+  width: 100%;
+  height: 100%;
+}
+.edvm-header-info {
+  line-height: 1.25;
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+.edvm-header-title {
+  font-family: "Barlow Condensed", "Barlow", sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: 0.4px;
+}
+.edvm-header-status {
+  font-size: 0.74rem;
+  opacity: 0.95;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.edvm-header-status::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #5bf08a;
+  display: inline-block;
+  box-shadow: 0 0 0 0 rgba(91, 240, 138, 0.7);
+  animation: edvm-pulse 2s infinite;
+}
+@keyframes edvm-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(91, 240, 138, 0.6); }
+  70% { box-shadow: 0 0 0 7px rgba(91, 240, 138, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(91, 240, 138, 0); }
+}
+.edvm-header-min {
+  background: rgba(255, 255, 255, 0.16);
+  border: none;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: background 0.2s, transform 0.2s;
+  position: relative;
+  z-index: 1;
+}
+.edvm-header-min:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.08);
+}
+.edvm-chat.edvm-inline .edvm-header-min {
+  display: none;
+}
+
+/* ---- Zona de mensajes ---- */
+.edvm-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 16px 8px;
+  background:
+    radial-gradient(circle at 12px 12px, rgba(204, 0, 0, 0.04) 1.5px, transparent 1.6px) 0 0 / 26px 26px,
+    var(--edvm-gris);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  scroll-behavior: smooth;
+}
+.edvm-messages::-webkit-scrollbar {
+  width: 8px;
+}
+.edvm-messages::-webkit-scrollbar-thumb {
+  background: rgba(204, 0, 0, 0.18);
+  border-radius: 4px;
+}
+.edvm-messages::-webkit-scrollbar-thumb:hover {
+  background: rgba(204, 0, 0, 0.32);
+}
+
+.edvm-msg {
+  display: flex;
+  gap: 9px;
+  max-width: 90%;
+  animation: edvm-in 0.32s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes edvm-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.edvm-msg-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--edvm-grad);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  box-shadow: 0 3px 8px rgba(204, 0, 0, 0.3);
+}
+.edvm-msg-avatar svg {
+  width: 20px;
+  height: 20px;
+}
+.edvm-bubble {
+  padding: 11px 15px;
+  border-radius: 16px;
+  font-size: 0.93rem;
+  line-height: 1.58;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+.edvm-msg.bot .edvm-bubble {
+  background: var(--edvm-blanco);
+  border: 1px solid var(--edvm-borde);
+  border-bottom-left-radius: 5px;
+  color: var(--edvm-texto);
+  box-shadow: 0 4px 14px rgba(20, 20, 40, 0.06);
+}
+.edvm-msg.user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+.edvm-msg.user .edvm-bubble {
+  background: var(--edvm-grad);
+  color: #fff;
+  border-bottom-right-radius: 5px;
+  box-shadow: 0 4px 14px rgba(204, 0, 0, 0.28);
+}
+.edvm-bubble a {
+  color: var(--edvm-rojo);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1.5px;
+}
+.edvm-bubble a:hover {
+  color: var(--edvm-rojo-osc);
+}
+.edvm-msg.user .edvm-bubble a {
+  color: #fff;
+}
+.edvm-bubble strong {
+  font-weight: 700;
+}
+.edvm-bubble p {
+  margin: 0 0 9px 0;
+}
+.edvm-bubble p:last-child {
+  margin-bottom: 0;
+}
+.edvm-bubble ul {
+  margin: 7px 0;
+  padding-left: 6px;
+  list-style: none;
+}
+.edvm-bubble li {
+  margin: 5px 0;
+  padding-left: 18px;
+  position: relative;
+}
+.edvm-bubble li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--edvm-rojo);
+}
+.edvm-msg.user .edvm-bubble li::before {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+/* ---- Indicador "escribiendo..." ---- */
+.edvm-typing {
+  display: inline-flex;
+  gap: 5px;
+  padding: 4px 2px;
+}
+.edvm-typing span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--edvm-rojo);
+  opacity: 0.5;
+  animation: edvm-bounce 1.2s infinite;
+}
+.edvm-typing span:nth-child(2) { animation-delay: 0.18s; }
+.edvm-typing span:nth-child(3) { animation-delay: 0.36s; }
+@keyframes edvm-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-6px); opacity: 1; }
+}
+
+/* ---- Botones de sugerencia (quick replies) ---- */
+.edvm-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 6px 16px 10px 57px;
+  background:
+    radial-gradient(circle at 12px 12px, rgba(204, 0, 0, 0.04) 1.5px, transparent 1.6px) 0 0 / 26px 26px,
+    var(--edvm-gris);
+}
+.edvm-chip {
+  background: var(--edvm-blanco);
+  border: 1.5px solid rgba(204, 0, 0, 0.25);
+  color: var(--edvm-rojo);
+  padding: 8px 14px;
+  border-radius: 18px;
+  font-size: 0.81rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  box-shadow: 0 2px 6px rgba(204, 0, 0, 0.06);
+}
+.edvm-chip:hover {
+  background: var(--edvm-grad);
+  color: #fff;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(204, 0, 0, 0.3);
+}
+
+/* ---- Barra de entrada ---- */
+.edvm-input-bar {
+  display: flex;
+  align-items: flex-end;
+  gap: 9px;
+  padding: 13px 14px;
+  background: var(--edvm-blanco);
+  border-top: 1px solid var(--edvm-borde);
+  flex-shrink: 0;
+}
+.edvm-input {
+  flex: 1;
+  border: 1.5px solid var(--edvm-borde);
+  border-radius: 22px;
+  padding: 11px 17px;
+  font-size: 0.93rem;
+  font-family: inherit;
+  resize: none;
+  max-height: 110px;
+  outline: none;
+  color: var(--edvm-texto);
+  background: var(--edvm-gris-tarjeta);
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  line-height: 1.4;
+}
+.edvm-input::placeholder {
+  color: #a0a0ad;
+}
+.edvm-input:focus {
+  border-color: var(--edvm-rojo);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.1);
+}
+.edvm-send {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: var(--edvm-grad);
+  color: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.18s, box-shadow 0.2s, filter 0.2s;
+  box-shadow: 0 4px 12px rgba(204, 0, 0, 0.32);
+}
+.edvm-send:hover {
+  transform: scale(1.08) rotate(2deg);
+  box-shadow: 0 6px 18px rgba(204, 0, 0, 0.45);
+}
+.edvm-send:active {
+  transform: scale(0.96);
+}
+.edvm-send:disabled {
+  background: #c9ccd2;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+.edvm-send svg {
+  width: 21px;
+  height: 21px;
+}
+
+/* ---- Pie ---- */
+.edvm-footer {
+  text-align: center;
+  font-size: 0.68rem;
+  color: var(--edvm-sub);
+  padding: 7px 12px 10px;
+  background: var(--edvm-blanco);
+  letter-spacing: 0.2px;
+}
+.edvm-footer strong {
+  color: var(--edvm-rojo);
+  font-weight: 700;
+}
+
+/* ============================================================
+   RESPONSIVE — móvil: panel a pantalla completa
+   ============================================================ */
+@media (max-width: 480px) {
+  .edvm-panel {
+    bottom: 0;
+    right: 0;
+    width: 100vw;
+    max-width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    border-radius: 0;
+  }
+  .edvm-chat.edvm-inline .edvm-panel {
+    height: 72vh;
+    border-radius: 20px;
+  }
+  .edvm-launcher {
+    bottom: 18px;
+    right: 18px;
+  }
+}
+
+/* Respeta la preferencia de menos animaciones */
+@media (prefers-reduced-motion: reduce) {
+  .edvm-launcher,
+  .edvm-launcher::after,
+  .edvm-msg,
+  .edvm-header-status::before {
+    animation: none !important;
+  }
+  .edvm-panel {
+    transition: opacity 0.2s ease;
+  }
+}
+
+</style>
+
+<script>
+/* Configuración. Para el modo avanzado con la API de Claude, pon aquí la URL
+   del backend, p. ej.: apiEndpoint: "https://TU-PROYECTO.vercel.app/api/chat" */
+window.EDVM_CONFIG = { apiEndpoint: "", titulo: "Asistente EDVM", subtitulo: "En línea · respuesta inmediata" };
+</script>
+
+<script>
+/* ---- base-conocimiento.js ---- */
+/* ============================================================================
+   BASE DE CONOCIMIENTO · Asistente Virtual E.D. Val Miñor Nigrán
+   ----------------------------------------------------------------------------
+   Este archivo contiene TODA la información que el asistente utiliza para
+   responder a las familias y jugadores. Es la ÚNICA fuente de datos: para
+   actualizar precios, fechas o enlaces, edita únicamente este archivo.
+
+   Funciona tanto en el navegador (define window.EDVM_KB) como en Node.js
+   (module.exports) para que el widget web y el backend con la API de Claude
+   compartan exactamente los mismos datos.
+
+   Estructura de cada "tema":
+     id          -> identificador único
+     keywords    -> palabras/expresiones que disparan el tema (sin tildes,
+                    en minúsculas; el motor ya normaliza la pregunta)
+     respuesta   -> texto de la respuesta. Admite un formato sencillo:
+                      **negrita**            -> texto en negrita
+                      [texto](url)           -> enlace
+                      línea que empieza por "• "  -> elemento de lista
+                      línea en blanco        -> separación de párrafo
+                    Los emails, teléfonos y URLs sueltas se enlazan solos.
+     sugerencias -> (opcional) botones de seguimiento sugeridos
+     social      -> (opcional) true para saludos/despedidas (menor prioridad)
+   ============================================================================ */
+
+(function (root, factory) {
+  var data = factory();
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = data;            // Node.js (backend con la API de Claude)
+  } else {
+    root.EDVM_KB = data;              // Navegador (widget web)
+  }
+})(typeof self !== "undefined" ? self : this, function () {
+  "use strict";
+
+  /* ---- Datos de contacto reutilizables -------------------------------- */
+  var CONTACTO = {
+    email: "info@edvmnigran.com",
+    whatsapp: "610 186 460",
+    whatsappUrl: "https://wa.me/34610186460",
+    director: "José Tizón",
+    telefonoDirector: "627 50 55 13",
+    direccion: "Rua Manuel Lemos, 124 · 36370 Nigrán (Pontevedra)",
+    instagram: "@edvalminor",
+    instagramUrl: "https://www.instagram.com/edvalminor/",
+    web: "https://www.edvmnigran.com",
+    iban: "ES60 2080 5052 1430 4002 1652",
+    banco: "ABANCA"
+  };
+
+  /* ---- Enlaces oficiales ---------------------------------------------- */
+  var ENLACES = {
+    formularioCampus: "https://forms.gle/ctGKydALhFaZNwLP6",
+    circularCampus: "https://www.canva.com/design/DAGqps5LNsA/RJOKABSqYsH4iKyef5_0_Q/view",
+    formularioCamisetas: "https://forms.gle/cjoA5SG9cxegKsh29",
+    socioFamiliar: "https://appuntame.abanca.com/portal/plan/edvalminornigran/16jb92bdys",
+    socioIndividual: "https://appuntame.abanca.com/portal/plan/edvalminornigran/16jb92b68z",
+    entrenamientos: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6VmFqMJzItjbnA8cCWYEo3K6CSpMQ5AMVMxlnPyZnWvQNJwe-uv5QtbmTuvv3BvPCRB-XBAElLEgn/pubhtml",
+    horarioOficina: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSt-LUR4JlfVsa8c1GNYM0hDPNobHOI5VIJgl3MNtHfvUWQjf5b7DaTyj_L6tctOKmYazl2WC1YLAON/pubhtml",
+    partidos: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLEfEYHDObmqbKK1Y73tVUbXIxRWmyuykG4MeoABWpaG79R2F9p9BXAAtRSOrvfkRuL9Dl0_T9kugh/pubhtml",
+    cuotas: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTep5vuFaqHWpr_Y86Gypoom0gSOA-vPKODF47os-rLL5eh300OABcrtSdv4bh--5pp9WtUk36iFNAG/pubhtml?gid=1374414062&single=true",
+    ropaJugadores: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRNjZlc2Jzg1QsDH3ABqg2dlszHWX4MtA8th_uBvPoXK8iDJGQbCLA49_6svjUs2gvIDTFdaPytiHkO/pubhtml?gid=842211522&single=true",
+    torneos: "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0hQyGOrsmNqoDO_g7kfxt1DtcgxmQSq6qA8_7MD6fBBihWufZ56XDcRR0IvyjK_HNlE61COMz7L1U/pubhtml",
+    xogade: "https://www.edvmnigran.com/_files/ugd/598442_e0e10e2c96754743b45dda8cbf1a007e.pdf",
+    ideario: "https://drive.google.com/drive/folders/0BxskfnPIuX9YU1VFem9Dcy1aTjQ?usp=sharing",
+    ureca: "http://www.ureca.es",
+    portalSocios: "https://appuntame.abanca.com/plan/#/index.html/16jb8lsc2k"
+  };
+
+  /* ---- Temas (intención -> respuesta) --------------------------------- */
+  var TEMAS = [
+    /* ---------- SALUDO (social) ---------- */
+    {
+      id: "saludo",
+      social: true,
+      keywords: ["hola", "buenas", "buenos dias", "buenas tardes", "buenas noches", "hey", "saludos", "ola", "boas", "que tal"],
+      respuesta:
+        "¡Hola! 🤍❤️ Soy el asistente virtual de la **E.D. Val Miñor Nigrán**. " +
+        "Estoy aquí para ayudarte con dudas sobre el club.\n\n" +
+        "¿Sobre qué te gustaría saber?",
+      sugerencias: ["Campus de verano", "Hacerme socio", "Cuotas", "Contacto"]
+    },
+
+    /* ---------- CAMPUS DE VERANO ---------- */
+    {
+      id: "campus",
+      keywords: ["campus", "campus de verano", "campus de futbol", "verano", "turno", "turnos", "campamento", "summer", "actividad verano", "campus 2026", "grupo pereira"],
+      respuesta:
+        "🏖️ **Campus de Fútbol ED Val Miñor 2026 · Grupo PEREIRA**\n\n" +
+        "• **Lugar:** Complejo Deportivo y Social URECA (Nigrán)\n" +
+        "• **1.er turno:** del 11 al 15 de agosto\n" +
+        "• **2.º turno:** del 25 al 29 de agosto (¡PLAZAS AGOTADAS!)\n" +
+        "• **Horario base:** de 09:30 h a 13:30 h\n" +
+        "• **Cuota:** 70 € por turno y alumno\n\n" +
+        "**Servicios opcionales de conciliación:**\n" +
+        "• «Buenos días» (recogida temprana 08:30–09:30 h): +20 €\n" +
+        "• Comedor / Media pensión (13:30–15:00 h): +70 €\n\n" +
+        "Disfrutaremos de fútbol, talleres y piscina. ¿Quieres saber cómo inscribirte?",
+      sugerencias: ["¿Cómo me inscribo al campus?", "Número de cuenta", "Contacto"]
+    },
+    {
+      id: "inscripcion_campus",
+      keywords: ["inscribir campus", "inscripcion campus", "apuntar campus", "apuntarme campus", "plaza campus", "formulario campus", "matricula campus", "reservar plaza", "como inscribo", "como me inscribo", "como apuntar", "apuntar", "apuntarme", "apuntar a mi hijo", "inscribir", "inscripcion", "inscribirme", "anotar", "anotarme", "como apunto"],
+      respuesta:
+        "📝 **Inscripción al Campus de Verano**\n\n" +
+        "1. Rellena el formulario oficial: [Formulario de inscripción](" + ENLACES.formularioCampus + ")\n" +
+        "2. Haz el ingreso en la cuenta " + CONTACTO.banco + ": **" + CONTACTO.iban + "**\n" +
+        "3. Envía el comprobante de pago por email a " + CONTACTO.email + "\n\n" +
+        "**Concepto de la transferencia:** nombre y apellidos del niño/a + año de nacimiento.\n" +
+        "Ejemplo: «Pedro López - 2010»\n\n" +
+        "La plaza queda **validada** solo cuando recibimos el comprobante. " +
+        "En un plazo de 2 a 3 días laborables recibirás la confirmación por email.\n\n" +
+        "📋 También puedes consultar la [circular informativa](" + ENLACES.circularCampus + ").",
+      sugerencias: ["Precio del campus", "Número de cuenta", "Contacto"]
+    },
+
+    /* ---------- HAZTE SOCIO ---------- */
+    {
+      id: "socios",
+      keywords: ["socio", "socia", "socios", "hacerme socio", "hazte socio", "abono", "carnet", "carne", "colaborar", "apoyar el club", "ser socio", "cuota socio", "abonado"],
+      respuesta:
+        "🤝 **Hazte socio y colabora con tu Escuela**\n\n" +
+        "• **Abono familiar:** 30 € / temporada\n" +
+        "• **Abono individual:** 20 € / temporada\n\n" +
+        "**Cómo darte de alta:**\n" +
+        "• Familiar: [Tramitar abono familiar](" + ENLACES.socioFamiliar + ")\n" +
+        "• Individual: [Tramitar abono individual](" + ENLACES.socioIndividual + ")\n\n" +
+        "Una vez dado de alta, escríbenos a " + CONTACTO.email + " indicando dónde quieres recoger el carnet:\n" +
+        "• Oficina EDVM (URECA)\n" +
+        "• Taquilla de Condomínguez\n\n" +
+        "Tu cuota nos ayuda a mantener instalaciones, material, seguros y el futuro de más de 27 equipos. ¡Gracias! 🤍❤️",
+      sugerencias: ["Contacto", "Instalaciones", "Cuotas de la temporada"]
+    },
+
+    /* ---------- CAMISETAS DE RECUERDO ---------- */
+    {
+      id: "camisetas",
+      keywords: ["camiseta", "camisetas", "camiseta recuerdo", "camiseta de recuerdo", "recuerdo temporada", "talla", "tallas"],
+      respuesta:
+        "👕 **Camiseta de recuerdo de la temporada**\n\n" +
+        "• **Tallas 2 a 14:** 40 €\n" +
+        "• **Tallas S a 3XXL:** 45 €\n" +
+        "• Marcaje del nombre: **incluido**\n\n" +
+        "**Cómo solicitarla:**\n" +
+        "1. Rellena la [solicitud de camiseta](" + ENLACES.formularioCamisetas + ")\n" +
+        "2. Ingresa el importe en la cuenta: **" + CONTACTO.iban + "**\n" +
+        "3. Envía el comprobante a " + CONTACTO.email + "\n\n" +
+        "Indica nombre y apellidos del solicitante y la talla. Ejemplo: «Pedro Miguel Álvarez - Talla 6».\n\n" +
+        "ℹ️ El plazo de pedidos se cerró el 19 de mayo. Si llegas más tarde, escríbenos por email para confirmar disponibilidad.",
+      sugerencias: ["Ropa oficial", "Número de cuenta", "Contacto"]
+    },
+    {
+      id: "ropa_oficial",
+      keywords: ["ropa oficial", "ropa de jugador", "ropa jugador", "ropa portero", "ropa de portero", "portero", "equipacion oficial", "equipacion", "equipamiento", "material deportivo"],
+      respuesta:
+        "🧤 **Ropa y equipación oficial**\n\n" +
+        "Disponemos de ropa oficial de jugador y de portero. Puedes consultar el catálogo y las tallas aquí:\n" +
+        "• [Catálogo de equipación de jugadores](" + ENLACES.ropaJugadores + ")\n\n" +
+        "Para pedidos o dudas sobre la ropa de portero, escríbenos a " + CONTACTO.email + " o por WhatsApp al " + CONTACTO.whatsapp + ".",
+      sugerencias: ["Camisetas de recuerdo", "Contacto"]
+    },
+
+    /* ---------- FIESTA FIN DE TEMPORADA ---------- */
+    {
+      id: "fiesta",
+      keywords: ["fiesta", "fin de temporada", "fiesta fin de temporada", "evento", "celebracion", "fiesta del club", "27 de junio", "que dia es la fiesta"],
+      respuesta:
+        "🎉 **Gran fiesta de fin de temporada**\n\n" +
+        "• **Fecha:** sábado 27 de junio\n" +
+        "• **Lugar:** Condomínguez\n\n" +
+        "Un día especial para reunir a todo el club: jugadores, amigos y familias. Habrá fútbol, diversión acuática, baile, sorpresas y mucha risa. 🤍❤️⚽\n\n" +
+        "El programa completo de actividades se anuncia a mediados de junio. ¡Reserva la fecha y no te lo pierdas!",
+      sugerencias: ["Instalaciones", "Contacto"]
+    },
+
+    /* ---------- CUOTAS DE LA TEMPORADA ---------- */
+    {
+      id: "cuotas",
+      keywords: ["cuota", "cuotas", "precio temporada", "cuotas temporada", "precio", "precios", "pago temporada", "mensualidad", "cuanto cuesta jugar", "cuanto vale"],
+      respuesta:
+        "💶 **Cuotas de la temporada**\n\n" +
+        "Los importes, plazos y modalidades de pago de cada equipo y categoría están detallados en la tabla oficial:\n" +
+        "• [Ver cuotas por categoría](" + ENLACES.cuotas + ")\n\n" +
+        "Si tienes dudas sobre tu cuota concreta, escríbenos a " + CONTACTO.email + " o pásate por la oficina (URECA).",
+      sugerencias: ["Horario de oficina", "Número de cuenta", "Contacto"]
+    },
+
+    /* ---------- ENTRENAMIENTOS ---------- */
+    {
+      id: "entrenamientos",
+      keywords: ["entrenamiento", "entrenamientos", "entreno", "entrenos", "entrena", "entrenan", "entrenamos", "horario entreno", "hora de entreno", "dias de entreno", "cuando entrena", "cuando entrenan", "a que hora entrenan", "horario entrenamiento"],
+      respuesta:
+        "📋 **Entrenamientos**\n\n" +
+        "Los días y horas de entrenamiento de cada equipo se actualizan en esta hoja:\n" +
+        "• [Consultar entrenamientos](" + ENLACES.entrenamientos + ")\n\n" +
+        "Si no encuentras tu equipo o tienes dudas, escríbenos a " + CONTACTO.email + ".",
+      sugerencias: ["Calendario de partidos", "Contacto"]
+    },
+
+    /* ---------- PARTIDOS ---------- */
+    {
+      id: "partidos",
+      keywords: ["partido", "partidos", "calendario", "calendario partidos", "convocatoria", "cuando juega", "cuando jugamos", "donde juega", "proximo partido"],
+      respuesta:
+        "⚽ **Calendario de partidos**\n\n" +
+        "Consulta dónde y cuándo juegan nuestros equipos este fin de semana:\n" +
+        "• [Calendario de partidos](" + ENLACES.partidos + ")\n\n" +
+        "Los partidos oficiales como local se disputan en el Campo Municipal de Nigrán.",
+      sugerencias: ["Entrenamientos", "Instalaciones", "Torneos"]
+    },
+
+    /* ---------- HORARIO DE OFICINA ---------- */
+    {
+      id: "horario_oficina",
+      keywords: ["oficina", "horario oficina", "horario de oficina", "atencion", "cuando atienden", "horario atencion", "secretaria", "administracion"],
+      respuesta:
+        "🕐 **Horario de oficina**\n\n" +
+        "Nuestro equipo administrativo te atiende presencialmente en el Complejo URECA (Nigrán). Consulta el horario actualizado aquí:\n" +
+        "• [Horario de oficina](" + ENLACES.horarioOficina + ")\n\n" +
+        "También puedes escribirnos a " + CONTACTO.email + " o por WhatsApp al " + CONTACTO.whatsapp + ".",
+      sugerencias: ["Contacto", "Instalaciones"]
+    },
+
+    /* ---------- CONTACTO ---------- */
+    {
+      id: "contacto",
+      keywords: ["contacto", "contactar", "telefono", "email", "correo", "whatsapp", "llamar", "escribir", "direccion", "donde estais", "ubicacion", "como os contacto", "numero"],
+      respuesta:
+        "📬 **Contacto E.D. Val Miñor Nigrán**\n\n" +
+        "• **Email:** " + CONTACTO.email + "\n" +
+        "• **WhatsApp / Teléfono:** " + CONTACTO.whatsapp + "\n" +
+        "• **Entrenadores y competición:** " + CONTACTO.director + " · " + CONTACTO.telefonoDirector + "\n" +
+        "• **Dirección:** " + CONTACTO.direccion + "\n" +
+        "• **Instagram:** [" + CONTACTO.instagram + "](" + CONTACTO.instagramUrl + ")\n\n" +
+        "Estamos encantados de ayudarte. 🤍❤️",
+      sugerencias: ["Horario de oficina", "Instalaciones"]
+    },
+
+    /* ---------- CUENTA BANCARIA ---------- */
+    {
+      id: "cuenta",
+      keywords: ["cuenta", "iban", "numero de cuenta", "transferencia", "ingreso", "como pago", "donde pago", "abanca", "datos bancarios", "como ingreso"],
+      respuesta:
+        "💳 **Número de cuenta (" + CONTACTO.banco + ")**\n\n" +
+        "**" + CONTACTO.iban + "**\n\n" +
+        "Recuerda indicar siempre el concepto correcto (por ejemplo, nombre y apellidos del niño/a + año de nacimiento) y enviar el comprobante de pago a " + CONTACTO.email + " para validar tu solicitud.",
+      sugerencias: ["Inscripción al campus", "Cuotas", "Camisetas de recuerdo"]
+    },
+
+    /* ---------- INSTALACIONES ---------- */
+    {
+      id: "instalaciones",
+      keywords: ["instalacion", "instalaciones", "campo", "campos", "ureca", "condominguez", "donde juegan", "donde entrenan", "donde se juega", "complejo", "estadio"],
+      respuesta:
+        "🏟️ **Nuestras instalaciones**\n\n" +
+        "• **Campo Municipal de Nigrán:** campo base donde disputamos los partidos oficiales como local.\n" +
+        "• **Complejo Deportivo URECA:** sede de la oficina, entrenamientos entre semana y el Campus de Verano. [Web URECA](" + ENLACES.ureca + ")\n" +
+        "• **Taquilla Condomínguez:** punto de atención los días de partido y recogida de carnets de socios.",
+      sugerencias: ["Partidos", "Horario de oficina", "Contacto"]
+    },
+
+    /* ---------- CATEGORÍAS / EQUIPOS ---------- */
+    {
+      id: "categorias",
+      keywords: ["categoria", "categorias", "edad", "edades", "equipo", "equipos", "prebenjamin", "benjamin", "alevin", "infantil", "cadete", "juvenil", "biberon", "biberones", "aficionados", "que edad", "que categoria"],
+      respuesta:
+        "👦👧 **Categorías y equipos**\n\n" +
+        "Contamos con más de **27 equipos** que cubren todo el ciclo formativo:\n" +
+        "• Biberones · Prebenjamín · Benjamín · Alevín · Infantil · Cadete · Juvenil · Aficionados\n\n" +
+        "Acogemos a jugadores y jugadoras desde sus primeros toques al balón hasta la etapa de aficionados. " +
+        "Para saber qué categoría corresponde a tu hijo/a y cómo inscribirlo, escríbenos a " + CONTACTO.email + " o por WhatsApp al " + CONTACTO.whatsapp + ".",
+      sugerencias: ["Cuotas", "Entrenamientos", "Contacto"]
+    },
+
+    /* ---------- IDEARIO Y RRI ---------- */
+    {
+      id: "ideario",
+      keywords: ["ideario", "rri", "normativa", "reglamento", "valores", "normas", "regimen interno", "filosofia"],
+      respuesta:
+        "📖 **Ideario y Reglamento de Régimen Interno (RRI)**\n\n" +
+        "Nuestro trabajo se sustenta en formar excelentes personas, no solo futbolistas: respeto, compromiso, esfuerzo y trabajo en equipo.\n\n" +
+        "Puedes consultar el ideario y la normativa completa aquí:\n" +
+        "• [Ideario & RRI](" + ENLACES.ideario + ")",
+      sugerencias: ["Sobre el club", "Contacto"]
+    },
+
+    /* ---------- XOGADE / SEGURO ---------- */
+    {
+      id: "xogade",
+      keywords: ["xogade", "seguro", "seguro deportivo", "protocolo", "lesion", "mutua", "cobertura", "accidente"],
+      respuesta:
+        "📄 **Protocolo Xogade (seguro deportivo)**\n\n" +
+        "Documento oficial de la Xunta de Galicia para el deporte base, con la normativa y seguros vigentes:\n" +
+        "• [Descargar protocolo Xogade (PDF)](" + ENLACES.xogade + ")\n\n" +
+        "Para cualquier gestión relacionada con una lesión o el seguro, contacta con " + CONTACTO.email + ".",
+      sugerencias: ["Contacto", "Ideario & RRI"]
+    },
+
+    /* ---------- TORNEOS ---------- */
+    {
+      id: "torneos",
+      keywords: ["torneo", "torneos", "competicion externa", "competiciones", "campeonato"],
+      respuesta:
+        "🏆 **Torneos y competiciones**\n\n" +
+        "Seguimiento de los torneos locales, regionales o nacionales en los que participan nuestros equipos fuera de su liga:\n" +
+        "• [Ver torneos](" + ENLACES.torneos + ")",
+      sugerencias: ["Partidos", "Contacto"]
+    },
+
+    /* ---------- CONGRESO DE ENTRENADORES ---------- */
+    {
+      id: "congreso",
+      keywords: ["congreso", "congreso de entrenadores", "formacion entrenadores", "femxa", "ponencia", "jornada tecnica", "curso entrenadores"],
+      respuesta:
+        "🎓 **I Congreso de Entrenadores de Fútbol Base FEMXA**\n\n" +
+        "• **Fechas:** jueves 26 y viernes 27 de diciembre\n" +
+        "• **Horario:** mañana 10:00–14:00 h · tarde 16:00–21:00 h\n" +
+        "• **Lugar:** Auditorio del Concello de Nigrán\n" +
+        "• **Pase completo:** 50 € · **½ jornada:** 30 €\n" +
+        "• **Director:** " + CONTACTO.director + " · Información: " + CONTACTO.telefonoDirector + "\n\n" +
+        "Organizado por la EDVM con el apoyo de la Federación Galega de Fútbol y el Concello de Nigrán.",
+      sugerencias: ["Contacto"]
+    },
+
+    /* ---------- PATROCINADORES ---------- */
+    {
+      id: "patrocinadores",
+      keywords: ["patrocinador", "patrocinadores", "patrocinio", "sponsor", "colaborador", "colaboradores", "empresa", "publicidad", "anunciarme"],
+      respuesta:
+        "🤝 **Patrocinadores y colaboradores**\n\n" +
+        "Gracias al tejido empresarial que apuesta por el deporte base. Patrocinador principal: **Grupo Pereira**. " +
+        "Nos acompañan Kömmerling, Several Energy, GADIS, Clínica Nimo, Aceites Abril y Pescanova, además de la Diputación de Pontevedra, el Concello de Nigrán y URECA.\n\n" +
+        "¿Tienes una empresa y quieres vincular tu marca a nuestros valores? Escríbenos a " + CONTACTO.email + ".",
+      sugerencias: ["Sobre el club", "Contacto"]
+    },
+
+    /* ---------- SOBRE EL CLUB / HISTORIA ---------- */
+    {
+      id: "historia",
+      keywords: ["historia", "fundacion", "desde cuando", "1996", "quienes sois", "quien sois", "sobre el club", "sobre vosotros", "que es edvm", "informacion del club", "quienes somos", "club", "trayectoria", "caixanova", "anos de historia", "cuantos anos"],
+      respuesta:
+        "🏅 **Sobre la E.D. Val Miñor Nigrán**\n\n" +
+        "Somos una escuela de fútbol fundada en **1996**, referente del fútbol base en Nigrán, el Val Miñor y toda Galicia. " +
+        "Contamos con cerca de **una treintena de equipos** (más de 27) y más de **300 jugadores**, desde la categoría de biberones hasta aficionados.\n\n" +
+        "Tenemos nuestra sede en **A Ramallosa (Nigrán)** y estamos federados en la **Real Federación Galega de Fútbol**. Históricamente también se nos ha conocido como «Val Miñor - Caixanova». Vestimos de **blanco y rojo** 🤍❤️.\n\n" +
+        "Nuestro principal objetivo es formar excelentes personas, no solo futbolistas.",
+      sugerencias: ["¿Qué es el Val Miñor?", "Categorías", "Hacerme socio"]
+    },
+
+    /* ---------- COMARCA VAL MIÑOR ---------- */
+    {
+      id: "comarca",
+      keywords: ["val minor", "valle minor", "comarca", "que es el val minor", "rio minor", "mancomunidad", "baiona", "gondomar", "rias baixas", "ria de vigo", "donde esta el val minor"],
+      respuesta:
+        "🗺️ **El Val Miñor**\n\n" +
+        "El **Val Miñor** es una comarca natural del sur de Galicia, en la provincia de Pontevedra, formada por los municipios de **Nigrán**, **Baiona** y **Gondomar**. Toma su nombre del **río Miñor**, que da forma al valle.\n\n" +
+        "Está en plena **Ría de Vigo**, dentro de las **Rías Baixas**, una de las zonas más turísticas de Galicia por sus playas, su naturaleza y su cultura. Los tres concellos forman la **Mancomunidade do Val Miñor**.\n\n" +
+        "Nuestro club lleva con orgullo el nombre de esta tierra. 🤍❤️",
+      sugerencias: ["Nigrán y sus playas", "Sobre el club", "Instalaciones"]
+    },
+
+    /* ---------- NIGRÁN ---------- */
+    {
+      id: "nigran",
+      keywords: ["nigran", "playa", "playas", "playa america", "patos", "panxon", "ramallosa", "que ver en nigran", "turismo", "que hacer en nigran"],
+      respuesta:
+        "🏖️ **Nigrán**\n\n" +
+        "Nigrán es el municipio donde tiene su sede la E.D. Val Miñor, situado entre **Vigo y Baiona**, en la comarca del Val Miñor. Tiene unos **18.000 habitantes** repartidos en 7 parroquias (Nigrán, Panxón, A Ramallosa, Parada, Camos, Chandebrito y Priegue), y en verano casi triplica su población.\n\n" +
+        "Es famoso por sus **playas**: **Playa América** (familiar, de arena fina y aguas tranquilas), **Patos** (todo un referente del surf) y **Panxón**. 🌊",
+      sugerencias: ["¿Qué es el Val Miñor?", "Instalaciones", "Campus de verano"]
+    },
+
+    /* ---------- REDES SOCIALES ---------- */
+    {
+      id: "redes",
+      keywords: ["instagram", "redes", "redes sociales", "seguir", "rrss", "facebook", "twitter", "x", "tiktok"],
+      respuesta:
+        "📸 **Síguenos en redes**\n\n" +
+        "Toda la actualidad diaria del club:\n" +
+        "• Instagram: [" + CONTACTO.instagram + "](" + CONTACTO.instagramUrl + ")\n" +
+        "• Facebook: [ED Val Miñor Nigrán](https://www.facebook.com/edvalminor/)\n" +
+        "• X (Twitter): [" + CONTACTO.instagram + "](https://x.com/edvalminor)\n\n" +
+        "Web oficial: " + CONTACTO.web,
+      sugerencias: ["Contacto", "Sobre el club"]
+    },
+
+    /* ---------- AGRADECIMIENTO (social) ---------- */
+    {
+      id: "agradecimiento",
+      social: true,
+      keywords: ["gracias", "muchas gracias", "genial", "perfecto", "estupendo", "vale gracias", "mil gracias", "grazas"],
+      respuesta:
+        "¡De nada! 🤍❤️ Si te surge cualquier otra duda, aquí estaré. ¡Aúpa Val Miñor! ⚽",
+      sugerencias: ["Campus de verano", "Hacerme socio", "Contacto"]
+    },
+
+    /* ---------- DESPEDIDA (social) ---------- */
+    {
+      id: "despedida",
+      social: true,
+      keywords: ["adios", "hasta luego", "chao", "chau", "nada mas", "eso es todo", "hasta pronto", "me voy"],
+      respuesta:
+        "¡Hasta pronto! Gracias por contactar con la E.D. Val Miñor Nigrán. 🤍❤️⚽",
+      sugerencias: []
+    }
+  ];
+
+  /* ---- Respuesta cuando no se reconoce la pregunta --------------------- */
+  var FALLBACK =
+    "Lo siento, no estoy seguro de haber entendido tu pregunta. 🤔\n\n" +
+    "Puedo ayudarte con: **campus de verano**, **inscripciones**, **hacerte socio**, " +
+    "**cuotas**, **camisetas**, **entrenamientos**, **partidos**, **instalaciones** o **contacto**.\n\n" +
+    "Si lo prefieres, escríbenos directamente a " + CONTACTO.email + " o por WhatsApp al " + CONTACTO.whatsapp + " y te atenderemos personalmente.";
+
+  /* ---- Mensaje de bienvenida del asistente ---------------------------- */
+  var BIENVENIDA =
+    "¡Hola! 👋 Soy el **asistente virtual** de la E.D. Val Miñor Nigrán. " +
+    "Pregúntame lo que necesites sobre el club y te ayudaré al instante.";
+
+  var SUGERENCIAS_INICIALES = [
+    "Campus de verano 2026",
+    "¿Cómo me hago socio?",
+    "¿Qué es el Val Miñor?",
+    "Cuotas de la temporada",
+    "Contacto"
+  ];
+
+  /* ====================================================================
+     CONTEXTO_IA
+     Versión en prosa de toda la información, pensada para usarse como
+     "system prompt" cuando se activa el modo avanzado con la API de Claude.
+     Mantén esta sección coherente con los temas de arriba.
+     ==================================================================== */
+  var CONTEXTO_IA = [
+    "# E.D. Val Miñor Nigrán — Información oficial del club",
+    "",
+    "## El club",
+    "Escuela de fútbol fundada en 1996. Referente del fútbol base en Nigrán, el Val Miñor y Galicia.",
+    "Cuenta con cerca de una treintena de equipos (más de 27) y más de 300 jugadores. Categorías:",
+    "biberones, prebenjamín, benjamín, alevín, infantil, cadete, juvenil y aficionados.",
+    "El objetivo es formar excelentes personas, no solo futbolistas.",
+    "Sede en A Ramallosa (Nigrán). Federado en la Real Federación Galega de Fútbol; históricamente",
+    "conocido también como 'Val Miñor - Caixanova'. Colores del club: blanco y rojo.",
+    "",
+    "## Contacto",
+    "- Email (vía principal): " + CONTACTO.email,
+    "- WhatsApp / Teléfono: " + CONTACTO.whatsapp,
+    "- Atención a entrenadores y competición: " + CONTACTO.director + " (" + CONTACTO.telefonoDirector + ")",
+    "- Dirección: " + CONTACTO.direccion,
+    "- Instagram: " + CONTACTO.instagram + " (" + CONTACTO.instagramUrl + ")",
+    "- Web: " + CONTACTO.web,
+    "- Número de cuenta " + CONTACTO.banco + ": " + CONTACTO.iban,
+    "",
+    "## Campus de Fútbol 2026 (Grupo PEREIRA)",
+    "- Lugar: Complejo Deportivo y Social URECA (Nigrán).",
+    "- 1.er turno: del 11 al 15 de agosto.",
+    "- 2.º turno: del 25 al 29 de agosto (PLAZAS AGOTADAS).",
+    "- Horario base: 09:30 a 13:30 h.",
+    "- Cuota: 70 € por turno y alumno.",
+    "- Servicio opcional «Buenos días» (recogida 08:30–09:30): +20 €.",
+    "- Servicio opcional de comedor / media pensión (13:30–15:00): +70 €.",
+    "- Inscripción: rellenar el formulario oficial (" + ENLACES.formularioCampus + ") e ingresar la cuota en la cuenta " + CONTACTO.iban + ".",
+    "  La plaza solo queda validada cuando se recibe el comprobante de pago por email a " + CONTACTO.email + ".",
+    "  Concepto de la transferencia: nombre y apellidos del niño/a + año de nacimiento. Ejemplo: 'Pedro López - 2010'.",
+    "  La confirmación se recibe por email en un plazo de 2 a 3 días laborables.",
+    "",
+    "## Hazte socio",
+    "- Abono familiar: 30 € por temporada.",
+    "- Abono individual: 20 € por temporada.",
+    "- Alta: familiar (" + ENLACES.socioFamiliar + ") o individual (" + ENLACES.socioIndividual + ").",
+    "- Tras el alta, escribir a " + CONTACTO.email + " indicando dónde recoger el carnet: Oficina EDVM (URECA) o Taquilla de Condomínguez.",
+    "",
+    "## Camiseta de recuerdo de la temporada",
+    "- Tallas 2 a 14: 40 €. Tallas S a 3XXL: 45 €. Marcaje del nombre incluido.",
+    "- Solicitud: " + ENLACES.formularioCamisetas + ". Ingreso en la cuenta " + CONTACTO.iban + " y comprobante a " + CONTACTO.email + ".",
+    "- Indicar nombre y apellidos del solicitante y la talla. Ejemplo: 'Pedro Miguel Álvarez - Talla 6'.",
+    "- El plazo de pedidos se cerró el 19 de mayo; para pedidos posteriores, confirmar disponibilidad por email.",
+    "- También hay ropa oficial de jugador y de portero (catálogo de jugadores: " + ENLACES.ropaJugadores + ").",
+    "",
+    "## Fiesta de fin de temporada",
+    "- Sábado 27 de junio, en Condomínguez. Programa completo a mediados de junio.",
+    "- Habrá fútbol, diversión acuática, baile y sorpresas para jugadores, amigos y familias.",
+    "",
+    "## Recursos y enlaces",
+    "- Cuotas de la temporada: " + ENLACES.cuotas,
+    "- Entrenamientos: " + ENLACES.entrenamientos,
+    "- Calendario de partidos: " + ENLACES.partidos,
+    "- Horario de oficina: " + ENLACES.horarioOficina,
+    "- Torneos: " + ENLACES.torneos,
+    "- Protocolo Xogade (seguro, PDF): " + ENLACES.xogade,
+    "- Ideario y RRI: " + ENLACES.ideario,
+    "",
+    "## Instalaciones",
+    "- Campo Municipal de Nigrán: partidos oficiales como local.",
+    "- Complejo Deportivo URECA: oficina, entrenamientos entre semana y campus.",
+    "- Taquilla Condomínguez: atención los días de partido y recogida de carnets de socios.",
+    "",
+    "## Congreso de Entrenadores (I edición, FEMXA)",
+    "- Jueves 26 y viernes 27 de diciembre. Mañana 10:00–14:00, tarde 16:00–21:00. Auditorio del Concello de Nigrán.",
+    "- Pase completo: 50 €. Media jornada: 30 €. Director: " + CONTACTO.director + " (" + CONTACTO.telefonoDirector + ").",
+    "",
+    "## Patrocinadores",
+    "- Principal: Grupo Pereira. También: Kömmerling, Several Energy, GADIS, Clínica Nimo, Aceites Abril, Pescanova.",
+    "- Instituciones: Diputación de Pontevedra, Concello de Nigrán y URECA.",
+    "",
+    "## El Val Miñor (comarca)",
+    "El Val Miñor es una comarca natural del sur de Galicia (provincia de Pontevedra) formada por los",
+    "municipios de Nigrán, Baiona y Gondomar. Toma su nombre del río Miñor, que forma el valle.",
+    "Se encuentra en la Ría de Vigo, dentro de las Rías Baixas, una de las zonas más turísticas de Galicia.",
+    "Los tres concellos forman la Mancomunidade do Val Miñor. El club lleva el nombre de esta comarca.",
+    "",
+    "## Nigrán (sede del club)",
+    "Municipio situado entre Vigo y Baiona, en el Val Miñor. Unos 18.000 habitantes en 7 parroquias",
+    "(Nigrán, Panxón, A Ramallosa, Parada, Camos, Chandebrito y Priegue); en verano casi triplica su población.",
+    "Playas destacadas: Playa América (familiar), Patos (referente del surf) y Panxón."
+  ].join("\n");
+
+  return {
+    CONTACTO: CONTACTO,
+    ENLACES: ENLACES,
+    TEMAS: TEMAS,
+    FALLBACK: FALLBACK,
+    BIENVENIDA: BIENVENIDA,
+    SUGERENCIAS_INICIALES: SUGERENCIAS_INICIALES,
+    CONTEXTO_IA: CONTEXTO_IA
+  };
+});
+
+</script>
+
+<script>
+/* ---- edvm-chat.js ---- */
+/* ============================================================================
+   Asistente Virtual E.D. Val Miñor Nigrán — Motor del chat
+   ----------------------------------------------------------------------------
+   - Funciona 100% en el navegador, sin servidor ni claves (modo local):
+     busca la mejor respuesta dentro de base-conocimiento.js.
+   - Opcionalmente puede usar la API de Claude para conversaciones más
+     naturales: basta con definir window.EDVM_CONFIG.apiEndpoint con la URL
+     del backend (ver carpeta /api). Si el backend falla, vuelve al modo local.
+
+   Uso:
+     EDVMChat.iniciarWidget();              // burbuja flotante (esquina)
+     EDVMChat.iniciarInline("#mi-div");     // chat incrustado en la página
+   ============================================================================ */
+
+window.EDVMChat = (function () {
+  "use strict";
+
+  var KB = window.EDVM_KB;
+  if (!KB) {
+    console.error("[EDVMChat] No se encontro base-conocimiento.js (window.EDVM_KB). Cargalo antes que edvm-chat.js.");
+    return { iniciarWidget: function () {}, iniciarInline: function () {} };
+  }
+
+  var CONFIG = window.EDVM_CONFIG || {};
+  var API_ENDPOINT = CONFIG.apiEndpoint || "";        // "" => modo local
+  var TITULO = CONFIG.titulo || "Asistente EDVM";
+  var SUBTITULO = CONFIG.subtitulo || "En linea · respuesta inmediata";
+
+  /* ====================================================================
+     ICONOS (SVG en linea)
+     ==================================================================== */
+  var ICONO_ESCUDO =
+    '<svg viewBox="0 0 50 58" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+    '<path d="M25 2 L48 12 L48 32 C48 44 25 56 25 56 C25 56 2 44 2 32 L2 12 Z" fill="#cc0000" stroke="#ffffff" stroke-width="2.5"/>' +
+    '<rect x="2" y="30" width="46" height="13" fill="#1a1a24"/>' +
+    '<text x="25" y="24" text-anchor="middle" font-family="Barlow Condensed, Arial" font-weight="900" font-size="11" fill="#fff">ED</text>' +
+    '<text x="25" y="41" text-anchor="middle" font-family="Barlow Condensed, Arial" font-weight="700" font-size="7.5" fill="#fff">VAL MIÑOR</text>' +
+    "</svg>";
+
+  // Version en blanco para la burbuja flotante
+  var ICONO_CHAT_BLANCO =
+    '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+    '<path d="M12 3C7.03 3 3 6.58 3 11c0 2.05.87 3.92 2.3 5.34L4 21l4.9-1.28C9.86 20.55 10.9 20.8 12 20.8c4.97 0 9-3.58 9-8s-4.03-8-9-8z" fill="#fff"/>' +
+    '<circle cx="8.5" cy="11" r="1.3" fill="#cc0000"/>' +
+    '<circle cx="12" cy="11" r="1.3" fill="#cc0000"/>' +
+    '<circle cx="15.5" cy="11" r="1.3" fill="#cc0000"/>' +
+    "</svg>";
+
+  var ICONO_ENVIAR =
+    '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+    '<path d="M3.4 20.4l17.45-7.48a1 1 0 000-1.84L3.4 3.6a.993.993 0 00-1.39.91L2 9.12c0 .5.37.93.87.99L17 12 2.87 13.88c-.5.07-.87.5-.87 1l.01 4.61c0 .71.73 1.2 1.39.91z" fill="currentColor"/>' +
+    "</svg>";
+
+  /* ====================================================================
+     UTILIDADES DE TEXTO
+     ==================================================================== */
+
+  // Normaliza: minusculas, sin tildes, sin signos -> para comparar palabras
+  function normalizar(texto) {
+    return (texto || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[̀-ͯ]/g, "")   // quita acentos y diacriticos
+      .replace(/[^a-z0-9\s]/g, " ")      // signos -> espacio
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function escaparHtml(texto) {
+    return (texto || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  // Convierte el formato sencillo de la base de conocimiento a HTML seguro.
+  function formatear(texto) {
+    var html = escaparHtml(texto);
+
+    // Enlaces [texto](url): se reservan como tokens con un marcador exclusivo
+    // (@@@indice@@@) que no puede colisionar con numeros reales del texto
+    // (p. ej. "70") ni volver a enlazarse en los pasos siguientes.
+    var tokens = [];
+    html = html.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (_, etiqueta, url) {
+      var i = tokens.length;
+      tokens.push('<a href="' + url + '" target="_blank" rel="noopener">' + etiqueta + "</a>");
+      return "@@@" + i + "@@@";
+    });
+
+    // Autoenlazar emails sueltos
+    html = html.replace(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g,
+      '<a href="mailto:$1">$1</a>');
+
+    // Autoenlazar URLs sueltas (http/https)
+    html = html.replace(/(^|[\s(])((?:https?:\/\/)[^\s<]+)/g, function (_, pre, url) {
+      return pre + '<a href="' + url + '" target="_blank" rel="noopener">' + url + "</a>";
+    });
+
+    // Negritas **texto**
+    html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+
+    // Restaurar los tokens de enlaces
+    html = html.replace(/@@@(\d+)@@@/g, function (_, i) {
+      return tokens[+i];
+    });
+
+    // Construir parrafos y listas a partir de los saltos de linea
+    var lineas = html.split("\n");
+    var salida = [];
+    var parr = [];
+    var lista = [];
+
+    function volcarParrafo() {
+      if (parr.length) {
+        salida.push("<p>" + parr.join("<br>") + "</p>");
+        parr = [];
+      }
+    }
+    function volcarLista() {
+      if (lista.length) {
+        salida.push("<ul>" + lista.map(function (li) { return "<li>" + li + "</li>"; }).join("") + "</ul>");
+        lista = [];
+      }
+    }
+
+    lineas.forEach(function (linea) {
+      var t = linea.trim();
+      if (t === "") {
+        volcarParrafo();
+        volcarLista();
+      } else if (t.charAt(0) === "•") {   // vineta "•"
+        volcarParrafo();
+        lista.push(t.replace(/^•\s*/, ""));
+      } else {
+        volcarLista();
+        parr.push(t);
+      }
+    });
+    volcarParrafo();
+    volcarLista();
+
+    return salida.join("");
+  }
+
+  /* ====================================================================
+     MOTOR DE BUSQUEDA (modo local)
+     ==================================================================== */
+
+  // Devuelve { texto, sugerencias, id } con la mejor coincidencia.
+  function buscarRespuesta(consulta) {
+    var q = " " + normalizar(consulta) + " ";
+    var mejorContenido = null, mejorContenidoPunt = 0;
+    var mejorSocial = null, mejorSocialPunt = 0;
+
+    KB.TEMAS.forEach(function (tema) {
+      var punt = 0;
+      tema.keywords.forEach(function (kw) {
+        var k = normalizar(kw);
+        if (!k) return;
+        // coincidencia por palabra/expresion completa
+        if (q.indexOf(" " + k + " ") !== -1) {
+          punt += k.length + (k.indexOf(" ") !== -1 ? 4 : 0); // bonus a expresiones
+        }
+      });
+      if (punt === 0) return;
+      if (tema.social) {
+        if (punt > mejorSocialPunt) { mejorSocialPunt = punt; mejorSocial = tema; }
+      } else {
+        if (punt > mejorContenidoPunt) { mejorContenidoPunt = punt; mejorContenido = tema; }
+      }
+    });
+
+    var UMBRAL = 4; // longitud minima de palabra reconocida
+    var elegido = null;
+    if (mejorContenido && mejorContenidoPunt >= UMBRAL) {
+      elegido = mejorContenido;
+    } else if (mejorSocial) {
+      elegido = mejorSocial;
+    } else if (mejorContenido) {
+      elegido = mejorContenido; // coincidencia debil, mejor que nada
+    }
+
+    if (elegido) {
+      return { texto: elegido.respuesta, sugerencias: elegido.sugerencias || [], id: elegido.id };
+    }
+    return { texto: KB.FALLBACK, sugerencias: KB.SUGERENCIAS_INICIALES.slice(0, 4), id: "fallback" };
+  }
+
+  /* ====================================================================
+     LLAMADA A LA API DE CLAUDE (modo avanzado, opcional)
+     ==================================================================== */
+  function consultarAPI(historial) {
+    return fetch(API_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: historial })
+    })
+      .then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        if (!data || !data.reply) throw new Error("Respuesta vacia");
+        return data.reply;
+      });
+  }
+
+  /* ====================================================================
+     INSTANCIA DE CHAT
+     ==================================================================== */
+  function crearChat(opciones) {
+    opciones = opciones || {};
+    var inline = !!opciones.inline;
+    var contenedorObjetivo = opciones.contenedor || null;
+
+    var historial = [];   // para el modo API: [{role, content}]
+    var raiz, messagesEl, suggestionsEl, inputEl, sendBtn, launcher, panel, badge;
+    var abierto = inline;
+
+    /* ---- Construccion del DOM ---- */
+    raiz = document.createElement("div");
+    raiz.className = "edvm-chat" + (inline ? " edvm-inline" : "");
+
+    panel = document.createElement("div");
+    panel.className = "edvm-panel";
+    panel.setAttribute("role", "dialog");
+    panel.setAttribute("aria-label", "Asistente virtual E.D. Val Miñor Nigrán");
+    panel.innerHTML =
+      '<div class="edvm-header">' +
+        '<div class="edvm-header-shield">' + ICONO_ESCUDO + "</div>" +
+        '<div class="edvm-header-info">' +
+          '<div class="edvm-header-title">' + escaparHtml(TITULO) + "</div>" +
+          '<div class="edvm-header-status">' + escaparHtml(SUBTITULO) + "</div>" +
+        "</div>" +
+        '<button class="edvm-header-min" type="button" aria-label="Minimizar">&#8211;</button>' +
+      "</div>" +
+      '<div class="edvm-messages" aria-live="polite"></div>' +
+      '<div class="edvm-suggestions"></div>' +
+      '<div class="edvm-input-bar">' +
+        '<textarea class="edvm-input" rows="1" placeholder="Escribe tu pregunta..." aria-label="Escribe tu pregunta"></textarea>' +
+        '<button class="edvm-send" type="button" aria-label="Enviar">' + ICONO_ENVIAR + "</button>" +
+      "</div>" +
+      '<div class="edvm-footer">Asistente de <strong>E.D. Val Miñor Nigrán</strong></div>';
+
+    messagesEl = panel.querySelector(".edvm-messages");
+    suggestionsEl = panel.querySelector(".edvm-suggestions");
+    inputEl = panel.querySelector(".edvm-input");
+    sendBtn = panel.querySelector(".edvm-send");
+
+    if (inline) {
+      raiz.appendChild(panel);
+      (contenedorObjetivo || document.body).appendChild(raiz);
+    } else {
+      launcher = document.createElement("button");
+      launcher.className = "edvm-launcher";
+      launcher.type = "button";
+      launcher.setAttribute("aria-label", "Abrir asistente virtual");
+      launcher.innerHTML = ICONO_CHAT_BLANCO +
+        '<span class="edvm-launcher-close">&times;</span>' +
+        '<span class="edvm-launcher-badge">1</span>';
+      badge = launcher.querySelector(".edvm-launcher-badge");
+      raiz.appendChild(panel);
+      raiz.appendChild(launcher);
+      document.body.appendChild(raiz);
+
+      launcher.addEventListener("click", alternar);
+      panel.querySelector(".edvm-header-min").addEventListener("click", cerrar);
+    }
+
+    /* ---- Render de mensajes ---- */
+    function avatarBot() {
+      return '<div class="edvm-msg-avatar">' + ICONO_CHAT_BLANCO + "</div>";
+    }
+
+    function pintarMensaje(rol, contenido, esHtmlPlano) {
+      var msg = document.createElement("div");
+      msg.className = "edvm-msg " + (rol === "user" ? "user" : "bot");
+      var cuerpo = esHtmlPlano ? contenido : formatear(contenido);
+      msg.innerHTML =
+        (rol === "bot" ? avatarBot() : "") +
+        '<div class="edvm-bubble">' + cuerpo + "</div>";
+      messagesEl.appendChild(msg);
+      desplazar();
+      return msg;
+    }
+
+    function pintarSugerencias(lista) {
+      suggestionsEl.innerHTML = "";
+      (lista || []).forEach(function (txt) {
+        var chip = document.createElement("button");
+        chip.className = "edvm-chip";
+        chip.type = "button";
+        chip.textContent = txt;
+        chip.addEventListener("click", function () {
+          enviar(txt);
+        });
+        suggestionsEl.appendChild(chip);
+      });
+    }
+
+    var typingEl = null;
+    function mostrarTyping() {
+      ocultarTyping();
+      typingEl = document.createElement("div");
+      typingEl.className = "edvm-msg bot";
+      typingEl.innerHTML = avatarBot() +
+        '<div class="edvm-bubble"><div class="edvm-typing"><span></span><span></span><span></span></div></div>';
+      messagesEl.appendChild(typingEl);
+      desplazar();
+    }
+    function ocultarTyping() {
+      if (typingEl && typingEl.parentNode) typingEl.parentNode.removeChild(typingEl);
+      typingEl = null;
+    }
+
+    function desplazar() {
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    /* ---- Logica de envio ---- */
+    function enviar(textoForzado) {
+      var texto = (typeof textoForzado === "string" ? textoForzado : inputEl.value).trim();
+      if (!texto) return;
+
+      pintarMensaje("user", escaparHtml(texto), true);
+      inputEl.value = "";
+      ajustarAltura();
+      pintarSugerencias([]);
+      historial.push({ role: "user", content: texto });
+      mostrarTyping();
+
+      var demora = 350 + Math.min(texto.length * 12, 650); // sensacion natural
+
+      if (API_ENDPOINT) {
+        // Modo avanzado: API de Claude (con respaldo local si falla)
+        consultarAPI(historial.slice(-12))
+          .then(function (reply) {
+            ocultarTyping();
+            historial.push({ role: "assistant", content: reply });
+            pintarMensaje("bot", reply);
+            pintarSugerencias([]);
+          })
+          .catch(function (err) {
+            console.warn("[EDVMChat] Fallo la API, uso respuesta local:", err.message);
+            ocultarTyping();
+            var res = buscarRespuesta(texto);
+            historial.push({ role: "assistant", content: res.texto });
+            pintarMensaje("bot", res.texto);
+            pintarSugerencias(res.sugerencias);
+          });
+      } else {
+        // Modo local
+        setTimeout(function () {
+          ocultarTyping();
+          var res = buscarRespuesta(texto);
+          historial.push({ role: "assistant", content: res.texto });
+          pintarMensaje("bot", res.texto);
+          pintarSugerencias(res.sugerencias);
+        }, demora);
+      }
+    }
+
+    /* ---- Entrada de texto ---- */
+    function ajustarAltura() {
+      inputEl.style.height = "auto";
+      inputEl.style.height = Math.min(inputEl.scrollHeight, 110) + "px";
+    }
+    inputEl.addEventListener("input", ajustarAltura);
+    inputEl.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        enviar();
+      }
+    });
+    sendBtn.addEventListener("click", function () { enviar(); });
+
+    /* ---- Apertura / cierre (solo widget flotante) ---- */
+    function abrir() {
+      abierto = true;
+      raiz.classList.add("is-open");
+      if (badge) badge.style.display = "none";
+      setTimeout(function () { inputEl.focus(); }, 250);
+    }
+    function cerrar() {
+      abierto = false;
+      raiz.classList.remove("is-open");
+    }
+    function alternar() { if (abierto) { cerrar(); } else { abrir(); } }
+
+    /* ---- Mensaje de bienvenida inicial ---- */
+    pintarMensaje("bot", KB.BIENVENIDA);
+    pintarSugerencias(KB.SUGERENCIAS_INICIALES);
+
+    return { abrir: abrir, cerrar: cerrar, enviar: enviar, raiz: raiz };
+  }
+
+  /* ====================================================================
+     API PUBLICA
+     ==================================================================== */
+  var instanciaWidget = null;
+
+  function iniciarWidget() {
+    if (instanciaWidget) return instanciaWidget;
+    function arranque() {
+      instanciaWidget = crearChat({ inline: false });
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", arranque);
+    } else {
+      arranque();
+    }
+    return instanciaWidget;
+  }
+
+  function iniciarInline(selectorOContenedor) {
+    var creado = null;
+    var run = function () {
+      var cont = typeof selectorOContenedor === "string"
+        ? document.querySelector(selectorOContenedor)
+        : selectorOContenedor;
+      if (!cont) {
+        console.error("[EDVMChat] No se encontro el contenedor:", selectorOContenedor);
+        return;
+      }
+      creado = crearChat({ inline: true, contenedor: cont });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", run);
+    } else {
+      run();
+    }
+    return creado;
+  }
+
+  return {
+    iniciarWidget: iniciarWidget,
+    iniciarInline: iniciarInline,
+    // Expuesto por si se quiere usar el motor desde fuera:
+    buscarRespuesta: buscarRespuesta,
+    normalizar: normalizar,
+    formatear: formatear
+  };
+})();
+
+</script>
+
+<script>
+  var demo = EDVMChat.iniciarInline("#chat-edvm");
+  EDVMChat.iniciarWidget();
+  document.querySelectorAll("#ejemplos .ej").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      if (demo && demo.enviar) demo.enviar(btn.textContent.trim());
+    });
+  });
+</script>
+
+</body>
+</html>

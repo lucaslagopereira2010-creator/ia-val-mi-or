@@ -337,24 +337,51 @@
     /* ---------- SOBRE EL CLUB / HISTORIA ---------- */
     {
       id: "historia",
-      keywords: ["historia", "fundacion", "desde cuando", "1996", "quienes sois", "quien sois", "sobre el club", "sobre vosotros", "que es edvm", "informacion del club", "quienes somos"],
+      keywords: ["historia", "fundacion", "desde cuando", "1996", "quienes sois", "quien sois", "sobre el club", "sobre vosotros", "que es edvm", "informacion del club", "quienes somos", "club", "trayectoria", "caixanova", "anos de historia", "cuantos anos"],
       respuesta:
         "🏅 **Sobre la E.D. Val Miñor Nigrán**\n\n" +
-        "Somos una escuela de fútbol fundada en **1996**, referente del fútbol base en Nigrán, el Val Miñor y Galicia. " +
-        "Contamos con más de **27 equipos** y más de **300 jugadores**, desde la categoría de biberones hasta aficionados.\n\n" +
-        "Nuestro principal objetivo es formar excelentes personas, no solo futbolistas. 🤍❤️",
-      sugerencias: ["Categorías", "Ideario & RRI", "Hacerme socio"]
+        "Somos una escuela de fútbol fundada en **1996**, referente del fútbol base en Nigrán, el Val Miñor y toda Galicia. " +
+        "Contamos con cerca de **una treintena de equipos** (más de 27) y más de **300 jugadores**, desde la categoría de biberones hasta aficionados.\n\n" +
+        "Tenemos nuestra sede en **A Ramallosa (Nigrán)** y estamos federados en la **Real Federación Galega de Fútbol**. Históricamente también se nos ha conocido como «Val Miñor - Caixanova». Vestimos de **blanco y rojo** 🤍❤️.\n\n" +
+        "Nuestro principal objetivo es formar excelentes personas, no solo futbolistas.",
+      sugerencias: ["¿Qué es el Val Miñor?", "Categorías", "Hacerme socio"]
+    },
+
+    /* ---------- COMARCA VAL MIÑOR ---------- */
+    {
+      id: "comarca",
+      keywords: ["val minor", "valle minor", "comarca", "que es el val minor", "rio minor", "mancomunidad", "baiona", "gondomar", "rias baixas", "ria de vigo", "donde esta el val minor"],
+      respuesta:
+        "🗺️ **El Val Miñor**\n\n" +
+        "El **Val Miñor** es una comarca natural del sur de Galicia, en la provincia de Pontevedra, formada por los municipios de **Nigrán**, **Baiona** y **Gondomar**. Toma su nombre del **río Miñor**, que da forma al valle.\n\n" +
+        "Está en plena **Ría de Vigo**, dentro de las **Rías Baixas**, una de las zonas más turísticas de Galicia por sus playas, su naturaleza y su cultura. Los tres concellos forman la **Mancomunidade do Val Miñor**.\n\n" +
+        "Nuestro club lleva con orgullo el nombre de esta tierra. 🤍❤️",
+      sugerencias: ["Nigrán y sus playas", "Sobre el club", "Instalaciones"]
+    },
+
+    /* ---------- NIGRÁN ---------- */
+    {
+      id: "nigran",
+      keywords: ["nigran", "playa", "playas", "playa america", "patos", "panxon", "ramallosa", "que ver en nigran", "turismo", "que hacer en nigran"],
+      respuesta:
+        "🏖️ **Nigrán**\n\n" +
+        "Nigrán es el municipio donde tiene su sede la E.D. Val Miñor, situado entre **Vigo y Baiona**, en la comarca del Val Miñor. Tiene unos **18.000 habitantes** repartidos en 7 parroquias (Nigrán, Panxón, A Ramallosa, Parada, Camos, Chandebrito y Priegue), y en verano casi triplica su población.\n\n" +
+        "Es famoso por sus **playas**: **Playa América** (familiar, de arena fina y aguas tranquilas), **Patos** (todo un referente del surf) y **Panxón**. 🌊",
+      sugerencias: ["¿Qué es el Val Miñor?", "Instalaciones", "Campus de verano"]
     },
 
     /* ---------- REDES SOCIALES ---------- */
     {
       id: "redes",
-      keywords: ["instagram", "redes", "redes sociales", "seguir", "rrss", "facebook"],
+      keywords: ["instagram", "redes", "redes sociales", "seguir", "rrss", "facebook", "twitter", "x", "tiktok"],
       respuesta:
         "📸 **Síguenos en redes**\n\n" +
-        "Toda la actualidad diaria del club en Instagram: [" + CONTACTO.instagram + "](" + CONTACTO.instagramUrl + ").\n" +
+        "Toda la actualidad diaria del club:\n" +
+        "• Instagram: [" + CONTACTO.instagram + "](" + CONTACTO.instagramUrl + ")\n" +
+        "• Facebook: [ED Val Miñor Nigrán](https://www.facebook.com/edvalminor/)\n" +
+        "• X (Twitter): [" + CONTACTO.instagram + "](https://x.com/edvalminor)\n\n" +
         "Web oficial: " + CONTACTO.web,
-      sugerencias: ["Contacto"]
+      sugerencias: ["Contacto", "Sobre el club"]
     },
 
     /* ---------- AGRADECIMIENTO (social) ---------- */
@@ -393,8 +420,8 @@
   var SUGERENCIAS_INICIALES = [
     "Campus de verano 2026",
     "¿Cómo me hago socio?",
+    "¿Qué es el Val Miñor?",
     "Cuotas de la temporada",
-    "Camisetas de recuerdo",
     "Contacto"
   ];
 
@@ -409,8 +436,11 @@
     "",
     "## El club",
     "Escuela de fútbol fundada en 1996. Referente del fútbol base en Nigrán, el Val Miñor y Galicia.",
-    "Más de 27 equipos y más de 300 jugadores. Categorías: biberones, prebenjamín, benjamín, alevín,",
-    "infantil, cadete, juvenil y aficionados. El objetivo es formar excelentes personas, no solo futbolistas.",
+    "Cuenta con cerca de una treintena de equipos (más de 27) y más de 300 jugadores. Categorías:",
+    "biberones, prebenjamín, benjamín, alevín, infantil, cadete, juvenil y aficionados.",
+    "El objetivo es formar excelentes personas, no solo futbolistas.",
+    "Sede en A Ramallosa (Nigrán). Federado en la Real Federación Galega de Fútbol; históricamente",
+    "conocido también como 'Val Miñor - Caixanova'. Colores del club: blanco y rojo.",
     "",
     "## Contacto",
     "- Email (vía principal): " + CONTACTO.email,
@@ -471,7 +501,18 @@
     "",
     "## Patrocinadores",
     "- Principal: Grupo Pereira. También: Kömmerling, Several Energy, GADIS, Clínica Nimo, Aceites Abril, Pescanova.",
-    "- Instituciones: Diputación de Pontevedra, Concello de Nigrán y URECA."
+    "- Instituciones: Diputación de Pontevedra, Concello de Nigrán y URECA.",
+    "",
+    "## El Val Miñor (comarca)",
+    "El Val Miñor es una comarca natural del sur de Galicia (provincia de Pontevedra) formada por los",
+    "municipios de Nigrán, Baiona y Gondomar. Toma su nombre del río Miñor, que forma el valle.",
+    "Se encuentra en la Ría de Vigo, dentro de las Rías Baixas, una de las zonas más turísticas de Galicia.",
+    "Los tres concellos forman la Mancomunidade do Val Miñor. El club lleva el nombre de esta comarca.",
+    "",
+    "## Nigrán (sede del club)",
+    "Municipio situado entre Vigo y Baiona, en el Val Miñor. Unos 18.000 habitantes en 7 parroquias",
+    "(Nigrán, Panxón, A Ramallosa, Parada, Camos, Chandebrito y Priegue); en verano casi triplica su población.",
+    "Playas destacadas: Playa América (familiar), Patos (referente del surf) y Panxón."
   ].join("\n");
 
   return {

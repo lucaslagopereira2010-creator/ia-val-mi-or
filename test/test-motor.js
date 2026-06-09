@@ -49,6 +49,8 @@ const casos = [
   ["teléfono de contacto", "contacto"],
   ["dónde están las instalaciones", "instalaciones"],
   ["mi hija tiene 8 años, qué categoría", "categorias"],
+  ["¿qué es el Val Miñor?", "comarca"],
+  ["qué playas hay en Nigrán", "nigran"],
   ["hola buenas", "saludo"],
   ["muchas gracias", "agradecimiento"],
   ["asdfghjkl qwerty", "fallback"]
