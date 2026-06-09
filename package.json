@@ -1,0 +1,12 @@
+{
+  "name": "asistente-edvm",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Asistente virtual de la E.D. Val Miñor Nigrán (chat de preguntas frecuentes).",
+  "scripts": {
+    "test": "node test/test-motor.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "latest"
+  }
+}

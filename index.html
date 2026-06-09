@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asistente Virtual · E.D. Val Miñor Nigrán</title>
+<meta name="description" content="Asistente virtual de la Escuela Deportiva Val Miñor Nigrán. Resuelve al instante dudas sobre el campus, inscripciones, cuotas, socios y más.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="asistente/edvm-chat.css">
+<style>
+  :root{
+    --rojo:#cc0000; --rojo-mid:#a80000; --rojo-vivo:#ff1f1f; --rojo-claro:#ffebec;
+    --texto:#1a1a24; --sub:#4a4a5a; --borde:rgba(0,0,0,.08); --gris:#f4f5f7;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Barlow',sans-serif;color:var(--texto);background:#fff;line-height:1.6;}
+  a{color:var(--rojo);}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 1.5rem;}
+
+  /* Cabecera */
+  header{border-bottom:1px solid var(--borde);position:sticky;top:0;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);z-index:50;}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:.8rem 1.5rem;max-width:1080px;margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;}
+  .brand svg{width:44px;height:44px;}
+  .brand-name{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.2rem;color:var(--rojo);letter-spacing:.5px;line-height:1;}
+  .brand-sub{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--sub);}
+  .nav-cta{background:var(--rojo);color:#fff;padding:.55rem 1.1rem;border-radius:5px;font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;text-decoration:none;}
+  .nav-cta:hover{background:var(--rojo-mid);}
+
+  /* Hero */
+  .hero{padding:3.5rem 0 2rem;background:linear-gradient(180deg,var(--rojo-claro),#fff);}
+  .eyebrow{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid rgba(204,0,0,.2);color:var(--rojo);padding:5px 13px;border-radius:20px;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:1rem;}
+  h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2.4rem,5.5vw,3.8rem);line-height:.98;letter-spacing:.5px;}
+  h1 .red{color:var(--rojo-vivo);}
+  .lead{font-size:1.08rem;color:var(--sub);max-width:620px;margin:1.1rem 0 1.6rem;}
+  .features{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem;}
+  .feat{background:#fff;border:1px solid var(--borde);border-radius:18px;padding:5px 13px;font-size:.82rem;font-weight:600;color:var(--texto);}
+  .feat span{color:var(--rojo);}
+
+  /* Layout demo */
+  .demo{padding:2.2rem 0 4rem;}
+  .demo-grid{display:grid;grid-template-columns:1fr 380px;gap:2rem;align-items:start;}
+  .demo-h2{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.7rem;margin-bottom:.4rem;}
+  .demo-p{color:var(--sub);font-size:.95rem;margin-bottom:1.2rem;}
+  .ej-title{font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--sub);font-weight:700;margin:1.6rem 0 .7rem;}
+  .ejemplos{display:flex;flex-direction:column;gap:.55rem;}
+  .ej{text-align:left;background:#fff;border:1px solid var(--borde);border-left:3px solid var(--rojo);border-radius:7px;padding:.7rem .9rem;font-size:.9rem;color:var(--texto);cursor:pointer;font-family:inherit;transition:all .18s;}
+  .ej:hover{background:var(--rojo-claro);transform:translateX(3px);}
+  .ej::before{content:'💬 ';}
+
+  .panel-card{position:sticky;top:80px;}
+  .panel-note{font-size:.78rem;color:var(--sub);text-align:center;margin-top:.7rem;}
+  .panel-note strong{color:var(--rojo);}
+
+  /* Bloque informativo */
+  .info{background:var(--gris);padding:3rem 0;border-top:1px solid var(--borde);}
+  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem;margin-top:1.5rem;}
+  .info-card{background:#fff;border:1px solid var(--borde);border-radius:10px;padding:1.3rem;}
+  .info-card h3{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.15rem;margin-bottom:.4rem;}
+  .info-card p{font-size:.88rem;color:var(--sub);}
+  .info-ico{font-size:1.6rem;margin-bottom:.4rem;}
+
+  /* Pie */
+  footer{background:var(--texto);color:rgba(255,255,255,.85);padding:2.5rem 0;}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:space-between;align-items:center;}
+  footer a{color:#fff;font-weight:600;}
+  .foot-contact{font-size:.88rem;line-height:1.9;}
+
+  @media(max-width:820px){
+    .demo-grid{grid-template-columns:1fr;}
+    .panel-card{position:static;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="#" class="brand">
+      <svg viewBox="0 0 50 58" xmlns="http://www.w3.org/2000/svg">
+        <path d="M25 2 L48 12 L48 32 C48 44 25 56 25 56 C25 56 2 44 2 32 L2 12 Z" fill="#cc0000" stroke="#fff" stroke-width="2.5"/>
+        <rect x="2" y="30" width="46" height="13" fill="#1a1a24"/>
+        <text x="25" y="24" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="11" fill="#fff">ED</text>
+        <text x="25" y="41" text-anchor="middle" font-family="Barlow Condensed" font-weight="700" font-size="7.5" fill="#fff">VAL MIÑOR</text>
+      </svg>
+      <div>
+        <div class="brand-name">E.D. Val Miñor</div>
+        <div class="brand-sub">Asistente Virtual</div>
+      </div>
+    </a>
+    <a href="https://www.edvmnigran.com" target="_blank" class="nav-cta">Web oficial</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">⚽ Inteligencia artificial al servicio del club</span>
+    <h1>Resuelve tus dudas<br><span class="red">al instante</span></h1>
+    <p class="lead">
+      El asistente virtual de la <strong>E.D. Val Miñor Nigrán</strong> responde automáticamente a las
+      preguntas más frecuentes de jugadores y familias: campus de verano, inscripciones, cuotas,
+      cómo hacerse socio, camisetas, instalaciones, contacto y mucho más.
+    </p>
+    <div class="features">
+      <div class="feat"><span>✓</span> Disponible 24/7</div>
+      <div class="feat"><span>✓</span> Respuesta inmediata</div>
+      <div class="feat"><span>✓</span> Información siempre actualizada</div>
+      <div class="feat"><span>✓</span> Fácil de integrar en la web</div>
+    </div>
+  </div>
+</section>
+
+<section class="demo">
+  <div class="wrap demo-grid">
+    <div>
+      <h2 class="demo-h2">Pruébalo ahora mismo</h2>
+      <p class="demo-p">Escribe tu pregunta en el chat o pulsa uno de estos ejemplos para ver cómo responde el asistente:</p>
+
+      <div class="ej-title">Preguntas de ejemplo</div>
+      <div class="ejemplos" id="ejemplos">
+        <button class="ej" type="button">¿Cuándo es el campus de verano y cuánto cuesta?</button>
+        <button class="ej" type="button">¿Cómo inscribo a mi hijo en el campus?</button>
+        <button class="ej" type="button">¿Cómo me hago socio del club?</button>
+        <button class="ej" type="button">¿Cuándo es la fiesta de fin de temporada?</button>
+        <button class="ej" type="button">¿Cuál es el número de cuenta?</button>
+        <button class="ej" type="button">¿Cómo contacto con el club?</button>
+      </div>
+    </div>
+
+    <div class="panel-card">
+      <!-- Aquí se incrusta el asistente -->
+      <div id="chat-edvm"></div>
+      <p class="panel-note">También aparece como <strong>burbuja flotante</strong> abajo a la derecha 👉</p>
+    </div>
+  </div>
+</section>
+
+<section class="info">
+  <div class="wrap">
+    <h2 class="demo-h2">¿Qué puede responder?</h2>
+    <p class="demo-p">El asistente conoce toda la información oficial del club. Estos son algunos de los temas:</p>
+    <div class="info-grid">
+      <div class="info-card"><div class="info-ico">🏖️</div><h3>Campus de Verano</h3><p>Fechas, turnos, horarios, precios, servicios opcionales e inscripción paso a paso.</p></div>
+      <div class="info-card"><div class="info-ico">🤝</div><h3>Hazte socio</h3><p>Cuotas familiar e individual, alta y recogida del carnet.</p></div>
+      <div class="info-card"><div class="info-ico">💶</div><h3>Cuotas y pagos</h3><p>Importes de la temporada y número de cuenta para los ingresos.</p></div>
+      <div class="info-card"><div class="info-ico">👕</div><h3>Ropa y camisetas</h3><p>Camiseta de recuerdo, tallas, precios y equipación oficial.</p></div>
+      <div class="info-card"><div class="info-ico">⚽</div><h3>Entrenamientos y partidos</h3><p>Horarios, calendarios y convocatorias de cada equipo.</p></div>
+      <div class="info-card"><div class="info-ico">📍</div><h3>Instalaciones y contacto</h3><p>Campos, oficina, teléfono, email, WhatsApp y dirección.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="brand-name" style="color:#fff;">E.D. Val Miñor Nigrán</div>
+      <div class="brand-sub" style="color:rgba(255,255,255,.6);">Escuela de Fútbol · Desde 1996</div>
+    </div>
+    <div class="foot-contact">
+      ✉ <a href="mailto:info@edvmnigran.com">info@edvmnigran.com</a><br>
+      📱 <a href="https://wa.me/34610186460">WhatsApp 610 186 460</a><br>
+      📍 Rua Manuel Lemos, 124 · Nigrán
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     ASISTENTE VIRTUAL
+     1) Configuración (opcional)
+     2) Base de conocimiento
+     3) Motor del chat
+     ============================================================ -->
+<script>
+  // Configuración del asistente.
+  // Para usar el modo avanzado con la API de Claude, pon aquí la URL de tu
+  // backend, p. ej.: apiEndpoint: "/api/chat". Si lo dejas vacío, funciona
+  // en modo local (sin servidor) con la base de conocimiento.
+  window.EDVM_CONFIG = {
+    apiEndpoint: "",
+    titulo: "Asistente EDVM",
+    subtitulo: "En línea · respuesta inmediata"
+  };
+</script>
+<script src="asistente/base-conocimiento.js"></script>
+<script src="asistente/edvm-chat.js"></script>
+<script>
+  // Chat incrustado en la página (demo)
+  var demo = EDVMChat.iniciarInline("#chat-edvm");
+
+  // Burbuja flotante (así se verá embebido en cualquier web del club)
+  EDVMChat.iniciarWidget();
+
+  // Conectar las preguntas de ejemplo con el chat incrustado
+  document.querySelectorAll("#ejemplos .ej").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      if (demo && demo.enviar) demo.enviar(btn.textContent.trim());
+    });
+  });
+</script>
+
+</body>
+</html>

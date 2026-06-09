@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ejemplo de integración · Asistente EDVM</title>
+<style>
+  body{font-family:system-ui,Arial,sans-serif;max-width:680px;margin:60px auto;padding:0 20px;color:#1a1a24;line-height:1.6;}
+  h1{color:#cc0000;}
+  code,pre{background:#f4f5f7;border-radius:6px;}
+  pre{padding:14px;overflow:auto;border:1px solid rgba(0,0,0,.08);}
+  code{padding:2px 5px;}
+</style>
+</head>
+<body>
+
+  <h1>Ejemplo de integración mínima</h1>
+  <p>
+    Esta página de ejemplo solo contiene las <strong>3 líneas necesarias</strong> para añadir el
+    asistente como <strong>burbuja flotante</strong> a cualquier web del club. Ábrela en el navegador
+    y verás la burbuja roja abajo a la derecha.
+  </p>
+
+  <p>Para integrarlo en la web oficial, copia estas líneas antes de cerrar la etiqueta
+  <code>&lt;/body&gt;</code> (ajusta la ruta a la carpeta <code>asistente/</code> según dónde la subas):</p>
+
+  <pre>&lt;link rel="stylesheet" href="asistente/edvm-chat.css"&gt;
+&lt;script src="asistente/base-conocimiento.js"&gt;&lt;/script&gt;
+&lt;script src="asistente/edvm-chat.js"&gt;&lt;/script&gt;
+&lt;script&gt;EDVMChat.iniciarWidget();&lt;/script&gt;</pre>
+
+  <!-- ====== Integración real del asistente (burbuja flotante) ====== -->
+  <link rel="stylesheet" href="asistente/edvm-chat.css">
+  <script src="asistente/base-conocimiento.js"></script>
+  <script src="asistente/edvm-chat.js"></script>
+  <script>EDVMChat.iniciarWidget();</script>
+
+</body>
+</html>
