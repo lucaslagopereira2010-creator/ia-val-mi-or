@@ -22,7 +22,7 @@
   header{border-bottom:1px solid var(--borde);position:sticky;top:0;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);z-index:50;}
   .nav{display:flex;align-items:center;justify-content:space-between;padding:.8rem 1.5rem;max-width:1080px;margin:0 auto;}
   .brand{display:flex;align-items:center;gap:11px;text-decoration:none;}
-  .brand svg{width:44px;height:44px;}
+  .brand-logo{width:48px;height:48px;display:block;border-radius:50%;box-shadow:0 3px 10px rgba(204,0,0,.25);}
   .brand-name{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.2rem;color:var(--rojo);letter-spacing:.5px;line-height:1;}
   .brand-sub{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--sub);}
   .nav-cta{background:var(--rojo);color:#fff;padding:.55rem 1.1rem;border-radius:5px;font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;text-decoration:none;}
@@ -78,12 +78,7 @@
 <header>
   <div class="nav">
     <a href="#" class="brand">
-      <svg viewBox="0 0 50 58" xmlns="http://www.w3.org/2000/svg">
-        <path d="M25 2 L48 12 L48 32 C48 44 25 56 25 56 C25 56 2 44 2 32 L2 12 Z" fill="#cc0000" stroke="#fff" stroke-width="2.5"/>
-        <rect x="2" y="30" width="46" height="13" fill="#1a1a24"/>
-        <text x="25" y="24" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="11" fill="#fff">ED</text>
-        <text x="25" y="41" text-anchor="middle" font-family="Barlow Condensed" font-weight="700" font-size="7.5" fill="#fff">VAL MIÑOR</text>
-      </svg>
+      <img src="asistente/logo-edvm.svg" class="brand-logo" alt="Escudo E.D. Val Miñor Nigrán">
       <div>
         <div class="brand-name">E.D. Val Miñor</div>
         <div class="brand-sub">Asistente Virtual</div>
@@ -179,7 +174,7 @@
   // en modo local (sin servidor) con la base de conocimiento.
   window.EDVM_CONFIG = {
     apiEndpoint: "",
-    titulo: "Asistente EDVM",
+    titulo: "E.D. Val Miñor",
     subtitulo: "En línea · respuesta inmediata"
   };
 </script>

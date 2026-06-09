@@ -17,6 +17,7 @@ const leer = (p) => fs.readFileSync(path.join(RAIZ, p), "utf8");
 const css = leer("asistente/edvm-chat.css");
 const kb = leer("asistente/base-conocimiento.js");
 const motor = leer("asistente/edvm-chat.js");
+const logo = leer("asistente/logo-edvm.svg");
 
 const html = `<!DOCTYPE html>
 <html lang="es">
@@ -46,9 +47,9 @@ body{
 
 /* Cabecera */
 .head{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:1.4rem;}
-.head-shield{width:78px;height:78px;background:#fff;border-radius:50%;padding:9px;
-  box-shadow:0 12px 30px -8px rgba(204,0,0,.45),0 4px 10px rgba(0,0,0,.1);margin-bottom:.9rem;}
-.head-shield svg{width:100%;height:100%;}
+.head-shield{width:96px;height:96px;border-radius:50%;overflow:hidden;
+  box-shadow:0 14px 34px -8px rgba(204,0,0,.5),0 4px 10px rgba(0,0,0,.12),0 0 0 4px #fff;margin-bottom:1rem;}
+.head-shield svg{width:100%;height:100%;display:block;}
 .eyebrow{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid rgba(204,0,0,.2);
   color:var(--rojo);padding:5px 14px;border-radius:20px;font-size:.68rem;letter-spacing:2px;
   text-transform:uppercase;font-weight:700;margin-bottom:.9rem;box-shadow:0 2px 8px rgba(204,0,0,.08);}
@@ -80,12 +81,7 @@ h1 .red{color:var(--rojo-vivo);}
 <div class="page">
   <div class="head">
     <div class="head-shield">
-      <svg viewBox="0 0 50 58" xmlns="http://www.w3.org/2000/svg">
-        <path d="M25 2 L48 12 L48 32 C48 44 25 56 25 56 C25 56 2 44 2 32 L2 12 Z" fill="#cc0000" stroke="#fff" stroke-width="2.5"/>
-        <rect x="2" y="30" width="46" height="13" fill="#181821"/>
-        <text x="25" y="24" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="11" fill="#fff">ED</text>
-        <text x="25" y="41" text-anchor="middle" font-family="Barlow Condensed" font-weight="700" font-size="7.5" fill="#fff">VAL MIÑOR</text>
-      </svg>
+      ${logo}
     </div>
     <span class="eyebrow">⚽ Escuela de Fútbol · Desde 1996</span>
     <h1>Asistente <span class="red">Virtual</span></h1>
@@ -119,7 +115,7 @@ ${css}
 <script>
 /* Configuración. Para el modo avanzado con la API de Claude, pon aquí la URL
    del backend, p. ej.: apiEndpoint: "https://TU-PROYECTO.vercel.app/api/chat" */
-window.EDVM_CONFIG = { apiEndpoint: "", titulo: "Asistente EDVM", subtitulo: "En línea · respuesta inmediata" };
+window.EDVM_CONFIG = { apiEndpoint: "", titulo: "E.D. Val Miñor", subtitulo: "En línea · respuesta inmediata" };
 </script>
 
 <script>

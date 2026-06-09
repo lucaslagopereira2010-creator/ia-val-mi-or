@@ -26,9 +26,9 @@ body{
 
 /* Cabecera */
 .head{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:1.4rem;}
-.head-shield{width:78px;height:78px;background:#fff;border-radius:50%;padding:9px;
-  box-shadow:0 12px 30px -8px rgba(204,0,0,.45),0 4px 10px rgba(0,0,0,.1);margin-bottom:.9rem;}
-.head-shield svg{width:100%;height:100%;}
+.head-shield{width:96px;height:96px;border-radius:50%;overflow:hidden;
+  box-shadow:0 14px 34px -8px rgba(204,0,0,.5),0 4px 10px rgba(0,0,0,.12),0 0 0 4px #fff;margin-bottom:1rem;}
+.head-shield svg{width:100%;height:100%;display:block;}
 .eyebrow{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid rgba(204,0,0,.2);
   color:var(--rojo);padding:5px 14px;border-radius:20px;font-size:.68rem;letter-spacing:2px;
   text-transform:uppercase;font-weight:700;margin-bottom:.9rem;box-shadow:0 2px 8px rgba(204,0,0,.08);}
@@ -60,12 +60,28 @@ h1 .red{color:var(--rojo-vivo);}
 <div class="page">
   <div class="head">
     <div class="head-shield">
-      <svg viewBox="0 0 50 58" xmlns="http://www.w3.org/2000/svg">
-        <path d="M25 2 L48 12 L48 32 C48 44 25 56 25 56 C25 56 2 44 2 32 L2 12 Z" fill="#cc0000" stroke="#fff" stroke-width="2.5"/>
-        <rect x="2" y="30" width="46" height="13" fill="#181821"/>
-        <text x="25" y="24" text-anchor="middle" font-family="Barlow Condensed" font-weight="900" font-size="11" fill="#fff">ED</text>
-        <text x="25" y="41" text-anchor="middle" font-family="Barlow Condensed" font-weight="700" font-size="7.5" fill="#fff">VAL MIÑOR</text>
-      </svg>
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="200" height="200" role="img" aria-label="Escudo E.D. Val Miñor Nigrán">
+  <defs>
+    <path id="edvmArcTop" d="M 24.8,72.6 A 80,80 0 0 1 175.2,72.6"/>
+    <path id="edvmArcBot" d="M 34.5,145.9 A 80,80 0 0 0 165.5,145.9"/>
+  </defs>
+  <circle cx="100" cy="100" r="98" fill="#cc1f1f"/>
+  <g fill="#ffffff" font-family="'Barlow Condensed','Arial Narrow',Arial,Helvetica,sans-serif" font-weight="700">
+    <text font-size="16" letter-spacing="1.2">
+      <textPath href="#edvmArcTop" startOffset="50%" text-anchor="middle">ED VAL MIÑOR</textPath>
+    </text>
+    <text font-size="17" letter-spacing="3">
+      <textPath href="#edvmArcBot" startOffset="50%" text-anchor="middle">NIGRÁN</textPath>
+    </text>
+  </g>
+  <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 54,84 C 66,72 78,72 90,82 C 98,88 102,88 110,82 C 122,72 134,72 146,84" stroke-width="6.5"/>
+    <path d="M 70,90 L 100,151" stroke-width="9.5"/>
+    <path d="M 130,90 L 100,151" stroke-width="9.5"/>
+  </g>
+  <polygon points="100,101 110,120 90,120" fill="#ffffff"/>
+</svg>
+
     </div>
     <span class="eyebrow">⚽ Escuela de Fútbol · Desde 1996</span>
     <h1>Asistente <span class="red">Virtual</span></h1>
@@ -135,10 +151,10 @@ h1 .red{color:var(--rojo-vivo);}
   bottom: 24px;
   right: 24px;
   z-index: 2147483000;
-  width: 66px;
-  height: 66px;
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
-  border: none;
+  border: 3px solid #fff;
   cursor: pointer;
   background: var(--edvm-grad);
   box-shadow: 0 10px 28px rgba(204, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.2);
@@ -164,10 +180,17 @@ h1 .red{color:var(--rojo-vivo);}
   box-shadow: 0 16px 36px rgba(204, 0, 0, 0.55), 0 4px 10px rgba(0, 0, 0, 0.25);
   animation-play-state: paused;
 }
-.edvm-launcher svg {
-  width: 34px;
-  height: 34px;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+.edvm-launcher-logo {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+}
+.edvm-launcher-logo .edvm-logo {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 .edvm-launcher .edvm-launcher-close {
   display: none;
@@ -182,7 +205,7 @@ h1 .red{color:var(--rojo-vivo);}
 .edvm-chat.is-open .edvm-launcher::after {
   display: none;
 }
-.edvm-chat.is-open .edvm-launcher svg {
+.edvm-chat.is-open .edvm-launcher-logo {
   display: none;
 }
 .edvm-chat.is-open .edvm-launcher .edvm-launcher-close {
@@ -292,22 +315,22 @@ h1 .red{color:var(--rojo-vivo);}
   pointer-events: none;
 }
 .edvm-header-shield {
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   flex-shrink: 0;
-  background: #fff;
   border-radius: 50%;
-  padding: 5px;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9), 0 4px 12px rgba(0, 0, 0, 0.25);
   position: relative;
   z-index: 1;
 }
-.edvm-header-shield svg {
+.edvm-header-shield .edvm-logo {
   width: 100%;
   height: 100%;
+  display: block;
 }
 .edvm-header-info {
   line-height: 1.25;
@@ -402,20 +425,21 @@ h1 .red{color:var(--rojo-vivo);}
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 .edvm-msg-avatar {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: var(--edvm-grad);
+  overflow: hidden;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   align-self: flex-end;
-  box-shadow: 0 3px 8px rgba(204, 0, 0, 0.3);
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.18);
 }
-.edvm-msg-avatar svg {
-  width: 20px;
-  height: 20px;
+.edvm-msg-avatar .edvm-logo {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 .edvm-bubble {
   padding: 11px 15px;
@@ -661,7 +685,7 @@ h1 .red{color:var(--rojo-vivo);}
 <script>
 /* Configuración. Para el modo avanzado con la API de Claude, pon aquí la URL
    del backend, p. ej.: apiEndpoint: "https://TU-PROYECTO.vercel.app/api/chat" */
-window.EDVM_CONFIG = { apiEndpoint: "", titulo: "Asistente EDVM", subtitulo: "En línea · respuesta inmediata" };
+window.EDVM_CONFIG = { apiEndpoint: "", titulo: "E.D. Val Miñor", subtitulo: "En línea · respuesta inmediata" };
 </script>
 
 <script>
@@ -1223,28 +1247,39 @@ window.EDVMChat = (function () {
 
   var CONFIG = window.EDVM_CONFIG || {};
   var API_ENDPOINT = CONFIG.apiEndpoint || "";        // "" => modo local
-  var TITULO = CONFIG.titulo || "Asistente EDVM";
+  var TITULO = CONFIG.titulo || "E.D. Val Miñor";
   var SUBTITULO = CONFIG.subtitulo || "En linea · respuesta inmediata";
 
   /* ====================================================================
      ICONOS (SVG en linea)
      ==================================================================== */
-  var ICONO_ESCUDO =
-    '<svg viewBox="0 0 50 58" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
-    '<path d="M25 2 L48 12 L48 32 C48 44 25 56 25 56 C25 56 2 44 2 32 L2 12 Z" fill="#cc0000" stroke="#ffffff" stroke-width="2.5"/>' +
-    '<rect x="2" y="30" width="46" height="13" fill="#1a1a24"/>' +
-    '<text x="25" y="24" text-anchor="middle" font-family="Barlow Condensed, Arial" font-weight="900" font-size="11" fill="#fff">ED</text>' +
-    '<text x="25" y="41" text-anchor="middle" font-family="Barlow Condensed, Arial" font-weight="700" font-size="7.5" fill="#fff">VAL MIÑOR</text>' +
+  // Escudo oficial del club (SVG vectorial). Se inserta en línea para que use
+  // las tipografías de la página (Barlow). logoSVG() devuelve una copia con IDs
+  // únicos, de modo que se puede repetir sin colisiones de identificadores.
+  var LOGO_TEMPLATE =
+    '<svg class="edvm-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+    '<defs>' +
+    '<path id="EDVMTOP" d="M 24.8,72.6 A 80,80 0 0 1 175.2,72.6"/>' +
+    '<path id="EDVMBOT" d="M 34.5,145.9 A 80,80 0 0 0 165.5,145.9"/>' +
+    '</defs>' +
+    '<circle cx="100" cy="100" r="98" fill="#cc1f1f"/>' +
+    '<g fill="#ffffff" font-family="\'Barlow Condensed\',\'Arial Narrow\',Arial,Helvetica,sans-serif" font-weight="700">' +
+    '<text font-size="16" letter-spacing="1.2"><textPath href="#EDVMTOP" startOffset="50%" text-anchor="middle">ED VAL MIÑOR</textPath></text>' +
+    '<text font-size="17" letter-spacing="3"><textPath href="#EDVMBOT" startOffset="50%" text-anchor="middle">NIGRÁN</textPath></text>' +
+    '</g>' +
+    '<g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round">' +
+    '<path d="M 54,84 C 66,72 78,72 90,82 C 98,88 102,88 110,82 C 122,72 134,72 146,84" stroke-width="6.5"/>' +
+    '<path d="M 70,90 L 100,151" stroke-width="9.5"/>' +
+    '<path d="M 130,90 L 100,151" stroke-width="9.5"/>' +
+    '</g>' +
+    '<polygon points="100,101 110,120 90,120" fill="#ffffff"/>' +
     "</svg>";
 
-  // Version en blanco para la burbuja flotante
-  var ICONO_CHAT_BLANCO =
-    '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
-    '<path d="M12 3C7.03 3 3 6.58 3 11c0 2.05.87 3.92 2.3 5.34L4 21l4.9-1.28C9.86 20.55 10.9 20.8 12 20.8c4.97 0 9-3.58 9-8s-4.03-8-9-8z" fill="#fff"/>' +
-    '<circle cx="8.5" cy="11" r="1.3" fill="#cc0000"/>' +
-    '<circle cx="12" cy="11" r="1.3" fill="#cc0000"/>' +
-    '<circle cx="15.5" cy="11" r="1.3" fill="#cc0000"/>' +
-    "</svg>";
+  var _logoSeq = 0;
+  function logoSVG() {
+    _logoSeq++;
+    return LOGO_TEMPLATE.replace(/EDVMTOP/g, "edvmT" + _logoSeq).replace(/EDVMBOT/g, "edvmB" + _logoSeq);
+  }
 
   var ICONO_ENVIAR =
     '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
@@ -1428,7 +1463,7 @@ window.EDVMChat = (function () {
     panel.setAttribute("aria-label", "Asistente virtual E.D. Val Miñor Nigrán");
     panel.innerHTML =
       '<div class="edvm-header">' +
-        '<div class="edvm-header-shield">' + ICONO_ESCUDO + "</div>" +
+        '<div class="edvm-header-shield">' + logoSVG() + "</div>" +
         '<div class="edvm-header-info">' +
           '<div class="edvm-header-title">' + escaparHtml(TITULO) + "</div>" +
           '<div class="edvm-header-status">' + escaparHtml(SUBTITULO) + "</div>" +
@@ -1456,7 +1491,7 @@ window.EDVMChat = (function () {
       launcher.className = "edvm-launcher";
       launcher.type = "button";
       launcher.setAttribute("aria-label", "Abrir asistente virtual");
-      launcher.innerHTML = ICONO_CHAT_BLANCO +
+      launcher.innerHTML = '<span class="edvm-launcher-logo">' + logoSVG() + "</span>" +
         '<span class="edvm-launcher-close">&times;</span>' +
         '<span class="edvm-launcher-badge">1</span>';
       badge = launcher.querySelector(".edvm-launcher-badge");
@@ -1470,7 +1505,7 @@ window.EDVMChat = (function () {
 
     /* ---- Render de mensajes ---- */
     function avatarBot() {
-      return '<div class="edvm-msg-avatar">' + ICONO_CHAT_BLANCO + "</div>";
+      return '<div class="edvm-msg-avatar">' + logoSVG() + "</div>";
     }
 
     function pintarMensaje(rol, contenido, esHtmlPlano) {

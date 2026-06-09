@@ -1,0 +1,21 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="200" height="200" role="img" aria-label="Escudo E.D. Val Miñor Nigrán">
+  <defs>
+    <path id="edvmArcTop" d="M 24.8,72.6 A 80,80 0 0 1 175.2,72.6"/>
+    <path id="edvmArcBot" d="M 34.5,145.9 A 80,80 0 0 0 165.5,145.9"/>
+  </defs>
+  <circle cx="100" cy="100" r="98" fill="#cc1f1f"/>
+  <g fill="#ffffff" font-family="'Barlow Condensed','Arial Narrow',Arial,Helvetica,sans-serif" font-weight="700">
+    <text font-size="16" letter-spacing="1.2">
+      <textPath href="#edvmArcTop" startOffset="50%" text-anchor="middle">ED VAL MIÑOR</textPath>
+    </text>
+    <text font-size="17" letter-spacing="3">
+      <textPath href="#edvmArcBot" startOffset="50%" text-anchor="middle">NIGRÁN</textPath>
+    </text>
+  </g>
+  <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 54,84 C 66,72 78,72 90,82 C 98,88 102,88 110,82 C 122,72 134,72 146,84" stroke-width="6.5"/>
+    <path d="M 70,90 L 100,151" stroke-width="9.5"/>
+    <path d="M 130,90 L 100,151" stroke-width="9.5"/>
+  </g>
+  <polygon points="100,101 110,120 90,120" fill="#ffffff"/>
+</svg>

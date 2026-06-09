@@ -23,28 +23,39 @@ window.EDVMChat = (function () {
 
   var CONFIG = window.EDVM_CONFIG || {};
   var API_ENDPOINT = CONFIG.apiEndpoint || "";        // "" => modo local
-  var TITULO = CONFIG.titulo || "Asistente EDVM";
+  var TITULO = CONFIG.titulo || "E.D. Val Miñor";
   var SUBTITULO = CONFIG.subtitulo || "En linea · respuesta inmediata";
 
   /* ====================================================================
      ICONOS (SVG en linea)
      ==================================================================== */
-  var ICONO_ESCUDO =
-    '<svg viewBox="0 0 50 58" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
-    '<path d="M25 2 L48 12 L48 32 C48 44 25 56 25 56 C25 56 2 44 2 32 L2 12 Z" fill="#cc0000" stroke="#ffffff" stroke-width="2.5"/>' +
-    '<rect x="2" y="30" width="46" height="13" fill="#1a1a24"/>' +
-    '<text x="25" y="24" text-anchor="middle" font-family="Barlow Condensed, Arial" font-weight="900" font-size="11" fill="#fff">ED</text>' +
-    '<text x="25" y="41" text-anchor="middle" font-family="Barlow Condensed, Arial" font-weight="700" font-size="7.5" fill="#fff">VAL MIÑOR</text>' +
+  // Escudo oficial del club (SVG vectorial). Se inserta en línea para que use
+  // las tipografías de la página (Barlow). logoSVG() devuelve una copia con IDs
+  // únicos, de modo que se puede repetir sin colisiones de identificadores.
+  var LOGO_TEMPLATE =
+    '<svg class="edvm-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+    '<defs>' +
+    '<path id="EDVMTOP" d="M 24.8,72.6 A 80,80 0 0 1 175.2,72.6"/>' +
+    '<path id="EDVMBOT" d="M 34.5,145.9 A 80,80 0 0 0 165.5,145.9"/>' +
+    '</defs>' +
+    '<circle cx="100" cy="100" r="98" fill="#cc1f1f"/>' +
+    '<g fill="#ffffff" font-family="\'Barlow Condensed\',\'Arial Narrow\',Arial,Helvetica,sans-serif" font-weight="700">' +
+    '<text font-size="16" letter-spacing="1.2"><textPath href="#EDVMTOP" startOffset="50%" text-anchor="middle">ED VAL MIÑOR</textPath></text>' +
+    '<text font-size="17" letter-spacing="3"><textPath href="#EDVMBOT" startOffset="50%" text-anchor="middle">NIGRÁN</textPath></text>' +
+    '</g>' +
+    '<g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round">' +
+    '<path d="M 54,84 C 66,72 78,72 90,82 C 98,88 102,88 110,82 C 122,72 134,72 146,84" stroke-width="6.5"/>' +
+    '<path d="M 70,90 L 100,151" stroke-width="9.5"/>' +
+    '<path d="M 130,90 L 100,151" stroke-width="9.5"/>' +
+    '</g>' +
+    '<polygon points="100,101 110,120 90,120" fill="#ffffff"/>' +
     "</svg>";
 
-  // Version en blanco para la burbuja flotante
-  var ICONO_CHAT_BLANCO =
-    '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
-    '<path d="M12 3C7.03 3 3 6.58 3 11c0 2.05.87 3.92 2.3 5.34L4 21l4.9-1.28C9.86 20.55 10.9 20.8 12 20.8c4.97 0 9-3.58 9-8s-4.03-8-9-8z" fill="#fff"/>' +
-    '<circle cx="8.5" cy="11" r="1.3" fill="#cc0000"/>' +
-    '<circle cx="12" cy="11" r="1.3" fill="#cc0000"/>' +
-    '<circle cx="15.5" cy="11" r="1.3" fill="#cc0000"/>' +
-    "</svg>";
+  var _logoSeq = 0;
+  function logoSVG() {
+    _logoSeq++;
+    return LOGO_TEMPLATE.replace(/EDVMTOP/g, "edvmT" + _logoSeq).replace(/EDVMBOT/g, "edvmB" + _logoSeq);
+  }
 
   var ICONO_ENVIAR =
     '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
@@ -228,7 +239,7 @@ window.EDVMChat = (function () {
     panel.setAttribute("aria-label", "Asistente virtual E.D. Val Miñor Nigrán");
     panel.innerHTML =
       '<div class="edvm-header">' +
-        '<div class="edvm-header-shield">' + ICONO_ESCUDO + "</div>" +
+        '<div class="edvm-header-shield">' + logoSVG() + "</div>" +
         '<div class="edvm-header-info">' +
           '<div class="edvm-header-title">' + escaparHtml(TITULO) + "</div>" +
           '<div class="edvm-header-status">' + escaparHtml(SUBTITULO) + "</div>" +
@@ -256,7 +267,7 @@ window.EDVMChat = (function () {
       launcher.className = "edvm-launcher";
       launcher.type = "button";
       launcher.setAttribute("aria-label", "Abrir asistente virtual");
-      launcher.innerHTML = ICONO_CHAT_BLANCO +
+      launcher.innerHTML = '<span class="edvm-launcher-logo">' + logoSVG() + "</span>" +
         '<span class="edvm-launcher-close">&times;</span>' +
         '<span class="edvm-launcher-badge">1</span>';
       badge = launcher.querySelector(".edvm-launcher-badge");
@@ -270,7 +281,7 @@ window.EDVMChat = (function () {
 
     /* ---- Render de mensajes ---- */
     function avatarBot() {
-      return '<div class="edvm-msg-avatar">' + ICONO_CHAT_BLANCO + "</div>";
+      return '<div class="edvm-msg-avatar">' + logoSVG() + "</div>";
     }
 
     function pintarMensaje(rol, contenido, esHtmlPlano) {

@@ -53,7 +53,8 @@ asistente incrustado y la burbuja flotante.
 ├── asistente/                  ← El asistente (esto es lo que se integra en la web)
 │   ├── base-conocimiento.js    ← ⭐ TODA la información del club (se edita aquí)
 │   ├── edvm-chat.js            ← Motor del chat e interfaz
-│   └── edvm-chat.css           ← Estilos (blanco/rojo del club)
+│   ├── edvm-chat.css           ← Estilos (blanco/rojo del club)
+│   └── logo-edvm.svg           ← Escudo oficial del club (vectorial)
 │
 ├── build-standalone.js         ← Regenera el archivo único (node build-standalone.js)
 │
