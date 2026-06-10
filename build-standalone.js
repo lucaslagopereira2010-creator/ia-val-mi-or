@@ -41,7 +41,7 @@ const L = {
 const NAVBAR =
 '<nav class="navbar">\n' +
 '  <div class="container nav-wrap">\n' +
-'    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>\n' +
+'    <button class="nav-toggle" aria-label="Mostrar u ocultar menú" aria-expanded="true"><span></span><span></span><span></span></button>\n' +
 '    <div class="nav-links" id="navLinks">\n' +
 '      <a href="#inicio" class="nav-btn">Inicio</a>\n' +
 '      <a href="#campus" class="nav-btn">Campus</a>\n' +
@@ -70,9 +70,11 @@ const MEJORAS_CSS =
 '.nav-btn.asist{background:#111;color:#fff;}\n' +
 '.nav-btn.asist:hover{background:#000;color:#fff;border-color:#111;}\n' +
 '@media (max-width:900px){\n' +
+'  .navbar{position:static;}\n' +
+'  .nav-wrap{flex-direction:column;}\n' +
 '  .nav-toggle{display:flex;}\n' +
-'  .nav-links{display:none;flex-direction:column;width:100%;margin-top:14px;gap:8px;}\n' +
-'  .nav-links.open{display:flex;}\n' +
+'  .nav-links{display:flex;flex-direction:column;width:100%;margin-top:12px;gap:8px;}\n' +
+'  .nav-links.cerrado{display:none;}\n' +
 '  .nav-links .nav-btn{width:100%;justify-content:center;padding:14px;font-size:13px;}\n' +
 '  .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(8px) rotate(45deg);}\n' +
 '  .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}\n' +
@@ -146,15 +148,26 @@ function aplicarMejoras(html) {
 }
 
 /* ---- Bloque del asistente + scripts (se inyecta antes de </body>) ---- */
-const INIT_JS =
-  "<script>\n" +
-  "var edvmWidget = EDVMChat.iniciarWidget();\n" +
+/* Script del MENÚ (independiente y a prueba de fallos). El menú está abierto por
+   defecto en móvil vía CSS; este script solo permite colapsarlo. Si fallara,
+   el menú seguiría visible. */
+const MENU_JS =
+  "<script>\n(function(){try{" +
+  "var t=document.querySelector('.nav-toggle'),nl=document.getElementById('navLinks');" +
+  "if(t&&nl){t.addEventListener('click',function(){var c=nl.classList.toggle('cerrado');t.setAttribute('aria-expanded',c?'false':'true');});" +
+  "nl.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){" +
+  "if(window.innerWidth<=900 && !a.hasAttribute('data-abrir-asistente')){nl.classList.add('cerrado');t.setAttribute('aria-expanded','false');}});});}" +
+  "}catch(e){}})();\n</script>";
+
+/* Script del ASISTENTE (aislado en try/catch para que la IA aparezca siempre) */
+const ASIST_JS =
+  "<script>\n(function(){try{" +
+  "var w=EDVMChat.iniciarWidget();" +
   "document.querySelectorAll('[data-abrir-asistente]').forEach(function(b){" +
-  "b.addEventListener('click',function(e){e.preventDefault();if(edvmWidget&&edvmWidget.abrir)edvmWidget.abrir();});});\n" +
-  "(function(){var t=document.querySelector('.nav-toggle'),nl=document.getElementById('navLinks');" +
-  "if(t&&nl){t.addEventListener('click',function(){var o=nl.classList.toggle('open');t.setAttribute('aria-expanded',o);});" +
-  "nl.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){nl.classList.remove('open');t.setAttribute('aria-expanded','false');});});}})();\n" +
-  "</script>";
+  "b.addEventListener('click',function(e){e.preventDefault();if(w&&w.abrir)w.abrir();});});" +
+  "}catch(e){if(window.console&&console.error)console.error('Asistente EDVM:',e);}})();\n</script>";
+
+const INIT_JS = MENU_JS + "\n" + ASIST_JS;
 
 function configJs(logoUrl) {
   return '<script>window.EDVM_CONFIG = { apiEndpoint: "", titulo: "E.D. Val Mi\\u00f1or", ' +

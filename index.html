@@ -136,9 +136,11 @@
 .nav-btn.asist{background:#111;color:#fff;}
 .nav-btn.asist:hover{background:#000;color:#fff;border-color:#111;}
 @media (max-width:900px){
+  .navbar{position:static;}
+  .nav-wrap{flex-direction:column;}
   .nav-toggle{display:flex;}
-  .nav-links{display:none;flex-direction:column;width:100%;margin-top:14px;gap:8px;}
-  .nav-links.open{display:flex;}
+  .nav-links{display:flex;flex-direction:column;width:100%;margin-top:12px;gap:8px;}
+  .nav-links.cerrado{display:none;}
   .nav-links .nav-btn{width:100%;justify-content:center;padding:14px;font-size:13px;}
   .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(8px) rotate(45deg);}
   .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
@@ -203,7 +205,7 @@
 
 <nav class="navbar">
   <div class="container nav-wrap">
-    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+    <button class="nav-toggle" aria-label="Mostrar u ocultar menú" aria-expanded="true"><span></span><span></span><span></span></button>
     <div class="nav-links" id="navLinks">
       <a href="#inicio" class="nav-btn">Inicio</a>
       <a href="#campus" class="nav-btn">Campus</a>
@@ -391,9 +393,10 @@
 <script src="asistente/base-conocimiento.js"></script>
 <script src="asistente/edvm-chat.js"></script>
 <script>
-var edvmWidget = EDVMChat.iniciarWidget();
-document.querySelectorAll('[data-abrir-asistente]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();if(edvmWidget&&edvmWidget.abrir)edvmWidget.abrir();});});
-(function(){var t=document.querySelector('.nav-toggle'),nl=document.getElementById('navLinks');if(t&&nl){t.addEventListener('click',function(){var o=nl.classList.toggle('open');t.setAttribute('aria-expanded',o);});nl.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){nl.classList.remove('open');t.setAttribute('aria-expanded','false');});});}})();
+(function(){try{var t=document.querySelector('.nav-toggle'),nl=document.getElementById('navLinks');if(t&&nl){t.addEventListener('click',function(){var c=nl.classList.toggle('cerrado');t.setAttribute('aria-expanded',c?'false':'true');});nl.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(window.innerWidth<=900 && !a.hasAttribute('data-abrir-asistente')){nl.classList.add('cerrado');t.setAttribute('aria-expanded','false');}});});}}catch(e){}})();
+</script>
+<script>
+(function(){try{var w=EDVMChat.iniciarWidget();document.querySelectorAll('[data-abrir-asistente]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();if(w&&w.abrir)w.abrir();});});}catch(e){if(window.console&&console.error)console.error('Asistente EDVM:',e);}})();
 </script>
 </body>
 </html>
