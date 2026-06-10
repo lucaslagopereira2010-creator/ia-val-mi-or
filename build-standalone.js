@@ -53,7 +53,7 @@ const NAVBAR =
 '      <a href="' + L.torneos + '" target="_blank" rel="noopener" class="nav-btn">Torneos</a>\n' +
 '      <a href="' + L.ideario + '" target="_blank" rel="noopener" class="nav-btn">Ideario & RRI</a>\n' +
 '      <a href="#xogade" class="nav-btn">Protocolo Xogade</a>\n' +
-'      <a href="' + L.ureca + '" target="_blank" rel="noopener" class="nav-btn">URECA ES</a>\n' +
+'      <a href="' + L.ureca + '" target="_blank" rel="noopener" class="nav-btn">Instalaciones</a>\n' +
 '      <a href="#socio" class="nav-btn highlight">¡Hazte Socio!</a>\n' +
 '      <a href="#" class="nav-btn asist" data-abrir-asistente>💬 Asistente</a>\n' +
 '    </div>\n' +
@@ -109,6 +109,14 @@ const MEJORAS_CSS =
 '.card{border-radius:14px;}\n' +
 '.cta-banner{position:relative;overflow:hidden;}\n' +
 '.cta-banner::after{content:"";position:absolute;top:-60px;right:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%);pointer-events:none;}\n' +
+'/* Banner del asistente */\n' +
+'.edvm-ask-cta{background:linear-gradient(135deg,#161616,#2d2d2d);padding:58px 0;}\n' +
+'.edvm-ask-in{display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;}\n' +
+'.edvm-ask-txt h2{color:#fff;font-size:30px;font-weight:900;margin-bottom:8px;}\n' +
+'.edvm-ask-txt p{color:rgba(255,255,255,.82);max-width:560px;font-size:16px;}\n' +
+'.edvm-ask-btn{background:linear-gradient(90deg,var(--red-primary),var(--red-dark));color:#fff;border:none;font-family:"Montserrat",sans-serif;font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:.5px;padding:18px 32px;border-radius:10px;cursor:pointer;box-shadow:0 8px 22px rgba(211,47,47,.4);transition:transform .25s,box-shadow .25s;white-space:nowrap;}\n' +
+'.edvm-ask-btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(211,47,47,.55);}\n' +
+'@media(max-width:768px){.edvm-ask-in{flex-direction:column;text-align:center;}.edvm-ask-txt h2{font-size:25px;}}\n' +
 '</style>\n</head>';
 
 /* ---- Aplica las mejoras a la página del club ---- */
@@ -124,6 +132,16 @@ function aplicarMejoras(html) {
   if (html.indexOf(subt) !== -1) {
     html = html.replace(subt, subt + '\n        <p class="header-tagline">Escuela de fútbol base · cerca de 30 equipos · referente del Val Miñor y Galicia.</p>');
   }
+  // 5) Banner que invita a usar el asistente (antes del pie)
+  var banner =
+    '<section class="edvm-ask-cta">\n' +
+    '  <div class="container edvm-ask-in">\n' +
+    '    <div class="edvm-ask-txt"><h2>¿Tienes alguna duda? 🤔</h2>' +
+    '<p>Nuestro <strong>Asistente Virtual</strong> te responde al instante: campus, inscripciones, cuotas, socios, camisetas, instalaciones y mucho más.</p></div>\n' +
+    '    <button type="button" class="edvm-ask-btn" data-abrir-asistente>💬 Pregúntale al asistente</button>\n' +
+    '  </div>\n' +
+    '</section>\n';
+  html = html.replace("<footer>", banner + "<footer>");
   return html;
 }
 

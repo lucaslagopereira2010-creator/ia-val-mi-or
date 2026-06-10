@@ -175,6 +175,14 @@
 .card{border-radius:14px;}
 .cta-banner{position:relative;overflow:hidden;}
 .cta-banner::after{content:"";position:absolute;top:-60px;right:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%);pointer-events:none;}
+/* Banner del asistente */
+.edvm-ask-cta{background:linear-gradient(135deg,#161616,#2d2d2d);padding:58px 0;}
+.edvm-ask-in{display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;}
+.edvm-ask-txt h2{color:#fff;font-size:30px;font-weight:900;margin-bottom:8px;}
+.edvm-ask-txt p{color:rgba(255,255,255,.82);max-width:560px;font-size:16px;}
+.edvm-ask-btn{background:linear-gradient(90deg,var(--red-primary),var(--red-dark));color:#fff;border:none;font-family:"Montserrat",sans-serif;font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:.5px;padding:18px 32px;border-radius:10px;cursor:pointer;box-shadow:0 8px 22px rgba(211,47,47,.4);transition:transform .25s,box-shadow .25s;white-space:nowrap;}
+.edvm-ask-btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(211,47,47,.55);}
+@media(max-width:768px){.edvm-ask-in{flex-direction:column;text-align:center;}.edvm-ask-txt h2{font-size:25px;}}
 </style>
 </head>
 <body>
@@ -207,7 +215,7 @@
       <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vR0hQyGOrsmNqoDO_g7kfxt1DtcgxmQSq6qA8_7MD6fBBihWufZ56XDcRR0IvyjK_HNlE61COMz7L1U/pubhtml" target="_blank" rel="noopener" class="nav-btn">Torneos</a>
       <a href="https://drive.google.com/drive/folders/0BxskfnPIuX9YU1VFem9Dcy1aTjQ?usp=sharing" target="_blank" rel="noopener" class="nav-btn">Ideario & RRI</a>
       <a href="#xogade" class="nav-btn">Protocolo Xogade</a>
-      <a href="http://www.ureca.es" target="_blank" rel="noopener" class="nav-btn">URECA ES</a>
+      <a href="http://www.ureca.es" target="_blank" rel="noopener" class="nav-btn">Instalaciones</a>
       <a href="#socio" class="nav-btn highlight">¡Hazte Socio!</a>
       <a href="#" class="nav-btn asist" data-abrir-asistente>💬 Asistente</a>
     </div>
@@ -341,6 +349,12 @@
     </div>
 </section>
 
+<section class="edvm-ask-cta">
+  <div class="container edvm-ask-in">
+    <div class="edvm-ask-txt"><h2>¿Tienes alguna duda? 🤔</h2><p>Nuestro <strong>Asistente Virtual</strong> te responde al instante: campus, inscripciones, cuotas, socios, camisetas, instalaciones y mucho más.</p></div>
+    <button type="button" class="edvm-ask-btn" data-abrir-asistente>💬 Pregúntale al asistente</button>
+  </div>
+</section>
 <footer>
     <div class="container">
         <div class="footer-grid">

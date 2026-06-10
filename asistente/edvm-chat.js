@@ -260,7 +260,7 @@ window.EDVMChat = (function () {
     var contenedorObjetivo = opciones.contenedor || null;
 
     var historial = [];   // para el modo API: [{role, content}]
-    var raiz, messagesEl, suggestionsEl, inputEl, sendBtn, launcher, panel, badge;
+    var raiz, messagesEl, suggestionsEl, inputEl, sendBtn, launcher, panel, badge, callout;
     var abierto = inline;
 
     /* ---- Construccion del DOM ---- */
@@ -307,6 +307,22 @@ window.EDVMChat = (function () {
       badge = launcher.querySelector(".edvm-launcher-badge");
       raiz.appendChild(panel);
       raiz.appendChild(launcher);
+
+      // Aviso de atención junto a la burbuja (para que la IA se vea bien)
+      callout = document.createElement("div");
+      callout.className = "edvm-callout";
+      callout.innerHTML = '<button class="edvm-callout-x" type="button" aria-label="Cerrar">&times;</button>' +
+        '👋 ¿Tienes dudas? <strong>Pregúntame</strong>';
+      raiz.appendChild(callout);
+      setTimeout(function () { if (!abierto && callout) callout.classList.add("show"); }, 1800);
+      callout.addEventListener("click", function (e) {
+        if (e.target && e.target.className === "edvm-callout-x") {
+          if (callout && callout.parentNode) { callout.parentNode.removeChild(callout); callout = null; }
+          return;
+        }
+        abrir();
+      });
+
       document.body.appendChild(raiz);
 
       launcher.addEventListener("click", alternar);
@@ -425,6 +441,7 @@ window.EDVMChat = (function () {
       abierto = true;
       raiz.classList.add("is-open");
       if (badge) badge.style.display = "none";
+      if (callout && callout.parentNode) { callout.parentNode.removeChild(callout); callout = null; }
       setTimeout(function () { inputEl.focus(); }, 250);
     }
     function cerrar() {
