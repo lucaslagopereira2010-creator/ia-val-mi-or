@@ -114,6 +114,20 @@
       sugerencias: ["Precio del campus", "Número de cuenta", "Contacto"]
     },
 
+    /* ---------- APUNTARSE A LA ESCUELA (TEMPORADA) ---------- */
+    {
+      id: "inscripcion_escuela",
+      keywords: ["apuntar a la escuela", "inscribir en el club", "inscribirse en el club", "unirse al club", "jugar en el club", "apuntarse al club", "inscripcion temporada", "quiero jugar al futbol", "formar parte del club", "entrar en el club", "apuntar a mi hijo a la escuela", "como apuntarse", "plazas escuela"],
+      respuesta:
+        "⚽ **Cómo apuntarse a la escuela**\n\n" +
+        "Si quieres que tu hijo/a forme parte de la E.D. Val Miñor durante la temporada, ponte en contacto con el club:\n" +
+        "• Email: " + CONTACTO.email + "\n" +
+        "• WhatsApp: " + CONTACTO.whatsapp + "\n" +
+        "• En persona: oficina del Complejo URECA, en el horario de atención\n\n" +
+        "Te informaremos de las plazas disponibles según el año de nacimiento, las cuotas y la documentación necesaria. ¡Te esperamos! 🤍❤️",
+      sugerencias: ["Categorías", "Cuotas de la temporada", "Horario de oficina"]
+    },
+
     /* ---------- HAZTE SOCIO ---------- */
     {
       id: "socios",

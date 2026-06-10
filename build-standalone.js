@@ -1,9 +1,9 @@
 /* ============================================================================
-   Generador del archivo único "asistente-edvm.html"
+   Generador de la WEB del club E.D. Val Miñor Nigrán
    ----------------------------------------------------------------------------
-   Combina los estilos, la base de conocimiento y el motor del chat en UN solo
-   archivo HTML autónomo (sin dependencias locales), ideal para abrir con doble
-   clic o compartir por email/WhatsApp.
+   A partir de una única plantilla genera:
+     • asistente-edvm.html  -> web completa en UN solo archivo (todo incluido)
+     • index.html           -> la misma web, enlazando los archivos de /asistente
 
    Ejecutar:  node build-standalone.js
    ============================================================================ */
@@ -18,202 +18,440 @@ const css = leer("asistente/edvm-chat.css");
 const kb = leer("asistente/base-conocimiento.js");
 const motor = leer("asistente/edvm-chat.js");
 const logo = leer("asistente/logo-edvm.svg");
+const logoDataUri = "data:image/svg+xml;utf8," + encodeURIComponent(logo);
 
-const html = `<!DOCTYPE html>
+/* Enlaces oficiales del club */
+const L = {
+  campusForm: "https://forms.gle/ctGKydALhFaZNwLP6",
+  circular: "https://www.canva.com/design/DAGqps5LNsA/RJOKABSqYsH4iKyef5_0_Q/view",
+  socioFam: "https://appuntame.abanca.com/portal/plan/edvalminornigran/16jb92bdys",
+  socioInd: "https://appuntame.abanca.com/portal/plan/edvalminornigran/16jb92b68z",
+  entrenos: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6VmFqMJzItjbnA8cCWYEo3K6CSpMQ5AMVMxlnPyZnWvQNJwe-uv5QtbmTuvv3BvPCRB-XBAElLEgn/pubhtml",
+  partidos: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLEfEYHDObmqbKK1Y73tVUbXIxRWmyuykG4MeoABWpaG79R2F9p9BXAAtRSOrvfkRuL9Dl0_T9kugh/pubhtml",
+  cuotas: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTep5vuFaqHWpr_Y86Gypoom0gSOA-vPKODF47os-rLL5eh300OABcrtSdv4bh--5pp9WtUk36iFNAG/pubhtml?gid=1374414062&single=true",
+  ropa: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRNjZlc2Jzg1QsDH3ABqg2dlszHWX4MtA8th_uBvPoXK8iDJGQbCLA49_6svjUs2gvIDTFdaPytiHkO/pubhtml?gid=842211522&single=true",
+  torneos: "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0hQyGOrsmNqoDO_g7kfxt1DtcgxmQSq6qA8_7MD6fBBihWufZ56XDcRR0IvyjK_HNlE61COMz7L1U/pubhtml",
+  xogade: "https://www.edvmnigran.com/_files/ugd/598442_e0e10e2c96754743b45dda8cbf1a007e.pdf",
+  ideario: "https://drive.google.com/drive/folders/0BxskfnPIuX9YU1VFem9Dcy1aTjQ?usp=sharing",
+  ureca: "http://www.ureca.es",
+  insta: "https://www.instagram.com/edvalminor/",
+  wa: "https://wa.me/34610186460"
+};
+
+const CONFIG_JS =
+  'window.EDVM_CONFIG = { apiEndpoint: "", titulo: "E.D. Val Mi\\u00f1or", subtitulo: "Asistente oficial \\u00b7 En l\\u00ednea" };';
+
+const INIT_JS =
+  '<script>' +
+  'EDVMChat.iniciarInline("#chat-edvm");' +
+  'var edvmWidget = EDVMChat.iniciarWidget();' +
+  'document.querySelectorAll("[data-abrir-asistente]").forEach(function(b){' +
+  'b.addEventListener("click",function(e){e.preventDefault();' +
+  'var t=document.getElementById("asistente"); if(t) t.scrollIntoView({behavior:"smooth"});});});' +
+  '</script>';
+
+const ASSETS_INLINE =
+  "<style>\n" + css + "\n</style>\n" +
+  "<script>" + CONFIG_JS + "</script>\n" +
+  "<script>\n/* base-conocimiento.js */\n" + kb + "\n</script>\n" +
+  "<script>\n/* edvm-chat.js */\n" + motor + "\n</script>\n" +
+  INIT_JS;
+
+const ASSETS_EXTERNAL =
+  '<link rel="stylesheet" href="asistente/edvm-chat.css">\n' +
+  "<script>" + CONFIG_JS + "</script>\n" +
+  '<script src="asistente/base-conocimiento.js"></script>\n' +
+  '<script src="asistente/edvm-chat.js"></script>\n' +
+  INIT_JS;
+
+function render(logoSrc, assets) {
+  return `<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Asistente Virtual · E.D. Val Miñor Nigrán</title>
-<meta name="description" content="Asistente virtual oficial de la Escuela Deportiva Val Miñor Nigrán. Resuelve al instante dudas sobre campus, inscripciones, cuotas, socios y más.">
+<title>E.D. Val Miñor Nigrán · Escuela de Fútbol desde 1996</title>
+<meta name="description" content="Web oficial de la Escuela Deportiva Val Miñor Nigrán (EDVM): escuela de fútbol base con cerca de 30 equipos, referente en Nigrán, el Val Miñor y Galicia. Campus, socios, cuotas y asistente virtual.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ============================ Estilos de la página ============================ */
 :root{
   --rojo:#cc1f1f; --rojo-mid:#a81717; --rojo-vivo:#ff2b2b; --rojo-osc:#7d0f0f;
   --grad:linear-gradient(135deg,#ff2b2b 0%,#cc1f1f 55%,#8a0f0f 100%);
-  --tinta:#16161d; --sub:#5d5d6a; --tenue:#8a8a96;
-  --linea:rgba(20,20,30,.08);
-  --crema:#faf8f6;
+  --tinta:#16161d; --sub:#5d5d6a; --tenue:#8a8a96; --linea:rgba(20,20,30,.08); --crema:#faf8f6;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{
-  font-family:'Barlow',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  color:var(--tinta);line-height:1.62;-webkit-font-smoothing:antialiased;
-  background:
-    radial-gradient(900px 460px at 50% -8%, #ffe1e1 0%, rgba(255,225,225,0) 70%),
-    radial-gradient(700px 500px at 100% 0%, #fff1ec 0%, rgba(255,241,236,0) 60%),
-    linear-gradient(180deg,#ffffff 0%, var(--crema) 100%);
-  min-height:100vh;
-}
-.wrap{max-width:600px;margin:0 auto;padding:0 1.25rem;}
+body{font-family:'Barlow',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--tinta);line-height:1.62;-webkit-font-smoothing:antialiased;background:#fff;}
+img{display:block;max-width:100%;}
+a{color:var(--rojo);}
 ::selection{background:#ffd4d4;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.3rem;}
+.sec{padding:4.2rem 0;}
+.sec-tag{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--rojo);font-weight:800;display:flex;align-items:center;gap:9px;}
+.sec-tag::before{content:"";width:26px;height:2px;background:var(--rojo);}
+.sec-h{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2rem,4.5vw,3rem);line-height:1;letter-spacing:.4px;margin:.5rem 0 .2rem;}
+.sec-sub{color:var(--sub);max-width:560px;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:8px;font-weight:700;font-size:.9rem;letter-spacing:.4px;text-decoration:none;cursor:pointer;border:none;transition:transform .2s,box-shadow .2s,background .2s;font-family:inherit;}
+.btn-red{background:var(--grad);color:#fff;box-shadow:0 8px 20px rgba(204,31,31,.32);}
+.btn-red:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(204,31,31,.42);}
+.btn-ghost{background:#fff;color:var(--rojo);border:1.5px solid rgba(204,31,31,.3);}
+.btn-ghost:hover{background:#fff0f0;transform:translateY(-2px);}
+.btn-dark{background:var(--tinta);color:#fff;}
+.btn-dark:hover{background:#000;transform:translateY(-2px);}
+.btn-light{background:rgba(255,255,255,.16);color:#fff;border:1.5px solid rgba(255,255,255,.4);}
+.btn-light:hover{background:rgba(255,255,255,.26);}
 
-/* ---- Hero ---- */
-.hero{text-align:center;padding:3rem 1.25rem 1.6rem;}
-.coin{
-  width:104px;height:104px;margin:0 auto 1.1rem;border-radius:50%;overflow:hidden;
-  box-shadow:0 18px 40px -10px rgba(204,31,31,.55), 0 6px 16px rgba(0,0,0,.12), 0 0 0 5px #fff, 0 0 0 6px rgba(204,31,31,.12);
-}
-.coin svg{width:100%;height:100%;display:block;}
-.eyebrow{
-  display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid rgba(204,31,31,.22);
-  color:var(--rojo);padding:6px 15px;border-radius:30px;font-size:.66rem;letter-spacing:2.5px;
-  text-transform:uppercase;font-weight:800;margin-bottom:1rem;box-shadow:0 4px 14px rgba(204,31,31,.1);
-}
-h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2.5rem,9vw,3.6rem);
-  line-height:.98;letter-spacing:.4px;color:var(--tinta);}
-h1 .red{color:var(--rojo-vivo);}
-.lead{color:var(--sub);font-size:1.06rem;max-width:480px;margin:.95rem auto 0;}
-.trust{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-top:1.4rem;}
-.trust .pill{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--linea);
-  border-radius:30px;padding:7px 14px;font-size:.8rem;font-weight:600;color:var(--tinta);
-  box-shadow:0 2px 8px rgba(0,0,0,.03);}
-.trust .pill b{color:var(--rojo);}
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--linea);}
+.nav-in{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.7rem 1.3rem;gap:1rem;}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;}
+.brand img{width:46px;height:46px;border-radius:50%;box-shadow:0 3px 10px rgba(204,31,31,.25);}
+.brand b{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.18rem;color:var(--rojo);letter-spacing:.5px;line-height:1;display:block;}
+.brand span{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--sub);}
+.nav-links{display:flex;align-items:center;gap:.3rem;list-style:none;}
+.nav-links a{color:var(--tinta);font-size:.82rem;font-weight:600;letter-spacing:.3px;text-transform:uppercase;padding:.45rem .8rem;border-radius:6px;text-decoration:none;transition:.2s;}
+.nav-links a:hover{color:var(--rojo);background:#fff0f0;}
+@media(max-width:860px){.nav-links{display:none;}}
 
-/* ---- Ejemplos ---- */
-.ej-wrap{margin-top:1.7rem;}
-.ej-label{text-align:center;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--tenue);font-weight:700;margin-bottom:.7rem;}
-.ejemplos{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;}
-.ej{background:#fff;border:1.5px solid rgba(204,31,31,.2);color:var(--rojo);border-radius:30px;
-  padding:9px 16px;font-size:.84rem;font-weight:600;cursor:pointer;font-family:inherit;
-  transition:transform .18s, box-shadow .2s, background .2s, color .2s;box-shadow:0 2px 8px rgba(204,31,31,.06);}
-.ej:hover{background:var(--grad);color:#fff;border-color:transparent;transform:translateY(-2px);box-shadow:0 8px 18px rgba(204,31,31,.3);}
+/* HERO */
+.hero{position:relative;background:var(--grad);color:#fff;overflow:hidden;text-align:center;padding:3.4rem 1.3rem 3rem;}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 18%, rgba(255,255,255,.14), transparent 42%);pointer-events:none;}
+.hero-in{position:relative;z-index:1;max-width:760px;margin:0 auto;}
+.hero-coin{width:118px;height:118px;margin:0 auto 1.2rem;border-radius:50%;overflow:hidden;background:#fff;box-shadow:0 16px 40px rgba(0,0,0,.28),0 0 0 6px rgba(255,255,255,.25);}
+.hero-coin img{width:100%;height:100%;}
+.hero-eyebrow{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);padding:6px 16px;border-radius:30px;font-size:.66rem;letter-spacing:3px;text-transform:uppercase;font-weight:800;margin-bottom:1rem;}
+.hero h1{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(2.6rem,7vw,4.4rem);line-height:.95;letter-spacing:.5px;}
+.hero h1 small{display:block;font-size:.34em;font-weight:700;letter-spacing:3px;text-transform:uppercase;opacity:.9;margin-bottom:.3rem;}
+.hero p{font-size:1.1rem;color:rgba(255,255,255,.92);max-width:560px;margin:1rem auto 1.7rem;}
+.hero-btns{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:680px;margin:2.4rem auto 0;}
+.stat .n{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2.4rem;line-height:1;}
+.stat .l{font-size:.72rem;letter-spacing:1px;text-transform:uppercase;opacity:.85;margin-top:3px;}
+@media(max-width:560px){.stats{grid-template-columns:repeat(2,1fr);gap:1.4rem;}}
 
-/* ---- Chat ---- */
-.chat-zone{padding:1.8rem 0 1rem;}
-.chat-card{position:relative;border-radius:22px;}
-.chat-card::before{
-  content:"";position:absolute;inset:-1px;border-radius:23px;z-index:-1;
-  background:linear-gradient(135deg,rgba(204,31,31,.5),rgba(204,31,31,0) 45%);
-}
+/* SOBRE */
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;}
+.about p{color:var(--sub);font-size:1.04rem;margin-bottom:1rem;}
+.about p strong{color:var(--tinta);}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem;}
+.chip{background:#fff0f0;border:1px solid rgba(204,31,31,.18);color:var(--rojo);padding:6px 14px;border-radius:30px;font-size:.82rem;font-weight:600;}
+.about-card{background:var(--grad);color:#fff;border-radius:18px;padding:2rem;box-shadow:0 18px 40px -12px rgba(204,31,31,.5);}
+.about-card h3{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.5rem;margin-bottom:.6rem;}
+.about-card ul{list-style:none;margin-top:1rem;}
+.about-card li{padding:.4rem 0;border-top:1px solid rgba(255,255,255,.2);font-weight:600;}
+@media(max-width:860px){.about-grid{grid-template-columns:1fr;gap:1.6rem;}}
 
-/* ---- Capacidades ---- */
-.feat-sec{padding:2.8rem 0 1rem;}
-.feat-h{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.7rem;text-align:center;letter-spacing:.3px;}
-.feat-p{text-align:center;color:var(--sub);font-size:.95rem;margin:.3rem auto 1.6rem;max-width:420px;}
-.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;}
-.feat{background:#fff;border:1px solid var(--linea);border-radius:16px;padding:1.1rem 1.1rem;
-  transition:transform .2s, box-shadow .2s;box-shadow:0 3px 12px rgba(0,0,0,.03);}
-.feat:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(204,31,31,.1);border-color:rgba(204,31,31,.2);}
-.feat .ic{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;
-  font-size:1.3rem;background:linear-gradient(135deg,#fff0f0,#ffe3e3);margin-bottom:.6rem;}
-.feat h3{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:.3px;margin-bottom:.2rem;}
-.feat p{font-size:.82rem;color:var(--sub);line-height:1.5;}
+/* GRID genérico de tarjetas */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem;}
+@media(max-width:860px){.cards{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.cards{grid-template-columns:1fr;}}
+.card{background:#fff;border:1px solid var(--linea);border-radius:14px;padding:1.4rem;text-decoration:none;color:inherit;display:block;transition:transform .2s,box-shadow .2s,border-color .2s;box-shadow:0 3px 12px rgba(0,0,0,.03);}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(204,31,31,.1);border-color:rgba(204,31,31,.22);}
+.card .ic{font-size:1.7rem;}
+.card h3{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.2rem;margin:.5rem 0 .3rem;letter-spacing:.3px;}
+.card p{font-size:.86rem;color:var(--sub);line-height:1.5;}
+.card .go{margin-top:.6rem;font-size:.78rem;font-weight:700;color:var(--rojo);}
 
-/* ---- Pie ---- */
-.foot{text-align:center;padding:2.6rem 1.25rem 2.4rem;margin-top:1.4rem;border-top:1px solid var(--linea);}
-.foot .fcoin{width:48px;height:48px;border-radius:50%;overflow:hidden;margin:0 auto .7rem;box-shadow:0 4px 12px rgba(204,31,31,.2);}
-.foot .fcoin svg{width:100%;height:100%;}
-.foot .fname{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.15rem;letter-spacing:.5px;}
-.foot .fcontact{font-size:.9rem;color:var(--sub);margin-top:.5rem;line-height:1.95;}
-.foot a{color:var(--rojo);font-weight:600;text-decoration:none;}
+/* CATEGORÍAS */
+.cat-list{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.6rem;}
+.cat{background:#fff;border:1px solid var(--linea);border-left:3px solid var(--rojo);border-radius:8px;padding:.7rem 1.1rem;font-weight:700;font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;letter-spacing:.3px;}
+.cat small{display:block;font-family:'Barlow',sans-serif;font-weight:500;font-size:.72rem;color:var(--tenue);letter-spacing:0;}
+
+/* CAMPUS / SOCIOS (paneles) */
+.panel{background:#fff;border:1px solid var(--linea);border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.05);}
+.panel-top{background:var(--grad);color:#fff;padding:1.2rem 1.6rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem;}
+.panel-top h3{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.5rem;letter-spacing:.5px;}
+.panel-top .tag{background:rgba(0,0,0,.22);padding:4px 12px;border-radius:20px;font-size:.72rem;text-transform:uppercase;letter-spacing:1px;font-weight:700;}
+.panel-body{padding:1.6rem;}
+.rows{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.2rem;}
+.row{display:flex;align-items:center;gap:1rem;background:#faf8f8;border-radius:8px;padding:.8rem 1rem;border-left:3px solid var(--rojo);}
+.row .ic{font-size:1.2rem;width:26px;text-align:center;}
+.row .l{font-size:.68rem;text-transform:uppercase;letter-spacing:1px;color:var(--tenue);font-weight:700;}
+.row .v{font-weight:700;font-size:.94rem;}
+.row .v .x{color:var(--rojo);font-size:.78rem;margin-left:.4rem;}
+.cuenta{background:#fff0f0;border-left:3px solid var(--rojo);border-radius:8px;padding:.8rem 1rem;font-family:monospace;font-weight:700;color:var(--rojo-mid);margin:.4rem 0 1rem;}
+.cuenta small{display:block;font-family:'Barlow';font-size:.62rem;letter-spacing:1px;text-transform:uppercase;color:var(--rojo);margin-bottom:3px;}
+.socios{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2rem;}
+@media(max-width:640px){.socios{grid-template-columns:1fr;}}
+.socio{border-radius:16px;overflow:hidden;border:1px solid var(--linea);box-shadow:0 8px 22px rgba(0,0,0,.05);}
+.socio-h{padding:1.3rem 1.5rem;display:flex;justify-content:space-between;align-items:center;color:#fff;}
+.socio.fam .socio-h{background:var(--grad);}
+.socio.ind .socio-h{background:linear-gradient(135deg,#2a2a33,#16161d);}
+.socio-h .t{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.4rem;}
+.socio-h .p{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2rem;line-height:1;text-align:right;}
+.socio-h .p small{display:block;font-family:'Barlow';font-size:.6rem;font-weight:500;opacity:.8;}
+.socio-b{background:#fff;padding:1.4rem 1.5rem;}
+.socio-b p{font-size:.9rem;color:var(--sub);margin-bottom:1rem;}
+
+/* CAMPUS layout */
+.campus-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.campus-grid > div{padding:1.6rem;}
+.campus-grid > div + div{border-left:1px solid var(--linea);}
+@media(max-width:760px){.campus-grid{grid-template-columns:1fr;}.campus-grid > div + div{border-left:none;border-top:1px solid var(--linea);}}
+.extra{display:flex;justify-content:space-between;background:#faf8f8;border-radius:8px;padding:.6rem .9rem;font-size:.86rem;color:var(--sub);margin-bottom:.4rem;}
+.extra b{color:var(--rojo);}
+
+/* ASISTENTE */
+.asist{background:linear-gradient(180deg,#fff, #fbf3f3);}
+.asist-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:2.4rem;align-items:start;}
+.asist-chat{max-width:440px;width:100%;}
+@media(max-width:860px){.asist-grid{grid-template-columns:1fr;}.asist-chat{margin:0 auto;}}
+
+/* CONTACTO */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;}
+@media(max-width:760px){.contact-grid{grid-template-columns:1fr;}}
+.ci{display:flex;gap:.9rem;align-items:flex-start;background:#fff;border:1px solid var(--linea);border-radius:12px;padding:1rem 1.2rem;}
+.ci .ic{font-size:1.2rem;}
+.ci .l{font-size:.68rem;text-transform:uppercase;letter-spacing:1px;color:var(--tenue);font-weight:700;}
+.ci .v{font-weight:600;font-size:.92rem;}
+.ci .v a{color:var(--rojo);text-decoration:none;}
+
+/* FOOTER */
+.foot{background:var(--tinta);color:rgba(255,255,255,.8);padding:3rem 1.3rem 2rem;}
+.foot-in{max-width:1080px;margin:0 auto;display:flex;flex-wrap:wrap;gap:1.6rem;justify-content:space-between;align-items:center;}
+.foot .fb{display:flex;align-items:center;gap:12px;}
+.foot .fb img{width:52px;height:52px;border-radius:50%;}
+.foot .fb b{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:1.2rem;color:#fff;letter-spacing:.5px;display:block;}
+.foot .fb span{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.55);}
+.foot .fc{font-size:.9rem;line-height:1.95;text-align:right;}
+.foot a{color:#fff;font-weight:600;text-decoration:none;}
 .foot a:hover{text-decoration:underline;}
-.foot .sep{opacity:.4;margin:0 .5rem;}
-.foot .heart{margin-top:.7rem;font-size:.82rem;color:var(--tenue);}
-
-@media(min-width:560px){ .feat-grid{grid-template-columns:repeat(3,1fr);} }
+.foot .copy{max-width:1080px;margin:1.6rem auto 0;border-top:1px solid rgba(255,255,255,.12);padding-top:1.2rem;font-size:.78rem;color:rgba(255,255,255,.5);text-align:center;}
+@media(max-width:560px){.foot-in{flex-direction:column;text-align:center;}.foot .fc{text-align:center;}}
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="wrap">
-    <div class="coin">${logo}</div>
-    <span class="eyebrow">⚽ Asistente oficial del club</span>
-    <h1>Resuelve tus dudas<br><span class="red">al instante</span></h1>
-    <p class="lead">Pregúntame lo que necesites sobre la <strong>E.D. Val Miñor Nigrán</strong>: campus, inscripciones, cuotas, socios, camisetas, instalaciones y mucho más.</p>
-    <div class="trust">
-      <span class="pill"><b>●</b> Disponible 24/7</span>
-      <span class="pill"><b>⚡</b> Respuesta inmediata</span>
-      <span class="pill"><b>✓</b> Información oficial</span>
-    </div>
+<nav class="nav">
+  <div class="nav-in">
+    <a href="#inicio" class="brand">
+      <img src="${logoSrc}" alt="Escudo E.D. Val Miñor Nigrán">
+      <span><b>E.D. Val Miñor</b><span>Escuela de Fútbol</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#club">El club</a></li>
+      <li><a href="#categorias">Categorías</a></li>
+      <li><a href="#campus">Campus</a></li>
+      <li><a href="#socios">Socios</a></li>
+      <li><a href="#asistente">Asistente</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <a href="${L.socioFam}" target="_blank" class="btn btn-red" style="padding:9px 18px;font-size:.8rem;">Hazte socio</a>
+  </div>
+</nav>
 
-    <div class="ej-wrap">
-      <div class="ej-label">Prueba a preguntar</div>
-      <div class="ejemplos" id="ejemplos">
-        <button class="ej" type="button">¿Cuándo es el campus de verano?</button>
-        <button class="ej" type="button">¿Cómo me hago socio?</button>
-        <button class="ej" type="button">¿Qué es el Val Miñor?</button>
-        <button class="ej" type="button">Número de cuenta</button>
-      </div>
+<header class="hero" id="inicio">
+  <div class="hero-in">
+    <div class="hero-coin"><img src="${logoSrc}" alt="Escudo E.D. Val Miñor Nigrán"></div>
+    <span class="hero-eyebrow">⚽ Escuela de Fútbol · Desde 1996</span>
+    <h1><small>Escuela Deportiva</small>VAL MIÑOR <span style="font-weight:700;font-size:.5em;">NIGRÁN</span></h1>
+    <p>Referente del fútbol base en Nigrán, el Val Miñor y Galicia. Formamos deportistas y, sobre todo, personas, con cerca de una treintena de equipos en todas las categorías.</p>
+    <div class="hero-btns">
+      <a href="#campus" class="btn btn-light">Campus de Verano</a>
+      <a href="${L.socioFam}" target="_blank" class="btn btn-light">Hazte socio</a>
+      <a href="#asistente" class="btn btn-dark" data-abrir-asistente>💬 Pregunta al asistente</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="n">1996</div><div class="l">Fundación</div></div>
+      <div class="stat"><div class="n">+27</div><div class="l">Equipos</div></div>
+      <div class="stat"><div class="n">+300</div><div class="l">Jugadores</div></div>
+      <div class="stat"><div class="n">8</div><div class="l">Categorías</div></div>
     </div>
   </div>
 </header>
 
-<main>
-  <section class="chat-zone">
-    <div class="wrap">
-      <div class="chat-card">
-        <div id="chat-edvm"></div>
+<section class="sec" id="club">
+  <div class="wrap about">
+    <div class="about-grid">
+      <div>
+        <p class="sec-tag">Quiénes somos</p>
+        <h2 class="sec-h">El motor del fútbol base<br>del Val Miñor</h2>
+        <br>
+        <p>La <strong>Escuela Deportiva Val Miñor Nigrán</strong> es una institución histórica dedicada a la formación de jóvenes deportistas desde <strong>1996</strong>. Somos el gran referente formativo de la comarca, desde los primeros toques al balón (biberones) hasta la etapa de aficionados.</p>
+        <p>Nuestro trabajo se sustenta en un firme <strong>Ideario y Reglamento de Régimen Interno</strong>. El terreno de juego es un aula más donde enseñamos respeto, compromiso y trabajo en equipo. <strong>Nuestro objetivo es formar excelentes personas, no solo futbolistas.</strong></p>
+        <div class="chips">
+          <span class="chip">🎓 Formación en valores</span>
+          <span class="chip">⚽ Cerca de 30 equipos</span>
+          <span class="chip">🏟️ Orgullo de Nigrán</span>
+          <span class="chip">📋 Federados (RFGF)</span>
+        </div>
+      </div>
+      <div class="about-card">
+        <h3>Datos del club</h3>
+        <ul>
+          <li>📍 A Ramallosa · Nigrán (Pontevedra)</li>
+          <li>📅 Fundado en 1996</li>
+          <li>🤍❤️ Colores blanco y rojo</li>
+          <li>🏆 Equipos en categorías de honor del fútbol base gallego</li>
+          <li>🤝 Instalaciones del Complejo URECA</li>
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="feat-sec">
-    <div class="wrap">
-      <h2 class="feat-h">¿Qué puedo responder?</h2>
-      <p class="feat-p">Conozco toda la información oficial del club y de su entorno.</p>
-      <div class="feat-grid">
-        <div class="feat"><div class="ic">🏖️</div><h3>Campus de Verano</h3><p>Fechas, turnos, precios e inscripción.</p></div>
-        <div class="feat"><div class="ic">🤝</div><h3>Hazte socio</h3><p>Abonos, alta y recogida del carnet.</p></div>
-        <div class="feat"><div class="ic">💶</div><h3>Cuotas y pagos</h3><p>Importes y número de cuenta.</p></div>
-        <div class="feat"><div class="ic">👕</div><h3>Ropa y camisetas</h3><p>Camiseta de recuerdo y equipación.</p></div>
-        <div class="feat"><div class="ic">⚽</div><h3>Entrenos y partidos</h3><p>Horarios, calendarios y categorías.</p></div>
-        <div class="feat"><div class="ic">📍</div><h3>Club y Val Miñor</h3><p>Instalaciones, contacto y la comarca.</p></div>
+<section class="sec" id="categorias" style="background:var(--crema);">
+  <div class="wrap">
+    <p class="sec-tag">Fútbol base</p>
+    <h2 class="sec-h">Categorías y equipos</h2>
+    <p class="sec-sub">Cubrimos todo el ciclo formativo, desde los más pequeños hasta los aficionados.</p>
+    <div class="cat-list">
+      <div class="cat">Biberones</div>
+      <div class="cat">Prebenjamín</div>
+      <div class="cat">Benjamín<small>sub-8</small></div>
+      <div class="cat">Alevín<small>sub-10</small></div>
+      <div class="cat">Infantil<small>sub-12</small></div>
+      <div class="cat">Cadete<small>sub-16</small></div>
+      <div class="cat">Juvenil<small>sub-18</small></div>
+      <div class="cat">Aficionados</div>
+    </div>
+    <p style="margin-top:1.4rem;color:var(--sub);font-size:.92rem;">¿No sabes qué categoría corresponde a tu hijo/a o cómo apuntarlo? <a href="#asistente" data-abrir-asistente style="font-weight:700;">Pregúntale al asistente</a> o escríbenos a <a href="mailto:info@edvmnigran.com">info@edvmnigran.com</a>.</p>
+  </div>
+</section>
+
+<section class="sec" id="campus">
+  <div class="wrap">
+    <p class="sec-tag">Verano</p>
+    <h2 class="sec-h">Campus de Fútbol 2026</h2>
+    <p class="sec-sub">Organizado por el Grupo PEREIRA en las instalaciones de URECA. Fútbol, talleres y piscina para disfrutar del verano.</p>
+    <div class="panel" style="margin-top:2rem;">
+      <div class="panel-top"><h3>Campus ED Val Miñor · Agosto 2026</h3><span class="tag">Grupo PEREIRA</span></div>
+      <div class="campus-grid">
+        <div>
+          <div class="rows">
+            <div class="row"><span class="ic">📍</span><div><div class="l">Lugar</div><div class="v">Complejo Deportivo URECA (Nigrán)</div></div></div>
+            <div class="row"><span class="ic">📅</span><div><div class="l">1.er turno</div><div class="v">Del 11 al 15 de agosto</div></div></div>
+            <div class="row"><span class="ic">📅</span><div><div class="l">2.º turno</div><div class="v">Del 25 al 29 de agosto <span class="x">· Plazas agotadas</span></div></div></div>
+            <div class="row"><span class="ic">🕘</span><div><div class="l">Horario</div><div class="v">De 09:30 a 13:30 h</div></div></div>
+            <div class="row"><span class="ic">💶</span><div><div class="l">Cuota</div><div class="v">70 € por turno y alumno</div></div></div>
+          </div>
+          <div class="extra"><span>🌅 «Buenos días» (08:30–09:30)</span><b>+20 €</b></div>
+          <div class="extra"><span>🍽️ Comedor / media pensión (13:30–15:00)</span><b>+70 €</b></div>
+        </div>
+        <div>
+          <h3 style="font-family:'Barlow Condensed';font-weight:800;font-size:1.3rem;margin-bottom:.6rem;">Inscripción</h3>
+          <p style="color:var(--sub);font-size:.92rem;margin-bottom:1rem;">Rellena el formulario y haz el ingreso. La plaza se valida al recibir el comprobante por email. Confirmación en 2-3 días laborables.</p>
+          <div class="cuenta"><small>Nº de cuenta (ABANCA)</small>ES60 2080 5052 1430 4002 1652</div>
+          <p style="font-size:.82rem;color:var(--sub);margin-bottom:1rem;">Concepto: nombre y apellidos del niño/a + año de nacimiento. Ej.: «Pedro López - 2010».</p>
+          <a href="${L.campusForm}" target="_blank" class="btn btn-red" style="width:100%;justify-content:center;">📝 Formulario de inscripción</a>
+          <a href="${L.circular}" target="_blank" class="btn btn-ghost" style="width:100%;justify-content:center;margin-top:.6rem;">📋 Descargar circular</a>
+        </div>
       </div>
     </div>
-  </section>
-</main>
+  </div>
+</section>
+
+<section class="sec" id="socios" style="background:var(--crema);">
+  <div class="wrap">
+    <p class="sec-tag">Apoya al club</p>
+    <h2 class="sec-h">Hazte socio</h2>
+    <p class="sec-sub">La cuota de socio ayuda a mantener instalaciones, material, seguros y el futuro de más de 27 equipos.</p>
+    <div class="socios">
+      <div class="socio fam">
+        <div class="socio-h"><div class="t">🏠 Abono Familiar</div><div class="p">30 €<small>/ temporada</small></div></div>
+        <div class="socio-b">
+          <p>Ideal para toda la familia. Demostráis vuestro apoyo al crecimiento deportivo de los jóvenes del club.</p>
+          <a href="${L.socioFam}" target="_blank" class="btn btn-red" style="width:100%;justify-content:center;">Tramitar abono familiar</a>
+        </div>
+      </div>
+      <div class="socio ind">
+        <div class="socio-h"><div class="t">👤 Abono Individual</div><div class="p">20 €<small>/ temporada</small></div></div>
+        <div class="socio-b">
+          <p>Hazte miembro y forma parte activa de la afición. Un aporte fundamental para sostener el club.</p>
+          <a href="${L.socioInd}" target="_blank" class="btn btn-dark" style="width:100%;justify-content:center;">Tramitar abono individual</a>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:1.2rem;color:var(--sub);font-size:.88rem;">Tras el alta, escríbenos a <a href="mailto:info@edvmnigran.com">info@edvmnigran.com</a> indicando dónde recoger el carnet: Oficina EDVM (URECA) o Taquilla de Condomínguez.</p>
+  </div>
+</section>
+
+<section class="sec" id="accesos">
+  <div class="wrap">
+    <p class="sec-tag">Información práctica</p>
+    <h2 class="sec-h">Accesos para familias</h2>
+    <div class="cards">
+      <a href="${L.entrenos}" target="_blank" class="card"><div class="ic">📋</div><h3>Entrenamientos</h3><p>Días y horas de cada equipo.</p><div class="go">Ver hoja →</div></a>
+      <a href="${L.partidos}" target="_blank" class="card"><div class="ic">⚽</div><h3>Partidos</h3><p>Calendario y convocatorias.</p><div class="go">Ver calendario →</div></a>
+      <a href="${L.cuotas}" target="_blank" class="card"><div class="ic">💶</div><h3>Cuotas</h3><p>Importes y plazos por categoría.</p><div class="go">Ver cuotas →</div></a>
+      <a href="${L.ropa}" target="_blank" class="card"><div class="ic">👕</div><h3>Equipación</h3><p>Ropa oficial de jugador.</p><div class="go">Ver catálogo →</div></a>
+      <a href="${L.torneos}" target="_blank" class="card"><div class="ic">🏆</div><h3>Torneos</h3><p>Competiciones fuera de liga.</p><div class="go">Ver torneos →</div></a>
+      <a href="${L.xogade}" target="_blank" class="card"><div class="ic">📄</div><h3>Protocolo Xogade</h3><p>Seguro deportivo (PDF).</p><div class="go">Descargar →</div></a>
+      <a href="${L.ideario}" target="_blank" class="card"><div class="ic">📖</div><h3>Ideario & RRI</h3><p>Valores y normativa del club.</p><div class="go">Acceder →</div></a>
+      <a href="${L.ureca}" target="_blank" class="card"><div class="ic">🌐</div><h3>URECA</h3><p>Instalaciones deportivas.</p><div class="go">Ir a URECA →</div></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec asist" id="asistente">
+  <div class="wrap">
+    <div class="asist-grid">
+      <div>
+        <p class="sec-tag">Ayuda 24/7</p>
+        <h2 class="sec-h">Asistente Virtual</h2>
+        <p class="sec-sub" style="margin-bottom:1rem;">¿Tienes dudas sobre el club? Pregúntale a nuestro asistente: campus, inscripciones, cuotas, socios, camisetas, instalaciones, contacto… Te responde al instante.</p>
+        <p style="color:var(--sub);font-size:.9rem;">También aparece como burbuja flotante 👇 en toda la web.</p>
+      </div>
+      <div class="asist-chat"><div id="chat-edvm"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="instalaciones" style="background:var(--crema);">
+  <div class="wrap">
+    <p class="sec-tag">Nuestro terreno de juego</p>
+    <h2 class="sec-h">Instalaciones</h2>
+    <div class="cards">
+      <div class="card"><div class="ic">🏟️</div><h3>Campo Municipal de Nigrán</h3><p>Campo base donde disputamos los partidos oficiales como local.</p></div>
+      <div class="card"><div class="ic">🏫</div><h3>Complejo Deportivo URECA</h3><p>Oficina, entrenamientos entre semana y Campus de Verano.</p></div>
+      <div class="card"><div class="ic">🎟️</div><h3>Taquilla Condomínguez</h3><p>Atención los días de partido y recogida de carnets de socios.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="contacto">
+  <div class="wrap">
+    <p class="sec-tag">Estamos a tu disposición</p>
+    <h2 class="sec-h">Contacto</h2>
+    <div class="contact-grid" style="margin-top:1.8rem;">
+      <div class="ci"><span class="ic">✉️</span><div><div class="l">Email (vía principal)</div><div class="v"><a href="mailto:info@edvmnigran.com">info@edvmnigran.com</a></div></div></div>
+      <div class="ci"><span class="ic">📱</span><div><div class="l">WhatsApp / Teléfono</div><div class="v"><a href="${L.wa}">610 186 460</a></div></div></div>
+      <div class="ci"><span class="ic">👤</span><div><div class="l">Entrenadores y competición</div><div class="v">José Tizón · 627 50 55 13</div></div></div>
+      <div class="ci"><span class="ic">📍</span><div><div class="l">Dirección</div><div class="v">Rua Manuel Lemos, 124 · Nigrán</div></div></div>
+      <div class="ci"><span class="ic">📸</span><div><div class="l">Instagram</div><div class="v"><a href="${L.insta}" target="_blank">@edvalminor</a></div></div></div>
+      <div class="ci"><span class="ic">💳</span><div><div class="l">Cuenta ABANCA</div><div class="v" style="font-family:monospace;color:var(--rojo);">ES60 2080 5052 1430 4002 1652</div></div></div>
+    </div>
+    <div style="display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.4rem;">
+      <a href="mailto:info@edvmnigran.com" class="btn btn-red">✉ Enviar email</a>
+      <a href="${L.wa}" target="_blank" class="btn btn-dark">💬 WhatsApp</a>
+    </div>
+  </div>
+</section>
 
 <footer class="foot">
-  <div class="fcoin">${logo}</div>
-  <div class="fname">E.D. Val Miñor Nigrán</div>
-  <div class="fcontact">
-    <a href="mailto:info@edvmnigran.com">info@edvmnigran.com</a>
-    <span class="sep">·</span>
-    <a href="https://wa.me/34610186460">WhatsApp 610 186 460</a>
+  <div class="foot-in">
+    <div class="fb">
+      <img src="${logoSrc}" alt="Escudo E.D. Val Miñor Nigrán">
+      <span><b>E.D. Val Miñor Nigrán</b><span>Escuela de Fútbol · Desde 1996</span></span>
+    </div>
+    <div class="fc">
+      <a href="mailto:info@edvmnigran.com">info@edvmnigran.com</a><br>
+      <a href="${L.wa}">WhatsApp 610 186 460</a><br>
+      Rua Manuel Lemos, 124 · Nigrán
+    </div>
   </div>
-  <div class="heart">Asistente virtual · Hecho con 🤍❤️ para el club</div>
+  <div class="copy">© 2026 Escuela Deportiva Val Miñor Nigrán · 🤍❤️ · Hecho para fomentar el deporte base</div>
 </footer>
 
-<!-- ================= ASISTENTE (todo incluido) ================= -->
-<style>
-${css}
-</style>
-
-<script>
-/* Configuración. Para el modo avanzado con la API de Claude, pon aquí la URL
-   del backend, p. ej.: apiEndpoint: "https://TU-PROYECTO.vercel.app/api/chat" */
-window.EDVM_CONFIG = { apiEndpoint: "", titulo: "E.D. Val Miñor", subtitulo: "Asistente oficial · En línea" };
-</script>
-
-<script>
-/* ---- base-conocimiento.js ---- */
-${kb}
-</script>
-
-<script>
-/* ---- edvm-chat.js ---- */
-${motor}
-</script>
-
-<script>
-  var demo = EDVMChat.iniciarInline("#chat-edvm");
-  EDVMChat.iniciarWidget();
-  document.querySelectorAll("#ejemplos .ej").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      if (demo && demo.enviar) demo.enviar(btn.textContent.trim());
-    });
-  });
-</script>
+${assets}
 
 </body>
 </html>
 `;
+}
 
-fs.writeFileSync(path.join(RAIZ, "asistente-edvm.html"), html, "utf8");
-console.log("Generado: asistente-edvm.html (" + Math.round(html.length / 1024) + " KB)");
+fs.writeFileSync(path.join(RAIZ, "asistente-edvm.html"), render(logoDataUri, ASSETS_INLINE), "utf8");
+fs.writeFileSync(path.join(RAIZ, "index.html"), render("asistente/logo-edvm.svg", ASSETS_EXTERNAL), "utf8");
+console.log("Generado: asistente-edvm.html y index.html");

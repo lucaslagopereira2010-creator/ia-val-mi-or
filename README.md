@@ -26,12 +26,12 @@ flotante en la esquina, como las de muchas webs).
 
 ## 🚀 Probarlo en 30 segundos
 
-**La forma más fácil:** abre el archivo **`asistente-edvm.html`** (doble clic). Es un
-archivo **único y autónomo** con todo incluido: no necesita nada más y puedes incluso
-enviarlo por email o WhatsApp para que otros lo prueben.
+**La forma más fácil:** abre el archivo **`asistente-edvm.html`** (doble clic). Es la
+**web completa del club en un solo archivo** (con el asistente incluido): no necesita
+nada más y puedes incluso enviarlo por email o WhatsApp para que otros lo prueben.
 
-También puedes abrir **`index.html`**, una página de demostración más completa con el
-asistente incrustado y la burbuja flotante.
+También puedes abrir **`index.html`**: es la misma web, pero enlazando los archivos de
+la carpeta `asistente/` (versión recomendada para subir a un servidor o GitHub Pages).
 
 > Consejo: para que los enlaces y todo funcione igual que en producción, puedes servir
 > la carpeta con un servidor local sencillo:
@@ -46,9 +46,9 @@ asistente incrustado y la burbuja flotante.
 
 ```
 .
-├── asistente-edvm.html         ← ⭐ ARCHIVO ÚNICO listo para probar (ábrelo)
-├── index.html                  ← Página de demostración completa
-├── embed.html                  ← Ejemplo mínimo de integración (3 líneas)
+├── asistente-edvm.html         ← ⭐ WEB DEL CLUB en un solo archivo (ábrelo/compártelo)
+├── index.html                  ← Web del club (enlaza los archivos de /asistente)
+├── embed.html                  ← Ejemplo mínimo de integración del asistente (3 líneas)
 │
 ├── asistente/                  ← El asistente (esto es lo que se integra en la web)
 │   ├── base-conocimiento.js    ← ⭐ TODA la información del club (se edita aquí)
@@ -56,7 +56,7 @@ asistente incrustado y la burbuja flotante.
 │   ├── edvm-chat.css           ← Estilos (blanco/rojo del club)
 │   └── logo-edvm.svg           ← Escudo oficial del club (vectorial)
 │
-├── build-standalone.js         ← Regenera el archivo único (node build-standalone.js)
+├── build-standalone.js         ← Genera la web: asistente-edvm.html e index.html
 │
 ├── api/
 │   └── chat.js                 ← Backend OPCIONAL para el modo con la API de Claude
