@@ -46,17 +46,19 @@ la carpeta `asistente/` (versión recomendada para subir a un servidor o GitHub 
 
 ```
 .
-├── asistente-edvm.html         ← ⭐ WEB DEL CLUB en un solo archivo (ábrelo/compártelo)
-├── index.html                  ← Web del club (enlaza los archivos de /asistente)
+├── web-club-fuente.html        ← La web del club (FUENTE; aquí se edita el contenido)
+├── asistente-edvm.html         ← ⭐ Tu web + el asistente en UN archivo (ábrelo/compártelo)
+├── index.html                  ← La misma web, enlazando los archivos de /asistente
 ├── embed.html                  ← Ejemplo mínimo de integración del asistente (3 líneas)
 │
 ├── asistente/                  ← El asistente (esto es lo que se integra en la web)
 │   ├── base-conocimiento.js    ← ⭐ TODA la información del club (se edita aquí)
 │   ├── edvm-chat.js            ← Motor del chat e interfaz
 │   ├── edvm-chat.css           ← Estilos (blanco/rojo del club)
-│   └── logo-edvm.svg           ← Escudo oficial del club (vectorial)
+│   ├── logo-original.jpg       ← Escudo ORIGINAL del club (el que usa el asistente)
+│   └── logo-edvm.svg           ← Escudo vectorial (alternativa de respaldo)
 │
-├── build-standalone.js         ← Genera la web: asistente-edvm.html e index.html
+├── build-standalone.js         ← Inyecta el asistente en tu web (genera ambos HTML)
 │
 ├── api/
 │   └── chat.js                 ← Backend OPCIONAL para el modo con la API de Claude

@@ -24,6 +24,7 @@ window.EDVMChat = (function () {
   var CONFIG = window.EDVM_CONFIG || {};
   var API_ENDPOINT = CONFIG.apiEndpoint || "";        // "" => modo local
   var TITULO = CONFIG.titulo || "E.D. Val Miñor";
+  var LOGO_URL = CONFIG.logoUrl || "";
   var SUBTITULO = CONFIG.subtitulo || "En linea · respuesta inmediata";
 
   /* ====================================================================
@@ -50,6 +51,9 @@ window.EDVMChat = (function () {
 
   var _logoSeq = 0;
   function logoSVG() {
+    if (LOGO_URL) {
+      return '<img class="edvm-logo" src="' + LOGO_URL + '" alt="Escudo E.D. Val Miñor Nigrán">';
+    }
     _logoSeq++;
     return LOGO_TEMPLATE.replace(/EDVMTOP/g, "edvmT" + _logoSeq).replace(/EDVMBOT/g, "edvmB" + _logoSeq);
   }
