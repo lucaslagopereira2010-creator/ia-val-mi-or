@@ -43,12 +43,9 @@ window.EDVMChat = (function () {
     '<text font-size="16" letter-spacing="1.2"><textPath href="#EDVMTOP" startOffset="50%" text-anchor="middle">ED VAL MIÑOR</textPath></text>' +
     '<text font-size="17" letter-spacing="3"><textPath href="#EDVMBOT" startOffset="50%" text-anchor="middle">NIGRÁN</textPath></text>' +
     '</g>' +
-    '<g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round">' +
-    '<path d="M 54,84 C 66,72 78,72 90,82 C 98,88 102,88 110,82 C 122,72 134,72 146,84" stroke-width="6.5"/>' +
-    '<path d="M 70,90 L 100,151" stroke-width="9.5"/>' +
-    '<path d="M 130,90 L 100,151" stroke-width="9.5"/>' +
-    '</g>' +
-    '<polygon points="100,101 110,120 90,120" fill="#ffffff"/>' +
+    '<path d="M 52,80 C 66,68 78,68 90,78 C 98,84 102,84 110,78 C 122,68 134,68 148,80" fill="none" stroke="#ffffff" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '<path d="M 56,88 L 144,88 L 100,160 Z M 100,88 L 78,124 L 122,124 Z" fill="#ffffff" fill-rule="evenodd"/>' +
+    '<polygon points="100,100 110,119 90,119" fill="#ffffff"/>' +
     "</svg>";
 
   var _logoSeq = 0;
@@ -83,6 +80,28 @@ window.EDVMChat = (function () {
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;");
+  }
+
+  // Distancia de edición (Levenshtein) acotada: tolera erratas al buscar.
+  function distancia(a, b) {
+    var m = a.length, n = b.length;
+    if (Math.abs(m - n) > 1) return 2; // basta con saber si es <= 1
+    var fila = [], i, j;
+    for (j = 0; j <= n; j++) fila[j] = j;
+    for (i = 1; i <= m; i++) {
+      var prev = fila[0];
+      fila[0] = i;
+      for (j = 1; j <= n; j++) {
+        var tmp = fila[j];
+        fila[j] = Math.min(
+          fila[j] + 1,
+          fila[j - 1] + 1,
+          prev + (a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1)
+        );
+        prev = tmp;
+      }
+    }
+    return fila[n];
   }
 
   // Convierte el formato sencillo de la base de conocimiento a HTML seguro.
@@ -160,7 +179,9 @@ window.EDVMChat = (function () {
 
   // Devuelve { texto, sugerencias, id } con la mejor coincidencia.
   function buscarRespuesta(consulta) {
-    var q = " " + normalizar(consulta) + " ";
+    var norm = normalizar(consulta);
+    var q = " " + norm + " ";
+    var qTokens = norm ? norm.split(" ") : [];
     var mejorContenido = null, mejorContenidoPunt = 0;
     var mejorSocial = null, mejorSocialPunt = 0;
 
@@ -172,6 +193,15 @@ window.EDVMChat = (function () {
         // coincidencia por palabra/expresion completa
         if (q.indexOf(" " + k + " ") !== -1) {
           punt += k.length + (k.indexOf(" ") !== -1 ? 4 : 0); // bonus a expresiones
+        } else if (k.indexOf(" ") === -1 && k.length >= 4) {
+          // tolerancia a erratas: palabra simple con distancia de edicion <= 1
+          for (var ti = 0; ti < qTokens.length; ti++) {
+            var t = qTokens[ti];
+            if (t.length >= 4 && Math.abs(t.length - k.length) <= 1 && distancia(t, k) <= 1) {
+              punt += k.length - 1;
+              break;
+            }
+          }
         }
       });
       if (punt === 0) return;

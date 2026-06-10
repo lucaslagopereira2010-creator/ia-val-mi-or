@@ -51,6 +51,9 @@ const casos = [
   ["mi hija tiene 8 años, qué categoría", "categorias"],
   ["¿qué es el Val Miñor?", "comarca"],
   ["qué playas hay en Nigrán", "nigran"],
+  ["el castillo de Baiona", "baiona"],
+  ["qué ver en Gondomar", "gondomar"],
+  ["cuando es el canpus", "campus"],
   ["hola buenas", "saludo"],
   ["muchas gracias", "agradecimiento"],
   ["asdfghjkl qwerty", "fallback"]

@@ -203,8 +203,12 @@ Resumen de lo que tiene cargado (todo editable en `base-conocimiento.js`):
 - **Club**: escuela de fútbol desde 1996, cerca de una treintena de equipos (más de 27),
   de biberones a aficionados, federado en la Real Federación Galega de Fútbol (sede en
   A Ramallosa, Nigrán; históricamente «Val Miñor - Caixanova»).
-- **El Val Miñor y Nigrán** *(información de internet)*: la comarca (Nigrán, Baiona y
-  Gondomar), el río Miñor, las Rías Baixas, y Nigrán con sus playas (América, Patos, Panxón).
+- **El Val Miñor** *(información de internet)*: la comarca (Nigrán, Baiona y Gondomar),
+  el río Miñor y las Rías Baixas. Incluye **Nigrán** (playas, fiestas, surf, senderismo),
+  **Baiona** (Fortaleza de Monterreal, Carabela Pinta, La Arribada) y **Gondomar**
+  (Pazo do Conde, Castro de Pedra Moura).
+- **Búsqueda tolerante a erratas**: entiende preguntas aunque tengan alguna falta de
+  ortografía (p. ej. «canpus» → campus).
 - **Campus de verano 2026** (Grupo PEREIRA): turnos, horarios, cuota (70 €), servicios
   opcionales e inscripción.
 - **Socios**: abono familiar (30 €) e individual (20 €), alta y recogida del carnet.

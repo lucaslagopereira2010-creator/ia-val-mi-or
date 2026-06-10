@@ -265,8 +265,9 @@
       keywords: ["categoria", "categorias", "edad", "edades", "equipo", "equipos", "prebenjamin", "benjamin", "alevin", "infantil", "cadete", "juvenil", "biberon", "biberones", "aficionados", "que edad", "que categoria"],
       respuesta:
         "👦👧 **Categorías y equipos**\n\n" +
-        "Contamos con más de **27 equipos** que cubren todo el ciclo formativo:\n" +
+        "Contamos con cerca de una treintena de equipos que cubren todo el ciclo formativo:\n" +
         "• Biberones · Prebenjamín · Benjamín · Alevín · Infantil · Cadete · Juvenil · Aficionados\n\n" +
+        "**Equivalencias por edad (orientativas):** Benjamín (sub-8), Alevín (sub-10), Infantil (sub-12), Cadete (sub-16), Juvenil (sub-18). Tenemos equipos compitiendo en categorías de honor del fútbol base gallego.\n\n" +
         "Acogemos a jugadores y jugadoras desde sus primeros toques al balón hasta la etapa de aficionados. " +
         "Para saber qué categoría corresponde a tu hijo/a y cómo inscribirlo, escríbenos a " + CONTACTO.email + " o por WhatsApp al " + CONTACTO.whatsapp + ".",
       sugerencias: ["Cuotas", "Entrenamientos", "Contacto"]
@@ -366,8 +367,40 @@
       respuesta:
         "🏖️ **Nigrán**\n\n" +
         "Nigrán es el municipio donde tiene su sede la E.D. Val Miñor, situado entre **Vigo y Baiona**, en la comarca del Val Miñor. Tiene unos **18.000 habitantes** repartidos en 7 parroquias (Nigrán, Panxón, A Ramallosa, Parada, Camos, Chandebrito y Priegue), y en verano casi triplica su población.\n\n" +
-        "Es famoso por sus **playas**: **Playa América** (familiar, de arena fina y aguas tranquilas), **Patos** (todo un referente del surf) y **Panxón**. 🌊",
+        "Es famoso por sus **playas**: **Playa América** (familiar, de arena fina y aguas tranquilas), **Patos** (todo un referente del surf) y **Panxón**. 🌊\n\n" +
+        "**Fiestas y planes:** San Xoán de Panxón (en torno al 24 de junio), Virxe do Carme en Playa América (último fin de semana de julio), surf en Patos y la ruta de senderismo del **Río Muíños** (circular de unos 8 km desde Playa América).",
       sugerencias: ["¿Qué es el Val Miñor?", "Instalaciones", "Campus de verano"]
+    },
+
+    /* ---------- BAIONA ---------- */
+    {
+      id: "baiona",
+      keywords: ["baiona", "bayona", "monterreal", "parador", "carabela", "pinta", "arribada", "virgen de la roca", "virxe da rocha", "que ver en baiona"],
+      respuesta:
+        "⛵ **Baiona**\n\n" +
+        "Baiona es uno de los tres concellos del Val Miñor (junto a Nigrán y Gondomar), una histórica villa marinera de las Rías Baixas.\n\n" +
+        "Qué ver:\n" +
+        "• **Fortaleza de Monterreal**: castillo sobre el monte Boi, hoy Parador de Turismo; su muralla (unos 3 km) es transitable.\n" +
+        "• **Réplica de la Carabela Pinta**: en el puerto; aquí llegó en 1493 la noticia del descubrimiento de América.\n" +
+        "• **La Arribada**: fiesta histórica (primer fin de semana de marzo) que recrea aquella llegada.\n" +
+        "• Casco histórico, playas y la **Virxe da Rocha**.\n\n" +
+        "Un plan perfecto para antes o después de un partido. ⚽",
+      sugerencias: ["¿Qué es el Val Miñor?", "Gondomar", "Nigrán y sus playas"]
+    },
+
+    /* ---------- GONDOMAR ---------- */
+    {
+      id: "gondomar",
+      keywords: ["gondomar", "pazo", "conde de gondomar", "pazos de ulloa", "castro", "pedra moura", "ponte das animas", "que ver en gondomar"],
+      respuesta:
+        "🏛️ **Gondomar**\n\n" +
+        "Gondomar completa la comarca del Val Miñor junto a Nigrán y Baiona. Tiene una historia antiquísima y un rico patrimonio.\n\n" +
+        "Qué ver:\n" +
+        "• **Pazo do Conde de Gondomar** (declarado Bien de Interés Cultural): sirvió de escenario para la serie «Los pazos de Ulloa».\n" +
+        "• **Castro de Pedra Moura** (Borreiros): asentamiento castreño con vistas a la bahía de Baiona y al valle del Miñor.\n" +
+        "• **Ponte das Ánimas** sobre el río Miñor, inicio de la Ruta das Ánimas.\n\n" +
+        "🤍❤️",
+      sugerencias: ["Baiona", "¿Qué es el Val Miñor?", "Nigrán y sus playas"]
     },
 
     /* ---------- REDES SOCIALES ---------- */
@@ -512,7 +545,18 @@
     "## Nigrán (sede del club)",
     "Municipio situado entre Vigo y Baiona, en el Val Miñor. Unos 18.000 habitantes en 7 parroquias",
     "(Nigrán, Panxón, A Ramallosa, Parada, Camos, Chandebrito y Priegue); en verano casi triplica su población.",
-    "Playas destacadas: Playa América (familiar), Patos (referente del surf) y Panxón."
+    "Playas destacadas: Playa América (familiar), Patos (referente del surf) y Panxón.",
+    "Fiestas: San Xoán de Panxón (en torno al 24 de junio) y Virxe do Carme en Playa América (último fin de semana de julio).",
+    "Senderismo: ruta del Río Muíños, circular de unos 8 km desde Playa América.",
+    "",
+    "## Baiona (comarca del Val Miñor)",
+    "Histórica villa marinera. Destaca la Fortaleza de Monterreal (hoy Parador de Turismo, con muralla transitable),",
+    "la réplica de la Carabela Pinta (en 1493 llegó aquí la noticia del descubrimiento de América) y la fiesta de",
+    "La Arribada (primer fin de semana de marzo).",
+    "",
+    "## Gondomar (comarca del Val Miñor)",
+    "Concello con rico patrimonio: el Pazo do Conde de Gondomar (Bien de Interés Cultural, escenario de 'Los pazos",
+    "de Ulloa'), el Castro de Pedra Moura (Borreiros) y la Ponte das Ánimas sobre el río Miñor."
   ].join("\n");
 
   return {
