@@ -465,12 +465,14 @@ window.EDVMChat = (function () {
   function iniciarWidget() {
     if (instanciaWidget) return instanciaWidget;
     function arranque() {
-      instanciaWidget = crearChat({ inline: false });
+      if (!instanciaWidget) instanciaWidget = crearChat({ inline: false });
     }
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", arranque);
-    } else {
+    // Si el <body> ya existe (script al final del body), créalo al momento para
+    // que quien llame reciba la instancia (y los botones puedan abrir el chat).
+    if (document.body) {
       arranque();
+    } else {
+      document.addEventListener("DOMContentLoaded", arranque);
     }
     return instanciaWidget;
   }

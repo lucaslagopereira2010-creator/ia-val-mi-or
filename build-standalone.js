@@ -42,9 +42,11 @@ const L = {
 
 /* Menú único y responsive con los enlaces correctos */
 const NAVBAR =
+'<noscript><div class="edvm-noscript">⚠️ Para usar el asistente virtual y el menú, abre esta página en un navegador (Chrome, Safari…) con JavaScript activado.</div></noscript>\n' +
 '<nav class="navbar">\n' +
 '  <div class="container nav-wrap">\n' +
-'    <button class="nav-toggle" aria-label="Mostrar u ocultar menú" aria-expanded="true"><span></span><span></span><span></span></button>\n' +
+'    <input type="checkbox" id="edvmNav" class="nav-chk">\n' +
+'    <label for="edvmNav" class="nav-toggle" aria-label="Abrir o cerrar el menú"><span></span><span></span><span></span></label>\n' +
 '    <div class="nav-links" id="navLinks">\n' +
 '      <a href="#inicio" class="nav-btn">Inicio</a>\n' +
 '      <a href="#sobre" class="nav-btn">El Club</a>\n' +
@@ -130,21 +132,23 @@ const MEJORAS_CSS =
 '<style id="edvm-mejoras">\n' +
 /* ---- Menú responsive ---- */
 '.nav-wrap{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px;position:relative;}\n' +
+'.nav-chk{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none;}\n' +
 '.nav-links{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;}\n' +
-'.nav-toggle{display:none;flex-direction:column;gap:5px;background:linear-gradient(90deg,var(--red-primary),var(--red-dark));border:none;border-radius:8px;padding:13px 16px;cursor:pointer;}\n' +
-'.nav-toggle span{display:block;width:24px;height:3px;background:#fff;border-radius:2px;transition:.3s;}\n' +
+'.nav-toggle{display:none;flex-direction:column;gap:5px;background:linear-gradient(90deg,var(--red-primary),var(--red-dark));border:none;border-radius:8px;padding:13px 18px;cursor:pointer;}\n' +
+'.nav-toggle span{display:block;width:26px;height:3px;background:#fff;border-radius:2px;transition:.3s;}\n' +
 '.nav-btn.asist{background:#111;color:#fff;}\n' +
 '.nav-btn.asist:hover{background:#000;color:#fff;border-color:#111;}\n' +
+'.edvm-noscript{background:#fff3cd;color:#856404;padding:12px 16px;text-align:center;font-size:14px;font-weight:700;}\n' +
 '@media (max-width:900px){\n' +
 '  .navbar{position:static;}\n' +
 '  .nav-wrap{flex-direction:column;}\n' +
 '  .nav-toggle{display:flex;}\n' +
-'  .nav-links{display:flex;flex-direction:column;width:100%;margin-top:12px;gap:8px;}\n' +
-'  .nav-links.cerrado{display:none;}\n' +
+'  .nav-links{display:none;flex-direction:column;width:100%;margin-top:12px;gap:8px;}\n' +
+'  .nav-chk:checked ~ .nav-links{display:flex;}\n' +
+'  .nav-chk:checked ~ .nav-toggle span:nth-child(1){transform:translateY(8px) rotate(45deg);}\n' +
+'  .nav-chk:checked ~ .nav-toggle span:nth-child(2){opacity:0;}\n' +
+'  .nav-chk:checked ~ .nav-toggle span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}\n' +
 '  .nav-links .nav-btn{width:100%;justify-content:center;padding:14px;font-size:13px;}\n' +
-'  .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(8px) rotate(45deg);}\n' +
-'  .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}\n' +
-'  .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}\n' +
 '}\n' +
 /* ---- Ajustes móvil ---- */
 '@media (max-width:768px){\n' +
@@ -256,17 +260,16 @@ function aplicarMejoras(html, logoSrc) {
 /* ---- Scripts (menú + asistente, separados y a prueba de fallos) ---- */
 const MENU_JS =
   "<script>\n(function(){try{" +
-  "var t=document.querySelector('.nav-toggle'),nl=document.getElementById('navLinks');" +
-  "if(t&&nl){t.addEventListener('click',function(){var c=nl.classList.toggle('cerrado');t.setAttribute('aria-expanded',c?'false':'true');});" +
-  "nl.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){" +
-  "if(window.innerWidth<=900 && !a.hasAttribute('data-abrir-asistente')){nl.classList.add('cerrado');t.setAttribute('aria-expanded','false');}});});}" +
+  "var chk=document.getElementById('edvmNav'),nl=document.getElementById('navLinks');" +
+  "if(chk&&nl){nl.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){" +
+  "if(!a.hasAttribute('data-abrir-asistente')) chk.checked=false;});});}" +
   "}catch(e){}})();\n</script>";
 
 const ASIST_JS =
   "<script>\n(function(){try{" +
-  "var w=EDVMChat.iniciarWidget();" +
+  "EDVMChat.iniciarWidget();" +
   "document.querySelectorAll('[data-abrir-asistente]').forEach(function(b){" +
-  "b.addEventListener('click',function(e){e.preventDefault();if(w&&w.abrir)w.abrir();});});" +
+  "b.addEventListener('click',function(e){e.preventDefault();var w=EDVMChat.iniciarWidget();if(w&&w.abrir)w.abrir();});});" +
   "}catch(e){if(window.console&&console.error)console.error('Asistente EDVM:',e);}})();\n</script>";
 
 const INIT_JS = MENU_JS + "\n" + ASIST_JS;
