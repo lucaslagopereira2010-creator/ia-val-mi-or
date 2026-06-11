@@ -28,6 +28,9 @@ const motor = leer("asistente/edvm-chat.js");
 const logoB64 = fs.readFileSync(path.join(RAIZ, "asistente/logo-original.jpg")).toString("base64");
 const logoDataUri = "data:image/jpeg;base64," + logoB64;
 
+/* URL pública (GitHub Pages) para la vista previa al compartir */
+const SITE_URL = "https://lucaslagopereira2010-creator.github.io/ia-val-mi-or/";
+
 /* Enlaces oficiales a los documentos del club */
 const L = {
   ideario: "https://drive.google.com/drive/folders/0BxskfnPIuX9YU1VFem9Dcy1aTjQ?usp=sharing",
@@ -206,7 +209,7 @@ const MEJORAS_CSS =
 '</style>\n</head>';
 
 /* Metadatos: favicon, descripción, Open Graph y Twitter */
-function headExtra(logoSrc) {
+function headExtra(logoSrc, ogImg) {
   var desc = "Web oficial de la Escuela Deportiva Val Miñor Nigrán (EDVM): escuela de fútbol base desde 1996, referente en Nigrán, el Val Miñor y Galicia. Campus, socios, cuotas, entrenamientos, partidos y asistente virtual.";
   return '\n' +
     '<link rel="icon" type="image/jpeg" href="' + logoSrc + '">\n' +
@@ -217,18 +220,19 @@ function headExtra(logoSrc) {
     '<meta property="og:site_name" content="E.D. Val Miñor Nigrán">\n' +
     '<meta property="og:title" content="E.D. Val Miñor Nigrán · Escuela de Fútbol">\n' +
     '<meta property="og:description" content="' + desc + '">\n' +
-    '<meta property="og:image" content="' + logoSrc + '">\n' +
+    '<meta property="og:url" content="' + SITE_URL + '">\n' +
+    '<meta property="og:image" content="' + ogImg + '">\n' +
     '<meta name="twitter:card" content="summary">\n' +
     '<meta name="twitter:title" content="E.D. Val Miñor Nigrán · Escuela de Fútbol">\n' +
     '<meta name="twitter:description" content="' + desc + '">\n' +
-    '<meta name="twitter:image" content="' + logoSrc + '">\n' +
+    '<meta name="twitter:image" content="' + ogImg + '">\n' +
     '</head>';
 }
 
 /* ---- Aplica las mejoras a la página del club ---- */
-function aplicarMejoras(html, logoSrc) {
+function aplicarMejoras(html, logoSrc, ogImg) {
   html = html.replace("</head>", MEJORAS_CSS);
-  html = html.replace("</head>", headExtra(logoSrc));
+  html = html.replace("</head>", headExtra(logoSrc, ogImg));
   // Menú único responsive
   html = html.replace(/<nav class="navbar">[\s\S]*?<\/nav>/, NAVBAR);
   // Quitar la sección del Congreso
@@ -292,10 +296,14 @@ function assets(logoUrl, inline) {
     '<script src="asistente/edvm-chat.js"></script>\n' + INIT_JS;
 }
 
-function construir(logoSrc, bloque) {
-  return aplicarMejoras(paginaBase, logoSrc).replace("</body>", bloque + "\n</body>");
+function construir(logoSrc, ogImg, bloque) {
+  return aplicarMejoras(paginaBase, logoSrc, ogImg).replace("</body>", bloque + "\n</body>");
 }
 
-fs.writeFileSync(path.join(RAIZ, "asistente-edvm.html"), construir(logoDataUri, assets(logoDataUri, true)), "utf8");
-fs.writeFileSync(path.join(RAIZ, "index.html"), construir("asistente/logo-original.jpg", assets("asistente/logo-original.jpg", false)), "utf8");
+// Archivo único: logo y vista previa con data URI (autónomo)
+fs.writeFileSync(path.join(RAIZ, "asistente-edvm.html"),
+  construir(logoDataUri, logoDataUri, assets(logoDataUri, true)), "utf8");
+// Modular (GitHub Pages): favicon relativo + og:image absoluta para compartir
+fs.writeFileSync(path.join(RAIZ, "index.html"),
+  construir("asistente/logo-original.jpg", SITE_URL + "asistente/logo-original.jpg", assets("asistente/logo-original.jpg", false)), "utf8");
 console.log("Generado: asistente-edvm.html (1 archivo) e index.html (modular)");
