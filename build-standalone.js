@@ -70,6 +70,16 @@ const NAVBAR =
 '  </div>\n' +
 '</nav>';
 
+/* Chat incrustado (visible en móvil, debajo del menú; en escritorio se usa la burbuja) */
+const INLINE_SECTION =
+'<section class="edvm-sec edvm-inline-sec">\n' +
+'  <div class="container">\n' +
+'    <div class="section-header"><span class="section-badge">Ayuda 24/7</span><h2 class="section-title">Pregúntale al Asistente</h2></div>\n' +
+'    <p class="edvm-inline-intro">Resuelve tus dudas al instante: campus, inscripciones, cuotas, socios, camisetas, instalaciones y mucho más.</p>\n' +
+'    <div id="chat-inline" class="edvm-inline-box"></div>\n' +
+'  </div>\n' +
+'</section>\n';
+
 /* Sección "Quiénes somos" (datos reales de la web oficial) */
 const SOBRE =
 '<section id="sobre" class="bg-alt edvm-sec">\n' +
@@ -142,6 +152,9 @@ const MEJORAS_CSS =
 '.nav-btn.asist{background:#111;color:#fff;}\n' +
 '.nav-btn.asist:hover{background:#000;color:#fff;border-color:#111;}\n' +
 '.edvm-noscript{background:#fff3cd;color:#856404;padding:12px 16px;text-align:center;font-size:14px;font-weight:700;}\n' +
+'.edvm-inline-sec{display:none;background:linear-gradient(180deg,#ffffff,#fff3f3);}\n' +
+'.edvm-inline-intro{text-align:center;color:var(--text-muted);max-width:560px;margin:-30px auto 30px;font-size:15px;}\n' +
+'.edvm-inline-box{max-width:720px;margin:0 auto;}\n' +
 '@media (max-width:900px){\n' +
 '  .navbar{position:static;}\n' +
 '  .nav-wrap{flex-direction:column;}\n' +
@@ -152,6 +165,8 @@ const MEJORAS_CSS =
 '  .nav-chk:checked ~ .nav-toggle span:nth-child(2){opacity:0;}\n' +
 '  .nav-chk:checked ~ .nav-toggle span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}\n' +
 '  .nav-links .nav-btn{width:100%;justify-content:center;padding:14px;font-size:13px;}\n' +
+'  .edvm-inline-sec{display:block;}\n' +
+'  .edvm-launcher,.edvm-callout{display:none!important;}\n' +
 '}\n' +
 /* ---- Ajustes móvil ---- */
 '@media (max-width:768px){\n' +
@@ -233,8 +248,8 @@ function headExtra(logoSrc, ogImg) {
 function aplicarMejoras(html, logoSrc, ogImg) {
   html = html.replace("</head>", MEJORAS_CSS);
   html = html.replace("</head>", headExtra(logoSrc, ogImg));
-  // Menú único responsive
-  html = html.replace(/<nav class="navbar">[\s\S]*?<\/nav>/, NAVBAR);
+  // Menú único responsive + chat incrustado justo debajo (para móvil)
+  html = html.replace(/<nav class="navbar">[\s\S]*?<\/nav>/, NAVBAR + "\n" + INLINE_SECTION);
   // Quitar la sección del Congreso
   html = html.replace(/<section id="congreso">[\s\S]*?<\/section>/, "");
   // Marca de agua del escudo real en la cabecera (da vida, sin fotos inventadas)
@@ -271,9 +286,12 @@ const MENU_JS =
 
 const ASIST_JS =
   "<script>\n(function(){try{" +
-  "EDVMChat.iniciarWidget();" +
+  "EDVMChat.iniciarInline('#chat-inline');" +   // chat incrustado (visible en móvil)
+  "EDVMChat.iniciarWidget();" +                 // burbuja flotante (visible en escritorio)
   "document.querySelectorAll('[data-abrir-asistente]').forEach(function(b){" +
-  "b.addEventListener('click',function(e){e.preventDefault();var w=EDVMChat.iniciarWidget();if(w&&w.abrir)w.abrir();});});" +
+  "b.addEventListener('click',function(e){e.preventDefault();" +
+  "if(window.innerWidth<=900){var s=document.querySelector('.edvm-inline-sec');if(s)s.scrollIntoView({behavior:'smooth',block:'start'});}" +
+  "else{var w=EDVMChat.iniciarWidget();if(w&&w.abrir)w.abrir();}});});" +
   "}catch(e){if(window.console&&console.error)console.error('Asistente EDVM:',e);}})();\n</script>";
 
 const INIT_JS = MENU_JS + "\n" + ASIST_JS;
