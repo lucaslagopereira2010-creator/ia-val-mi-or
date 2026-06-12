@@ -31,6 +31,27 @@ const logoDataUri = "data:image/jpeg;base64," + logoB64;
 /* URL pública (GitHub Pages) para la vista previa al compartir */
 const SITE_URL = "https://lucaslagopereira2010-creator.github.io/ia-val-mi-or/";
 
+/* Seguridad: política de contenido (CSP) estricta + sin fuga de referente.
+   - Solo se permite lo que la web necesita (fuentes de Google y datos embebidos).
+   - 'unsafe-inline' es imprescindible porque la base de conocimiento y el motor
+     del asistente van embebidos en la propia página (sin servidores externos).
+   - object-src 'none' y base-uri 'self' cierran vectores clásicos de inyección.
+   - referrer no-referrer: al pulsar un enlace externo NO se filtra la URL del
+     alojamiento (ni, por tanto, la cuenta) a terceros. */
+const SECURITY_META =
+  '<meta http-equiv="Content-Security-Policy" content="' +
+    "default-src 'self'; " +
+    "base-uri 'self'; " +
+    "object-src 'none'; " +
+    "img-src 'self' data:; " +
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+    "font-src 'self' https://fonts.gstatic.com data:; " +
+    "script-src 'self' 'unsafe-inline'; " +
+    "connect-src 'self'; " +
+    "form-action 'self'" +
+  '">\n' +
+  '<meta name="referrer" content="no-referrer">\n';
+
 /* Enlaces oficiales a los documentos del club */
 const L = {
   ideario: "https://drive.google.com/drive/folders/0BxskfnPIuX9YU1VFem9Dcy1aTjQ?usp=sharing",
@@ -48,10 +69,10 @@ const L = {
    móvil lo bloquee). Se pasa por variable de entorno EDVM_ASIST_URL. */
 const ASIST_URL = process.env.EDVM_ASIST_URL || "";
 const asistNav = ASIST_URL
-  ? '<a href="' + ASIST_URL + '" target="_blank" rel="noopener" class="nav-btn asist">💬 Asistente</a>'
+  ? '<a href="' + ASIST_URL + '" target="_blank" rel="noopener noreferrer" class="nav-btn asist">💬 Asistente</a>'
   : '<a href="#" class="nav-btn asist" data-abrir-asistente>💬 Asistente</a>';
 const asistBanner = ASIST_URL
-  ? '<a href="' + ASIST_URL + '" target="_blank" rel="noopener" class="edvm-ask-btn">💬 Abrir el asistente</a>'
+  ? '<a href="' + ASIST_URL + '" target="_blank" rel="noopener noreferrer" class="edvm-ask-btn">💬 Abrir el asistente</a>'
   : '<button type="button" class="edvm-ask-btn" data-abrir-asistente>💬 Pregúntale al asistente</button>';
 
 /* Menú único y responsive con los enlaces correctos */
@@ -65,15 +86,15 @@ const NAVBAR =
 '      <a href="#inicio" class="nav-btn">Inicio</a>\n' +
 '      <a href="#sobre" class="nav-btn">El Club</a>\n' +
 '      <a href="#campus" class="nav-btn">Campus</a>\n' +
-'      <a href="' + L.entrenos + '" target="_blank" rel="noopener" class="nav-btn">Entrenamientos</a>\n' +
-'      <a href="' + L.partidos + '" target="_blank" rel="noopener" class="nav-btn">Partidos</a>\n' +
-'      <a href="' + L.horario + '" target="_blank" rel="noopener" class="nav-btn">Horario Oficina</a>\n' +
-'      <a href="' + L.cuotas + '" target="_blank" rel="noopener" class="nav-btn">Cuotas</a>\n' +
-'      <a href="' + L.ropa + '" target="_blank" rel="noopener" class="nav-btn">Ropa Jugadores</a>\n' +
-'      <a href="' + L.torneos + '" target="_blank" rel="noopener" class="nav-btn">Torneos</a>\n' +
-'      <a href="' + L.ideario + '" target="_blank" rel="noopener" class="nav-btn">Ideario & RRI</a>\n' +
+'      <a href="' + L.entrenos + '" target="_blank" rel="noopener noreferrer" class="nav-btn">Entrenamientos</a>\n' +
+'      <a href="' + L.partidos + '" target="_blank" rel="noopener noreferrer" class="nav-btn">Partidos</a>\n' +
+'      <a href="' + L.horario + '" target="_blank" rel="noopener noreferrer" class="nav-btn">Horario Oficina</a>\n' +
+'      <a href="' + L.cuotas + '" target="_blank" rel="noopener noreferrer" class="nav-btn">Cuotas</a>\n' +
+'      <a href="' + L.ropa + '" target="_blank" rel="noopener noreferrer" class="nav-btn">Ropa Jugadores</a>\n' +
+'      <a href="' + L.torneos + '" target="_blank" rel="noopener noreferrer" class="nav-btn">Torneos</a>\n' +
+'      <a href="' + L.ideario + '" target="_blank" rel="noopener noreferrer" class="nav-btn">Ideario & RRI</a>\n' +
 '      <a href="#xogade" class="nav-btn">Protocolo Xogade</a>\n' +
-'      <a href="' + L.ureca + '" target="_blank" rel="noopener" class="nav-btn">Instalaciones</a>\n' +
+'      <a href="' + L.ureca + '" target="_blank" rel="noopener noreferrer" class="nav-btn">Instalaciones</a>\n' +
 '      <a href="#contacto" class="nav-btn">Contacto</a>\n' +
 '      <a href="#socio" class="nav-btn highlight">¡Hazte Socio!</a>\n' +
 '      ' + asistNav + '\n' +
@@ -141,12 +162,12 @@ const CONTACTO =
 '      <div class="edvm-ci"><span class="i">📱</span><div><div class="l">WhatsApp / Teléfono</div><div class="v"><a href="https://wa.me/34610186460">610 186 460</a></div></div></div>\n' +
 '      <div class="edvm-ci"><span class="i">👤</span><div><div class="l">Entrenadores y competición</div><div class="v">José Tizón · 627 50 55 13</div></div></div>\n' +
 '      <div class="edvm-ci"><span class="i">📍</span><div><div class="l">Dirección</div><div class="v">Rúa Manuel Lemos, 124 · 36379 Nigrán</div></div></div>\n' +
-'      <div class="edvm-ci"><span class="i">📸</span><div><div class="l">Instagram</div><div class="v"><a href="https://www.instagram.com/edvalminor/" target="_blank" rel="noopener">@edvalminor</a></div></div></div>\n' +
+'      <div class="edvm-ci"><span class="i">📸</span><div><div class="l">Instagram</div><div class="v"><a href="https://www.instagram.com/edvalminor/" target="_blank" rel="noopener noreferrer">@edvalminor</a></div></div></div>\n' +
 '      <div class="edvm-ci"><span class="i">💳</span><div><div class="l">Cuenta ABANCA</div><div class="v edvm-iban">ES60 2080 5052 1430 4002 1652</div></div></div>\n' +
 '    </div>\n' +
 '    <div class="edvm-contact-btns">\n' +
 '      <a href="mailto:info@edvmnigran.com" class="edvm-cbtn red">✉ Enviar email</a>\n' +
-'      <a href="https://wa.me/34610186460" target="_blank" rel="noopener" class="edvm-cbtn dark">💬 WhatsApp</a>\n' +
+'      <a href="https://wa.me/34610186460" target="_blank" rel="noopener noreferrer" class="edvm-cbtn dark">💬 WhatsApp</a>\n' +
 '    </div>\n' +
 '  </div>\n' +
 '</section>\n';
@@ -257,6 +278,8 @@ function headExtra(logoSrc, ogImg) {
 
 /* ---- Aplica las mejoras a la página del club ---- */
 function aplicarMejoras(html, logoSrc, ogImg) {
+  // Seguridad lo antes posible en el <head> (justo tras el charset)
+  html = html.replace('<meta charset="UTF-8">', '<meta charset="UTF-8">\n' + SECURITY_META);
   html = html.replace("</head>", MEJORAS_CSS);
   html = html.replace("</head>", headExtra(logoSrc, ogImg));
   // Menú único responsive + chat incrustado justo debajo (para móvil)
@@ -330,6 +353,7 @@ function assets(logoUrl, inline) {
 function paginaAsistente() {
   return '<!DOCTYPE html>\n<html lang="es">\n<head>\n' +
     '<meta charset="UTF-8">\n' +
+    SECURITY_META +
     '<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">\n' +
     '<title>Asistente Virtual · E.D. Val Miñor Nigrán</title>\n' +
     '<link rel="preconnect" href="https://fonts.googleapis.com">\n' +
