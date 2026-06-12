@@ -43,6 +43,17 @@ const L = {
   ureca: "http://www.ureca.es"
 };
 
+/* Enlace al asistente alojado: si se define, el botón "Asistente" será un ENLACE
+   a esa página (abre el navegador real, donde el JS funciona aunque el visor del
+   móvil lo bloquee). Se pasa por variable de entorno EDVM_ASIST_URL. */
+const ASIST_URL = process.env.EDVM_ASIST_URL || "";
+const asistNav = ASIST_URL
+  ? '<a href="' + ASIST_URL + '" target="_blank" rel="noopener" class="nav-btn asist">💬 Asistente</a>'
+  : '<a href="#" class="nav-btn asist" data-abrir-asistente>💬 Asistente</a>';
+const asistBanner = ASIST_URL
+  ? '<a href="' + ASIST_URL + '" target="_blank" rel="noopener" class="edvm-ask-btn">💬 Abrir el asistente</a>'
+  : '<button type="button" class="edvm-ask-btn" data-abrir-asistente>💬 Pregúntale al asistente</button>';
+
 /* Menú único y responsive con los enlaces correctos */
 const NAVBAR =
 '<noscript><div class="edvm-noscript">⚠️ Para usar el asistente virtual y el menú, abre esta página en un navegador (Chrome, Safari…) con JavaScript activado.</div></noscript>\n' +
@@ -65,7 +76,7 @@ const NAVBAR =
 '      <a href="' + L.ureca + '" target="_blank" rel="noopener" class="nav-btn">Instalaciones</a>\n' +
 '      <a href="#contacto" class="nav-btn">Contacto</a>\n' +
 '      <a href="#socio" class="nav-btn highlight">¡Hazte Socio!</a>\n' +
-'      <a href="#" class="nav-btn asist" data-abrir-asistente>💬 Asistente</a>\n' +
+'      ' + asistNav + '\n' +
 '    </div>\n' +
 '  </div>\n' +
 '</nav>';
@@ -269,7 +280,7 @@ function aplicarMejoras(html, logoSrc, ogImg) {
     '  <div class="container edvm-ask-in">\n' +
     '    <div class="edvm-ask-txt"><h2>¿Tienes alguna duda? 🤔</h2>' +
     '<p>Nuestro <strong>Asistente Virtual</strong> te responde al instante: campus, inscripciones, cuotas, socios, camisetas, instalaciones y mucho más.</p></div>\n' +
-    '    <button type="button" class="edvm-ask-btn" data-abrir-asistente>💬 Pregúntale al asistente</button>\n' +
+    '    ' + asistBanner + '\n' +
     '  </div>\n' +
     '</section>\n';
   html = html.replace("<footer>", CONTACTO + banner + "<footer>");
@@ -314,6 +325,40 @@ function assets(logoUrl, inline) {
     '<script src="asistente/edvm-chat.js"></script>\n' + INIT_JS;
 }
 
+/* Página del asistente A PANTALLA COMPLETA (autónoma). Es la que se abre al
+   pulsar el enlace "Asistente": el chat ocupa toda la pantalla y va listo. */
+function paginaAsistente() {
+  return '<!DOCTYPE html>\n<html lang="es">\n<head>\n' +
+    '<meta charset="UTF-8">\n' +
+    '<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">\n' +
+    '<title>Asistente Virtual · E.D. Val Miñor Nigrán</title>\n' +
+    '<link rel="preconnect" href="https://fonts.googleapis.com">\n' +
+    '<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">\n' +
+    '<link rel="icon" type="image/jpeg" href="' + logoDataUri + '">\n' +
+    '<meta name="theme-color" content="#cc1f1f">\n' +
+    '<meta name="description" content="Asistente virtual de la E.D. Val Miñor Nigrán: campus, inscripciones, cuotas, socios y más.">\n' +
+    '<meta property="og:type" content="website">\n' +
+    '<meta property="og:title" content="Asistente · E.D. Val Miñor Nigrán">\n' +
+    '<meta property="og:description" content="Pregúntale al asistente del club: campus, cuotas, socios, instalaciones y más.">\n' +
+    '<meta property="og:image" content="' + SITE_URL + 'asistente/logo-original.jpg">\n' +
+    '<style>\n' +
+    '*{margin:0;padding:0;box-sizing:border-box;}html,body{height:100%;}\n' +
+    'body{font-family:"Barlow",-apple-system,sans-serif;background:#f6f7f9;}\n' +
+    '#chat-full{height:100vh;height:100dvh;}\n' +
+    '#chat-full .edvm-chat.edvm-inline .edvm-panel{height:100vh;height:100dvh;max-height:none;border-radius:0;box-shadow:none;border:none;}\n' +
+    '.edvm-nojs{background:#fff3cd;color:#856404;padding:14px;text-align:center;font-weight:700;}\n' +
+    '</style>\n' +
+    '<style>\n' + css + '\n</style>\n' +
+    '</head>\n<body>\n' +
+    '<noscript><div class="edvm-nojs">Activa JavaScript en tu navegador para usar el asistente.</div></noscript>\n' +
+    '<div id="chat-full"></div>\n' +
+    '<script>window.EDVM_CONFIG = { apiEndpoint: "", titulo: "E.D. Val Mi\\u00f1or", subtitulo: "Asistente oficial \\u00b7 En l\\u00ednea", logoUrl: "' + logoDataUri + '" };</script>\n' +
+    '<script>\n/* base-conocimiento.js */\n' + kb + '\n</script>\n' +
+    '<script>\n/* edvm-chat.js */\n' + motor + '\n</script>\n' +
+    '<script>(function(){try{EDVMChat.iniciarInline("#chat-full");}catch(e){if(window.console&&console.error)console.error("Asistente EDVM:",e);}})();</script>\n' +
+    '</body>\n</html>\n';
+}
+
 function construir(logoSrc, ogImg, bloque) {
   return aplicarMejoras(paginaBase, logoSrc, ogImg).replace("</body>", bloque + "\n</body>");
 }
@@ -324,4 +369,6 @@ fs.writeFileSync(path.join(RAIZ, "asistente-edvm.html"),
 // Modular (GitHub Pages): favicon relativo + og:image absoluta para compartir
 fs.writeFileSync(path.join(RAIZ, "index.html"),
   construir("asistente/logo-original.jpg", SITE_URL + "asistente/logo-original.jpg", assets("asistente/logo-original.jpg", false)), "utf8");
-console.log("Generado: asistente-edvm.html (1 archivo) e index.html (modular)");
+// Página del asistente a pantalla completa (destino del enlace "Asistente")
+fs.writeFileSync(path.join(RAIZ, "asistente.html"), paginaAsistente(), "utf8");
+console.log("Generado: asistente-edvm.html, index.html y asistente.html" + (ASIST_URL ? " (enlace: " + ASIST_URL + ")" : ""));

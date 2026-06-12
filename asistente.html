@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Asistente Virtual · E.D. Val Miñor Nigrán</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/jpeg" href="data:image/jpeg;base64,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">
+<meta name="theme-color" content="#cc1f1f">
+<meta name="description" content="Asistente virtual de la E.D. Val Miñor Nigrán: campus, inscripciones, cuotas, socios y más.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Asistente · E.D. Val Miñor Nigrán">
+<meta property="og:description" content="Pregúntale al asistente del club: campus, cuotas, socios, instalaciones y más.">
+<meta property="og:image" content="https://lucaslagopereira2010-creator.github.io/ia-val-mi-or/asistente/logo-original.jpg">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}html,body{height:100%;}
+body{font-family:"Barlow",-apple-system,sans-serif;background:#f6f7f9;}
+#chat-full{height:100vh;height:100dvh;}
+#chat-full .edvm-chat.edvm-inline .edvm-panel{height:100vh;height:100dvh;max-height:none;border-radius:0;box-shadow:none;border:none;}
+.edvm-nojs{background:#fff3cd;color:#856404;padding:14px;text-align:center;font-weight:700;}
+</style>
+<style>
+/* ============================================================================
+   Asistente Virtual E.D. Val Miñor Nigrán — Estilos del widget
+   Identidad visual del club: blanco y rojo, tipografías Barlow, escudo.
+   Diseño cuidado: degradados, profundidad, microanimaciones.
+   Todo va prefijado con .edvm- para no interferir con la web donde se embeba.
+   ============================================================================ */
+
+.edvm-chat,
+.edvm-chat *,
+.edvm-launcher,
+.edvm-launcher * {
+  box-sizing: border-box;
+}
+
+.edvm-chat {
+  /* Paleta del club */
+  --edvm-rojo: #cc0000;
+  --edvm-rojo-mid: #a80000;
+  --edvm-rojo-vivo: #ff2b2b;
+  --edvm-rojo-osc: #8a0000;
+  --edvm-rojo-claro: #fff0f1;
+  --edvm-blanco: #ffffff;
+  --edvm-gris: #f6f7f9;
+  --edvm-gris-tarjeta: #f9fafb;
+  --edvm-texto: #181821;
+  --edvm-sub: #5a5a68;
+  --edvm-borde: rgba(20, 20, 30, 0.08);
+  --edvm-sombra: 0 24px 60px -12px rgba(140, 0, 0, 0.28), 0 8px 24px rgba(0, 0, 0, 0.12);
+  --edvm-grad: linear-gradient(135deg, #ff2b2b 0%, #cc0000 55%, #8a0000 100%);
+
+  font-family: "Barlow", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--edvm-texto);
+}
+
+/* ============================================================
+   BOTÓN FLOTANTE (burbuja)
+   ============================================================ */
+.edvm-launcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 2147483000;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  cursor: pointer;
+  background: var(--edvm-grad);
+  box-shadow: 0 10px 28px rgba(204, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s;
+  padding: 0;
+  animation: edvm-flotar 3.5s ease-in-out infinite;
+}
+.edvm-launcher::after {
+  /* anillo de pulso */
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--edvm-rojo-vivo);
+  opacity: 0;
+  animation: edvm-anillo 3s ease-out infinite;
+}
+.edvm-launcher:hover {
+  transform: translateY(-4px) scale(1.06);
+  box-shadow: 0 16px 36px rgba(204, 0, 0, 0.55), 0 4px 10px rgba(0, 0, 0, 0.25);
+  animation-play-state: paused;
+}
+.edvm-launcher-logo {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+}
+.edvm-launcher-logo .edvm-logo {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.edvm-launcher .edvm-launcher-close {
+  display: none;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1;
+}
+.edvm-chat.is-open .edvm-launcher {
+  animation: none;
+}
+.edvm-chat.is-open .edvm-launcher::after {
+  display: none;
+}
+.edvm-chat.is-open .edvm-launcher-logo {
+  display: none;
+}
+.edvm-chat.is-open .edvm-launcher .edvm-launcher-close {
+  display: block;
+}
+@keyframes edvm-flotar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes edvm-anillo {
+  0% { transform: scale(1); opacity: 0.7; }
+  70% { transform: scale(1.5); opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Insignia de "1" cuando hay un mensaje de bienvenida sin leer */
+.edvm-launcher-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 11px;
+  background: #181821;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================================
+   PANEL DE CHAT
+   ============================================================ */
+.edvm-panel {
+  position: fixed;
+  bottom: 104px;
+  right: 24px;
+  z-index: 2147483000;
+  width: 392px;
+  max-width: calc(100vw - 32px);
+  height: 620px;
+  max-height: calc(100vh - 140px);
+  background: var(--edvm-blanco);
+  border-radius: 20px;
+  border: 1px solid var(--edvm-borde);
+  box-shadow: var(--edvm-sombra);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform-origin: bottom right;
+  opacity: 0;
+  transform: translateY(20px) scale(0.94);
+  pointer-events: none;
+  transition: opacity 0.28s ease, transform 0.32s cubic-bezier(.34,1.4,.64,1);
+}
+.edvm-chat.is-open .edvm-panel {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Modo "inline": el chat va incrustado en la página (no flotante) */
+.edvm-chat.edvm-inline {
+  position: relative;
+}
+.edvm-chat.edvm-inline .edvm-panel {
+  position: relative;
+  bottom: auto;
+  right: auto;
+  width: 100%;
+  max-width: 100%;
+  height: 600px;
+  max-height: 82vh;
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  box-shadow: 0 18px 50px -18px rgba(140, 0, 0, 0.22), 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* ---- Cabecera ---- */
+.edvm-header {
+  position: relative;
+  background: var(--edvm-grad);
+  color: #fff;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.edvm-header::after {
+  /* brillo diagonal sutil */
+  content: "";
+  position: absolute;
+  top: -60%;
+  right: -10%;
+  width: 60%;
+  height: 220%;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0));
+  transform: rotate(20deg);
+  pointer-events: none;
+}
+.edvm-header-shield {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.9), 0 4px 12px rgba(0, 0, 0, 0.25);
+  position: relative;
+  z-index: 1;
+}
+.edvm-header-shield .edvm-logo {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.edvm-header-info {
+  line-height: 1.25;
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+.edvm-header-title {
+  font-family: "Barlow Condensed", "Barlow", sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: 0.4px;
+}
+.edvm-header-status {
+  font-size: 0.74rem;
+  opacity: 0.95;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.edvm-header-status::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #5bf08a;
+  display: inline-block;
+  box-shadow: 0 0 0 0 rgba(91, 240, 138, 0.7);
+  animation: edvm-pulse 2s infinite;
+}
+@keyframes edvm-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(91, 240, 138, 0.6); }
+  70% { box-shadow: 0 0 0 7px rgba(91, 240, 138, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(91, 240, 138, 0); }
+}
+.edvm-header-min {
+  background: rgba(255, 255, 255, 0.16);
+  border: none;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: background 0.2s, transform 0.2s;
+  position: relative;
+  z-index: 1;
+}
+.edvm-header-min:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.08);
+}
+.edvm-chat.edvm-inline .edvm-header-min {
+  display: none;
+}
+
+/* ---- Zona de mensajes ---- */
+.edvm-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 16px 8px;
+  background:
+    radial-gradient(circle at 12px 12px, rgba(204, 0, 0, 0.04) 1.5px, transparent 1.6px) 0 0 / 26px 26px,
+    var(--edvm-gris);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  scroll-behavior: smooth;
+}
+.edvm-messages::-webkit-scrollbar {
+  width: 8px;
+}
+.edvm-messages::-webkit-scrollbar-thumb {
+  background: rgba(204, 0, 0, 0.18);
+  border-radius: 4px;
+}
+.edvm-messages::-webkit-scrollbar-thumb:hover {
+  background: rgba(204, 0, 0, 0.32);
+}
+
+.edvm-msg {
+  display: flex;
+  gap: 9px;
+  max-width: 90%;
+  animation: edvm-in 0.32s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes edvm-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.edvm-msg-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.18);
+}
+.edvm-msg-avatar .edvm-logo {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.edvm-bubble {
+  padding: 11px 15px;
+  border-radius: 16px;
+  font-size: 0.93rem;
+  line-height: 1.58;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+.edvm-msg.bot .edvm-bubble {
+  background: var(--edvm-blanco);
+  border: 1px solid var(--edvm-borde);
+  border-bottom-left-radius: 5px;
+  color: var(--edvm-texto);
+  box-shadow: 0 4px 14px rgba(20, 20, 40, 0.06);
+}
+.edvm-msg.user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+.edvm-msg.user .edvm-bubble {
+  background: var(--edvm-grad);
+  color: #fff;
+  border-bottom-right-radius: 5px;
+  box-shadow: 0 4px 14px rgba(204, 0, 0, 0.28);
+}
+.edvm-bubble a {
+  color: var(--edvm-rojo);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1.5px;
+}
+.edvm-bubble a:hover {
+  color: var(--edvm-rojo-osc);
+}
+.edvm-msg.user .edvm-bubble a {
+  color: #fff;
+}
+.edvm-bubble strong {
+  font-weight: 700;
+}
+.edvm-bubble p {
+  margin: 0 0 9px 0;
+}
+.edvm-bubble p:last-child {
+  margin-bottom: 0;
+}
+.edvm-bubble ul {
+  margin: 7px 0;
+  padding-left: 6px;
+  list-style: none;
+}
+.edvm-bubble li {
+  margin: 5px 0;
+  padding-left: 18px;
+  position: relative;
+}
+.edvm-bubble li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--edvm-rojo);
+}
+.edvm-msg.user .edvm-bubble li::before {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+/* ---- Indicador "escribiendo..." ---- */
+.edvm-typing {
+  display: inline-flex;
+  gap: 5px;
+  padding: 4px 2px;
+}
+.edvm-typing span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--edvm-rojo);
+  opacity: 0.5;
+  animation: edvm-bounce 1.2s infinite;
+}
+.edvm-typing span:nth-child(2) { animation-delay: 0.18s; }
+.edvm-typing span:nth-child(3) { animation-delay: 0.36s; }
+@keyframes edvm-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-6px); opacity: 1; }
+}
+
+/* ---- Botones de sugerencia (quick replies) ---- */
+.edvm-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 6px 16px 10px 57px;
+  background:
+    radial-gradient(circle at 12px 12px, rgba(204, 0, 0, 0.04) 1.5px, transparent 1.6px) 0 0 / 26px 26px,
+    var(--edvm-gris);
+}
+.edvm-chip {
+  background: var(--edvm-blanco);
+  border: 1.5px solid rgba(204, 0, 0, 0.25);
+  color: var(--edvm-rojo);
+  padding: 8px 14px;
+  border-radius: 18px;
+  font-size: 0.81rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  box-shadow: 0 2px 6px rgba(204, 0, 0, 0.06);
+}
+.edvm-chip:hover {
+  background: var(--edvm-grad);
+  color: #fff;
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(204, 0, 0, 0.3);
+}
+
+/* ---- Barra de entrada ---- */
+.edvm-input-bar {
+  display: flex;
+  align-items: flex-end;
+  gap: 9px;
+  padding: 13px 14px;
+  background: var(--edvm-blanco);
+  border-top: 1px solid var(--edvm-borde);
+  flex-shrink: 0;
+}
+.edvm-input {
+  flex: 1;
+  border: 1.5px solid var(--edvm-borde);
+  border-radius: 22px;
+  padding: 11px 17px;
+  font-size: 0.93rem;
+  font-family: inherit;
+  resize: none;
+  max-height: 110px;
+  outline: none;
+  color: var(--edvm-texto);
+  background: var(--edvm-gris-tarjeta);
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  line-height: 1.4;
+}
+.edvm-input::placeholder {
+  color: #a0a0ad;
+}
+.edvm-input:focus {
+  border-color: var(--edvm-rojo);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.1);
+}
+.edvm-send {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: var(--edvm-grad);
+  color: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.18s, box-shadow 0.2s, filter 0.2s;
+  box-shadow: 0 4px 12px rgba(204, 0, 0, 0.32);
+}
+.edvm-send:hover {
+  transform: scale(1.08) rotate(2deg);
+  box-shadow: 0 6px 18px rgba(204, 0, 0, 0.45);
+}
+.edvm-send:active {
+  transform: scale(0.96);
+}
+.edvm-send:disabled {
+  background: #c9ccd2;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+.edvm-send svg {
+  width: 21px;
+  height: 21px;
+}
+
+/* ---- Pie ---- */
+.edvm-footer {
+  text-align: center;
+  font-size: 0.68rem;
+  color: var(--edvm-sub);
+  padding: 7px 12px 10px;
+  background: var(--edvm-blanco);
+  letter-spacing: 0.2px;
+}
+.edvm-footer strong {
+  color: var(--edvm-rojo);
+  font-weight: 700;
+}
+
+/* ============================================================
+   RESPONSIVE — móvil: panel a pantalla completa
+   ============================================================ */
+@media (max-width: 480px) {
+  .edvm-panel {
+    bottom: 0;
+    right: 0;
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
+    border-radius: 0;
+  }
+  .edvm-chat.edvm-inline .edvm-panel {
+    height: 72vh;
+    border-radius: 20px;
+  }
+  .edvm-launcher {
+    bottom: 18px;
+    right: 18px;
+  }
+}
+
+/* Respeta la preferencia de menos animaciones */
+@media (prefers-reduced-motion: reduce) {
+  .edvm-launcher,
+  .edvm-launcher::after,
+  .edvm-msg,
+  .edvm-header-status::before {
+    animation: none !important;
+  }
+  .edvm-panel {
+    transition: opacity 0.2s ease;
+  }
+}
+
+/* ============================================================
+   AVISO "Pregúntame" junto a la burbuja (para que la IA se vea)
+   ============================================================ */
+.edvm-callout {
+  position: fixed;
+  bottom: 42px;
+  right: 104px;
+  z-index: 2147483000;
+  background: #fff;
+  color: var(--edvm-texto);
+  border: 1px solid var(--edvm-borde);
+  padding: 12px 16px;
+  border-radius: 16px;
+  box-shadow: 0 16px 38px rgba(140, 0, 0, 0.22), 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: "Barlow", -apple-system, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.35;
+  max-width: 220px;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateX(12px) scale(0.95);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(.34, 1.4, .64, 1);
+}
+.edvm-callout.show {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  pointer-events: auto;
+  animation: edvm-callout-bob 2.6s ease-in-out 0.8s infinite;
+}
+.edvm-callout strong { color: var(--edvm-rojo); }
+.edvm-callout::after {
+  content: "";
+  position: absolute;
+  right: -7px;
+  bottom: 20px;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border-right: 1px solid var(--edvm-borde);
+  border-bottom: 1px solid var(--edvm-borde);
+  transform: rotate(-45deg);
+}
+.edvm-callout-x {
+  position: absolute;
+  top: -9px;
+  right: -9px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: var(--edvm-texto);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.edvm-chat.is-open .edvm-callout { display: none; }
+@keyframes edvm-callout-bob {
+  0%, 100% { transform: translateX(0) scale(1); }
+  50% { transform: translateX(-5px) scale(1.02); }
+}
+@media (max-width: 600px) {
+  .edvm-callout { right: 92px; bottom: 34px; max-width: 165px; font-size: 0.82rem; padding: 10px 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .edvm-callout.show { animation: none !important; }
+}
+
+</style>
+</head>
+<body>
+<noscript><div class="edvm-nojs">Activa JavaScript en tu navegador para usar el asistente.</div></noscript>
+<div id="chat-full"></div>
+<script>window.EDVM_CONFIG = { apiEndpoint: "", titulo: "E.D. Val Mi\u00f1or", subtitulo: "Asistente oficial \u00b7 En l\u00ednea", logoUrl: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxIQEBUSERIVFhUXFhUaFxgWGBcVGBYVFhgXGBYbGBcYHSggGBsmGxcYIjIhJSkrLi4uFx8zODMsNygtLisBCgoKDg0OGxAQGy0lICUtLTAtLSstLS8tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAOAA4QMBEQACEQEDEQH/xAAcAAEAAgIDAQAAAAAAAAAAAAAABgcEBQECAwj/xABEEAABAwICBgYGBgkEAwEAAAABAAIDBBEFIQYSEzFBUQciYXGBkRQjMkJioVJygpKxwRYzQ1SissLS8BVTY9FEo+Fz/8QAGgEBAAIDAQAAAAAAAAAAAAAAAAMEAgUGAf/EADURAAICAQMCAwUIAgEFAAAAAAABAgMRBBIxBSETQVEiYXGBsRQjMkJSkaHRFcHwJDNDcuH/2gAMAwEAAhEDEQA/ALxQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAdJZmsBc5waBvJIAHiV5k9SbeERnENPaKLISGU8ohrD7xs35qOV0UX6el6mzvtx8SPVfSc8/qaYDtkff+Fo/NRPU+iNjX0L9c/2NTP0g1ztzomfVZf+YlYO+Rbj0bTrnL+Zhu0yxA/+S4dzYx/SsfGn6ky6VpV+X+Q3TGvH/lO8Wx/2p40/UPpelf5fqZMGnte3fIx31ox/TZeq+RFLo2mfGV8zaUvSZMP1tPG4cSxzmHyIKzWpfmirPoUfyzfzN/h/SJSSWEm0iPxt1m/eZe3jZSxviyhd0fUQ47/AlFFXRTN1opGPbza4OHyUqeTWzrlB4ksGQvTEIAgCAIAgCAIAgCAIAgCAIAgCAIDFxDEIqdhkme1jRxcbeA5nsC8cku7M6652S2wWWQDHOkgm7aOOw/3JB/LH/d5KtPUfpN7puiZ73P5IhGIYhNUO1p5HSH4jkO5u4eAVeUnLlm8p01VKxCODGWJMEAQBAEAQBAEB6U0743a8bnMd9JhLT5heptcGFlULFiayS/BekSeKzahomb9IWbIP6XfLvU8dQ1yabU9FhLvU8P08iw8Fx6nrG60MgJG9pye3vac/HcrUZqXBoL9NbQ8TWDZrIgCAIAgCAIAgCAIAgCAIAgCAiGlem8dLeKG0k24j3Iz8ZG8/CPkobLlHsuTZ6Lpk7/al2j9Sr8SxGWpftJ3l7uF8g0cmt3NCpym5cnUUaauiO2CwYqxJwgCAIAgCAIAgCAIAgCA7wyuY4PY4tcNzmmxHcQvU2uDCdcZx2zWUWHot0g3tFW2B3CYCzT/+gHs/WGXcrVd+e0jndb0dx9unj08/kWE1wIuDcH5qyaLg5QBAEAQBAEAQBAEAQHBKArfTXTckup6R1hufKOPNsZ/F3lzVa27HaJv+ndLzi25fBf2V+Aqh0aWAgCAIAgCAIAgCAIAgCAIAgCAICT6H6XvoiI5Lvp+W90Xazm34fLkZqrnHs+DU9Q6ZG9OdfaX1LcpahkrGvjcHNcAWuBuCDyV1PPBykoyi3GS7o9l6eBAEAQBAEAQBACgK16QNLS4upKd2QyleOPNjT+J8Oaq3W/lib/pfTs4usXwX+yvzkFVOifBJsYwGClPXMzhqsOs10PvAH2CdbjyU8q4xNRp9bdc8LC+OfrwYOG4dC+CaeV0gbG+NoDA0k65IF9bLgsYwjhtli++2NsKoYy1nucVeGxGm9Jge8tEgje2QNDg4jWBBabELxwW3cj2rU2eN4NiWcZWDHwWjjnlEUj9TXBDHZW2h9kO7CcvFeQim8Mm1Vs6ob4rOOfger8JMUEkk92OD9nGzi57fbJv7rRxG8leuvCyyNavxLIxr7rGW/ReXzM5mjJMGtd232e1Eerlsr7tb6dutq8ll4Xs58yu+prxtuPZzjPv/AKNfR4c2Slnn1iDEYgBlY7R1jdYKGYtlmzUON8K0u0smuWBcNxgWDNqY5iZAxzNmGa3sufIXANJ4XtYHmVJCvcmUNXq3ROKxlPk9ItHXCnmlmJjexpc2MjrEBwYXO5NubDnYrLwvZbZhLqCdsYVrKb7swqmgDKeCbWN5TKCMrDZuAFu+6w2LCfqTx1Dds4Y/Ckb6vwF0RMULmSxh7WynZtM0JeRcuJFwLHJwyUrra7I1tesjL7yzMZYeO/svBgQYHH6TVRve/Up2yOu0N1nBhA45cVhsW5+4tT1k1VXKKWZfsdKfDqaaOZ0Lpw6KIyesEeqQCBbqm/FeqEZJ4PZ6i+qcFYo4k8dsmRhujglpY5g2aRz3vbqxanV1dx63NexqTjkjv18q7pV9kl5vP+jA0iwxtNK1jXON42PIdq6zHOvdrtXK4t81hZHayzotTK+DlJef7mrUZdJLoXpQ6ik1JCTTuPWG/Zk++3s5jx375qrNrw+DVdS6er474/iX8lwxSBzQ5pBBAIIzBB3EFXjk2mnhndDwIAgCAIAgCAh/SDpKaWLYxH10g3jfGzcXd53DxPBQ3WbVhcm06XovHnul+Ffz7ipgFROuSwCgZuJ9IpZDrSR073WAu6FpNgLDM9ildrfKKEen1x7RlJfMx6HF5IWvY1sZbIQXNewObdtyLA7rXWMbGiSzRwsak28rt2OMQxeWdrWO1WsabhkbWsbrHK9m7z3pKbawe06SuqW5d36swFgWWsrDM+vxiad7HyuDywANuMrA3zHG5381m7G8NlarSV1xlGHbJ6jSKr2m028l9bWtrHVve9tS9rdieJLOTH7BRt2bf7OtLjUke1AbGWyuDntcwObcEkWachmV6rGsieirnty3mK7dz2ZSVFbYx07QBfOOMMBvztv3fivdsp8Ij8anS5Upt/F5OtXQ1VLG+OSMtZJql1xv2ZJbY7xvRxlFYFd2n1E1JPuv9mN/qsx2hc8uMrAx5dmS0EEC/DcFjvZP9lq9nCxh5XxPKWte6OOIkasZeW5Z9cguueOYXm94S9DNaeClKfnLk9/9YnFQalr9WUm5LcgdwsRuIy3L3fLdkj+x1Ovwmso5hxqZs0kwLS6UODw5oLXB5u4Fp4IrJJ5PJaOuVca/Jcep6Px2QsexrIWB7dVxjiawlt72uOGS98R4wYrQ1qSk23jjLMYYlKI44w6zY3OewjJwc7edZeb5YwSPS1ucptZz2OtfWunfrvDdY7y1obrHm62RPavJScuTOiiNMdseDGWJMEBPOjbSTUcKOU9V36kn3XcWdx3jxHJWqLfys57q+h/88F8f7LNVo54IAgCAIAgMTFK9lPC+aQ2axpJ5nkB2k5eK8k0llklVcrZqEeWUViVe+pmfNIes83PIDg0dgGS10pbnk7fT0RprUI+RjLEnCAIAgO8MTnuDWNLnE2AAuSewBepN9kYznGC3SeEbd+iVc1usaZ9uzVJ+6Df5LPwp+hSXU9M3jcaeSNzTZzS08nAg+RWDTRdjOMlmLydV4ZEj0XwVj7T1N9kDZjBm+d491o4tHE7vmp660+7NTr9Y4/d1fi836I39ZpGQLgtiiabdS5brD3GBpBmcOLrhje3jM7MLPkauvRObxzJ/8y/Q2+C6QQ1cZZKQ5mQOsNVzCcm64ud53PBtfLI78oTjJFbUaW3Tyzx/v4EK0x0ZdRv1m5xOPVPLsPL/ADwr21bXlG96dr1dHZLlGjoKJ879SMXO8ng0cyeAUUYuTwjYX6iFMd02SOq0V2EJlkbKWNtrP6keR4tjcdY587dymdSiss1UOpStmowx34X/ANNBiNDstVzXa8bxdrhxHIjgcj5FRSjg2VGo8TMWsSXKPaPAal0HpDYXGPmMyRzDd5HanhyxkxeuojZ4bl3Nc4EGxFj2rAtKSfdHCHoQBAAbZg2IzBGRBGYI7UyeSSaaZdWheOem0wc620Z1ZB8Q425OFj4kcFsK57o5OK12lentcfLlfA36kKYQBAEAQFadKeMaz2UjTk2z5PrH2G+Au7xaquon+U6Homm5ufwX+yAqqdCEAQGZhdW2N/rIxJGcnsPEc2ne1w4FZRlh9yvqapTj7DxJcMkmKaEl0YnoX7aJwuG5a4HZ9K3LI96mlT2zE1tHVdsvD1Cw15mqwt0dJI2V73GRhvqs6oYfouJzc7hqgWHE8FjFKDy+Se92amOyC9l+b8zcU3SHOHkuaNUnde9h4jPwLVmtR37lSfRI7fZl3NhiWIsxNo2TohKLENlY1269wCRex5EEfEpHJTXYqV02aSX3iePczVYdonLJMBUwlkYzJiYTrke6LGzb/SUcam37Rdt6jCNf3Usv3+RsMWwyCmc6ercRcWgp2uzEYAAblkG8z28Ss5KMe7KtFttyVVS/9pELxGudO/WcA0AWYxuTWMG5rRwH4qrKTk8m/wBPp40xwvm/U8qaodG7WYbHzBB3gjiDyK8Ta4M7Ko2R2yROcJ0rpXUop6hrgC4BzXXe0NdleN29oac7G9hexOQVqNsXHDOev6bfC3fX/BmMx/DsNj1KYbZ+8ludz8Uhy8Bde+JCC7GC0er1ct1vZe/+iF4/pFPWuvK6zAerG3Jrf+z2n5KvOxzN1pNDVpl7PPqe+jEIqHNpX5tdICAN4BBL7fdb8+azq9r2WQdRbp++jzguaNgaAALACwAyAA3BXcHJt57shHShhTXQtqWtAcxwa8gb2uyF+djbzKr6iPbJuejahq3w2+z+pWapnUBAEAQEh0Exj0WsbrG0cto38gSfVu8HG3c4qame2WDWdV0vjUuS5j3+XmXQFeOQCAIAgPKpmDGOe42DQSTyAFyjPUnJpIoPEK11RNJM7fI4u7gfZHgLDwWtk8vJ3enpVVcYLyMdYkwQBAEBJtCNJDRy6jz6l56w+g47njl29ncpqbNrw+DVdT0Kuhvj+JfyT3SrROKtbrtsya3VeNzuQfbeO3grVlSmveaHRa+zTSw+8fQqGrpnxSOjkaWvabOB4FUGmnhnX1Wxtgpx4ZlU2CVMrQ+OCRzTuc1pIy5ELJQk+6RDZq6ItwnJZ95uYf8AWGN1WiqA7nHyJFwpF4qKMv8AHSeXtNdNgNc9xc+nnc47y5riT4lYOubeWi1DWaSCxGSSOn6OVn7rN9wp4U/Qy/yGm/Wh+jlZ+6zfcKeFP0H+Q0360P0crP3Wb7hTwp+g/wAhpv1ofo5Wfus33CnhT9B/kNN+tHDtHqsC5ppQBv6hXnhy9D1a/TP86JF0WUodUySH3IwB3vP/AE0+am067tmu65Y1XGPqWerZzJo9OSBh09/ott36zbfNR2/gZd6fn7TDHqUutedqEAQBAcOF0DLx0RxX0qjilPtW1X/XZ1XeZF/FbGEt0UzhtZT4N0of8wblZlYIAgIr0k12yoHNBzlc2Mdxzf8Awg+aiuliJselVeJqU3wu5UCoHYhAEAQBAEBbvRzi3pFJqON3wkMPaz3D5ZfZV6me6Jx/VdN4N+VxLuYPSXgIki9KYOvGOv8AFHz72/hdY3w3LJP0jV+HZ4UuH9TUdGeO7OQ0sh6shvHfhJxH2h8x2rDTz/KW+saTcvGiuOS0FbObFkAQCyAIBZAQ3pKxvYwCBh681weYjHtee7zUF89qwbbpGl8W3e+I/U6dF9BqUjpSM5Hm31WdUfPWXmnjiOR1i3fft9ETFWDUkT6T6oMogzjJI0eDbvP4DzUN7xHBtej17tRn0RU6onWoIAgCAICwuiauznpyfoyN/kf+DPNWtNLlHOdcp7xs+RY6tGgCAICtOluqvJTxcA17z3khrfwcqupfCOi6FX2nP4IgKqnQBAEAQBAEBK+jWv2VaGE9WVpb9odZv4EeKnoliWDUdZp30b/QtuSMOaWuFwQQRzB3q6cqm08oovHsOdR1T4gSNR12HjqnNh7/AMwtfNbJHa6S6OpoTfn2ZbmiONispmvNtcdWQcnDj3Herlc90cnKa3TPT2uPl5G7UhUMPFsRZTQumkNmtHiTwA7ScljKSisskpqlbNQjyyL6D6Wuq5JIprB9y+O27U4t7SOfG/YoqrdzwzY9Q6f9njGUeOH8SaKc1R5zyhjS5xs1oJJPADMpnB6k28IozSDE3VlS+Wx6xDWN5NGTB3/mVr5y3yO10lC01GH5d38S6MGodhTRQj3GNB77Z/O6vRWEkcdfZ4lkp+rMwNWREVV0n4ltKpsIOUTc/rvsT5DV+ap6iWXg6fotO2t2Pz+iIcq5uwgCAIAgJD0f1OzxGLk8PYftN1h/E0Kah4mazq9e/TN+mGXQrxyAQBAU/wBJU2tiDh9GONv4u/qVLUfjOs6LHGnz6tkWUBtggCAIAgCA9qOpMUjJG72Oa4fZIKyi8PJHdWrK3B+aL+pphIxr25hzQ4dxFwtiu6OClFxbTIR0pYRrxNqWjOPqv+o45HwP8xUF8MrJuejanZY6nw/qRDQvHPQ6kFx9U+zZOwcHeB+RKgpntl7jbdS0ivq7crui6Q64V84/gqnpIxwzT+jsPq4jn8UnHyGXfdU77MvadP0fSKFfiy5fHwIth1a6CVkrPaY4EdvMdxFx4qCMtrybW+lXVuEvMvjDqxs8TJWey9ocPHh3jctknlZRw1lbrm4vlEP6T8a2cQpmHrSZvtwjB3faIt3AqC+eFg2vR9L4lniSXZfUiWgOGekVrLi7Y/WO8PZH3reShohmRt+rX+HQ0uZFzK8cgYONYk2mgfM/cwbubtzR4mwWMpbVkloqdtigvMoipndI90jzdznFzj2k3K1zeXk7mquNcFBeR5rwkCAIAgCAzMGl1KmBw4TReWu0H5XWUHiSK+sjuomvcy/VsjhQgCApTTx18RqO9g/9bFQu/GzselLGlj8zQqI2IQBAEAQBAEBb3RviG2omsJ60RLD9Xe35G3gr1MsxOP6rT4eob8n3JNVQNkY5jxdrgQQeIIsVK1nsa+MnFqS5RROOYY6lqHwu905H6TT7J8vzWvnHa8Hb6S9X1KaLK6OMcE8GwefWRAAfFH7p8Nx8Oat0T3Rwc31XSOm3euJfU2b9DqEkk07SSSSdZ+ZOZ95Z+HH0K0dfqIrCmzj9DKD92b5v/uXnhQ9D3/I6n9bNjDBDRwEMAjiYHOOZIAzLt6ywoorylO6ffu2UljmJuqqiSZ2Wsch9FoyaPL81QnLdLJ2mk06opUP3LP6OcH9Hpdo4WfNZx5hnuDyJP2lbphticx1TU+NfhcLt/ZLFMa0qvpKx7ayimYepGbvtxk5fZHzJ5KpqJ5e06Xo+k2R8aXL4+BClWN6EAQBAEAQHaJ1nNPJzT5EFex5RHb/25fB/Q+hwtmcCEAKApXTxtsRqO0sP/rYqFy9tnY9KedLH5mgURsQgCAIAgCAICXdGmJ7Gr2RPVmFvttzb8tYeIU9EsPBpus0b6t65j9C21dOWIZ0kYDt4dvGPWRA3tvdHvPlv81BfDcsm16Vq/Bs2S4l/DK2wXE30s7Jmb2nMfSafaae8KpCW15Ol1WnjfW4MvTD6xk8TZYzdrwCD3/mtinlZOHnXKuTjLlGQvTEr/pQxvVa2kYc3WdJbg33W+JF/DtVe+eOxvOjaXdLxpcLj4kQ0RwU1lU1hHq29aQ/COHicvNQUw3M2/UdV9npbXL4LuaLCwV84wj+mmPijpyWn1r7tjHbxcewfjZR2z2xLug0r1FuPJclMOJJuTcnMk7yTvutedoopLCOEPQgCAIAgCA7RNu5o5uaPMgL2PKI7fwS+DPocLZnAhACgKf6S4dXEHH6ccbv5m/0qlqF7Z1nRZZ0+PRsiygNsEAQBAEAQBAd4ZXMc17TZzSCDyINwvU8PJhZBTi4vhl74JiLamnjmb77QSOTtzh4G4WxjLcsnC30uqxwfkZxF1kRFO6daPehz67B6mQkt+F28s/MdncqN1e15XB1nS9b40NkvxL+Ta9GWPbN5pJD1XkmMng/i3x3947VnRP8AKyr1jR5XjRXxLExKuZTxPlebNY0k9vIDtJyVpvCyaCquVk1CPLKJxKtfUSvlf7T3Ens5AdgFh4LXSk5PJ3FFUaa1FcIt3QbAvRKUaw9ZJZz+y46rfAfMlXqobYnJdQ1Xj3NrhdkbrEK1kEbpZDZrRcn8hzJ3LOTSWWVK65WSUY8spHSDGH1k7pn5Dcxv0WDcO/ie0rX2Tcnk7TR6WOnrUFz5mtWBbCAIAgCAIAgMzBYteqgbzmi8tcE/ILOtZkitrJbaJv3F+rYnDBAEBWvS3S2kp5eYew94Ic35Fyq6lcM6HoVn44fBkAVU6EIAgCAIAgCAICedF+Naj3Urzk+7o/rAdYeIF/Aq1p5/lOf61pcpXL4Ms1WjnTCxfDY6qF0Uou1w8QeBHIheSSawySm6VU1OPKKUxjC5aGfZvuHNOsx494A9Vzf8yK184ODOz0+or1VWV80bjSnS11ZTwxAWsLzcnPGTbdnveI5KSy3ckinoem+BbKb+Q6PcE9Jqdo8eris48nP9wfn4DmlEMvLHVtV4VWyPMvoW+TYXKunKFRad6TelybKI+pYcrftHD3u4cPNUrrN3ZHVdL0Pgx8Sf4n/CIooDcBAEAQBAEAQBASLo+pdpiMXJge8+DdUfN4U1CzM1nV7Numa9cIudXjkAgCAi3SRQ7Wge4DOItkHcMn/wlyiujmBsel2+HqY54fYp9UDsQgCAIAgCAIAgPSnmdG9r2GzmkEHkRmF6nh5MLK1ZFwlwy8tHcXbWU7JW7zk4fRePaH+cCtjCW5ZOH1NEqLHBmxcVkQGk0qwJtbAWbpG5xu5O5HsO4/8AxYThvWC3otVLT2blx5lNOopBLsSw7TW1NXjrE2AVDa87TsfHg6/Fz2wXbo1hDaOnZEN+95+k8+0fy7gFfhHasI4vVah32ubIf0iaVe1SQO7JXD+Qfn5c1Dfbj2UbbpXT9331i7eSK7VQ6QIAgCAIAgCAIAgLD6JaD9fUH4Y2+HWf+LfJW9MuzZzfXLcyjWviyxlZNCEAQHnURB7S1wuHAgjmDkV41lHqbTyig8SoXU80kLt8bi3vHunxaQfFa6cdssHdaa5XVRmvMxliThAEAQBAEAQBASLQrSH0Kfrn1L7B/wAPJ47uPYpqbNrwazqei8evMfxL+S4w4OAcDcEXBGYIO5XjkWsPDOEPDDlwqF07Kh0YMrAQ13Gx58+NuVyvNqzklV1irdafZ+RoNO9KvRWbGE+ucN/+208frHh5qK2zasLkv9N0Dvlul+FfyVMSqJ1qSXAQ9CAIAgCAIAgCA4JQNpLLLy0Uwv0WjiiI6wbd/wBd3Wd8zbwWxhHbFI4bWXeNdKZuFmVggCAICtulTB7OZVtGRsyTv/ZuPzb91VdRH8x0HRNTzS/iv9lfqqdEEAQBAEAQBAEAQE40D0u2Nqaod6vcx59wn3T8Pbw7t1mm3Hss0HVOnbvva+fNFmq2c4cICsek3BtnK2pb7Mhs/seBkfED5KpqIYeTpOjarMXU/LghKrG+CAIAgCAIAgCAICR6A4P6VWNLheOGz3ci4H1bfvC/2VNTDdLJq+ranwqdq5l2+XmXMrxyIQBAEAQGLiVCyoifFILte0g+PEdo3+C8aysMzrsdc1OPKKKxXD300z4ZPaYd/BzfdcOwj/MlrpQ2vB3GmvjfWrI+ZirEnCAIAgCAIAgCAICwdCcfNPRySVUhMTHBkTTm8utdzW8SMx2DPcrdU8RzI5vqOkU71Cld33ZJoNMaF0evt2t+F1w8G17avHwUqti1k10un6iMtu1/6IjprpbT1dNsoQ8nXaSXDVADb5jPj+agttjJYRtundOupu3zxggyrG/CAIAgCAIAgCA5AJIABJJAAGZJOQA7SUxng8lJRWXwXXobgfoVM1httHdaQ/GeF+QFh4LY1w2xwcTrdT9otcvLhG9WZUCAIAgCAICJaf6NelxbWIeujBsP9xm8s7+I7cuKhur3LKNn0zW/Z7Nsvwv+PeVGqJ16eVlBAEAQBAEAQBAEB2dISACTYXsOAvmbL1tmKhFPK5Oq8MggPSeBzLa4trNDgMr6p3G3C/avWmuTCFsZ52+R5rwzCAIAgCAIAgJ/0a6NaxFZKMh+pB4njJ3cB4nkrVFf5mc71fXZ+4g/j/RZStHPhAEAQBAEAQBAVz0gaIm7qumbfjKwceb2jnzHHfzvWuqz7SN90vqO37q19vJldg3VQ6Q5QBAEAQEmNNSGlpmyjZSSMkInGYBEjmgSt4t3ZjMKxiO1JmmVuoV9koe0k+P6O9ZhbIqyhiLYyHMg2mrYtkJkcCb+9cWzSUUpRQqvnPT2zy+Xj3HOHULTPXhkLJHR6+yYW64FptXJnHqpFLdLBjfbJVU7pNJ8v5HfFcOPoL5XwxxuaYsvRzC4FzrENfrWeOeS9mvYzgx01/8A1KhGTa7+eUZVLSwGOkjBpmSSQhx2sGvruLiB17gAm1rFZJRwuCG2y3fZL2mk/J4x8jXS4VFNiErQ3YU7CHSa42YY0AA7/Z1nXA77qPYpWFuOpnXpI5e6T48ztpHQMli9Kh2ILTqzMhfrtaCSI388xke0JbFNZRjoLpwn4Nme/GfXzO+KUFK9sMQtBMaeF7ZP2cjnA3En0Dce125rKUYvCMab9TBzn+KO5przXwNXpZSthq3xtaGgNiyba1zEwu3dpJUVqxLBe6dZKyndJ+b+pqFGXggCAICT6E6KmtftJQRTtOf/ACke6Ph5nw52npq3d3wajqXUFSvDg/af8FwRsDQAAAAAABkABusrpyjeXlnZAEAQBAEAQBAEBwgK7000IJLqijbnmXxDieLoxz5t48M99a2nPeJvundV2rwrePJ/2V3/AJ3EbweRVQ6RPPdBAEAQBDxJLuhdBtXGDkFe5PHCLWGgXE7yUbbChFcI4K8PUkjkuPMpnJ4oRXCOLoetJ8goFFLgIEkuAh6EAQEs0P0NfVkSzAsg3jg6Xu5N+Ljw5qeqnd3fBpuodTjUtlXeX0LYp4GxtDGNDWtAAAFgANwAVxLBy7k5PLPVengQBAEAQBAEAQBAEAQEV0q0KirLyR2jm+kB1X/XH9Qz79yisqUjZaLqVmn9l94+n9FWYrhc1K/UnYWngd7XdrXbj+PYqU4OL7nUafVV3xzB/wBmGsSwEAQBAEAQBAEAQBAEAQHpTU75XhkbHPedzWi5P/Q7TkvUm+COyyFcd03hFjaLdH4ZaWss528RDNjfrn3z2bu9W66Eu7Oc1vV5WexT2Xr5snwFlYNIcoAgCAIAgCAIAgCAIAgCAIDHraKOZhZKxr2neHC4XjSfJnCyUHui8MgWOdG+91HJb/jkJI+y/ePEHvVeenz3Ru9N1uS7XLPvX9EHxPC56Y2nifH2kXae546p81WlCUeTeUaqm5exJP6mGsSwEAQBAEAQBAEB60lNJM7UiY57uTAXHxtu8VlGLfBHZdXWszaRMcE6OZpLOqniJv0G2dIe8+y3+JTw078zTanrcI9qVn3ssLB8EgpGasEYbzO9zvrOOZVmMVHg0F2osulum8mxWRCEAQBAEAQBAEAQBAEAQBAEAQBAEB1kjDgQ4Ag7wRcHwQ9Ta7ojmI6D0M1zstm48YjqfwjqnyUTpi/IvVdS1NfZSyvf3I9V9GH+zUnukYD/ABNI/BRvTLyZsK+uv88P2NRP0d1rT1di8djyD5Oao3p5FuHW9O+U0YrtB8QH7AHukj/Ny88CZKur6V/mf7HDdCMQP7C3e+P+5eeBP0PX1bSrzf7GRF0fVzt7Ym/Wk/taVl9nkRy61p1xl/I2tJ0YyH9bUtA4hjCT4OcR+CzWm9WVJ9d/RD9zfYf0e0UWbw+U/wDI7L7rbA+N1JGiCKN3VtTZw8fAk9LSsibqxsaxo4NAaPIKVJLg10pyk8yeT2XpiEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQBAEAQH//Z" };</script>
+<script>
+/* base-conocimiento.js */
+/* ============================================================================
+   BASE DE CONOCIMIENTO · Asistente Virtual E.D. Val Miñor Nigrán
+   ----------------------------------------------------------------------------
+   Este archivo contiene TODA la información que el asistente utiliza para
+   responder a las familias y jugadores. Es la ÚNICA fuente de datos: para
+   actualizar precios, fechas o enlaces, edita únicamente este archivo.
+
+   Funciona tanto en el navegador (define window.EDVM_KB) como en Node.js
+   (module.exports) para que el widget web y el backend con la API de Claude
+   compartan exactamente los mismos datos.
+
+   Estructura de cada "tema":
+     id          -> identificador único
+     keywords    -> palabras/expresiones que disparan el tema (sin tildes,
+                    en minúsculas; el motor ya normaliza la pregunta)
+     respuesta   -> texto de la respuesta. Admite un formato sencillo:
+                      **negrita**            -> texto en negrita
+                      [texto](url)           -> enlace
+                      línea que empieza por "• "  -> elemento de lista
+                      línea en blanco        -> separación de párrafo
+                    Los emails, teléfonos y URLs sueltas se enlazan solos.
+     sugerencias -> (opcional) botones de seguimiento sugeridos
+     social      -> (opcional) true para saludos/despedidas (menor prioridad)
+   ============================================================================ */
+
+(function (root, factory) {
+  var data = factory();
+  if (typeof module !== "undefined" && module.exports) {
+    module.exports = data;            // Node.js (backend con la API de Claude)
+  } else {
+    root.EDVM_KB = data;              // Navegador (widget web)
+  }
+})(typeof self !== "undefined" ? self : this, function () {
+  "use strict";
+
+  /* ---- Datos de contacto reutilizables -------------------------------- */
+  var CONTACTO = {
+    email: "info@edvmnigran.com",
+    whatsapp: "610 186 460",
+    whatsappUrl: "https://wa.me/34610186460",
+    director: "José Tizón",
+    telefonoDirector: "627 50 55 13",
+    direccion: "Rua Manuel Lemos, 124 · 36370 Nigrán (Pontevedra)",
+    instagram: "@edvalminor",
+    instagramUrl: "https://www.instagram.com/edvalminor/",
+    web: "https://www.edvmnigran.com",
+    iban: "ES60 2080 5052 1430 4002 1652",
+    banco: "ABANCA"
+  };
+
+  /* ---- Enlaces oficiales ---------------------------------------------- */
+  var ENLACES = {
+    formularioCampus: "https://forms.gle/ctGKydALhFaZNwLP6",
+    circularCampus: "https://www.canva.com/design/DAGqps5LNsA/RJOKABSqYsH4iKyef5_0_Q/view",
+    formularioCamisetas: "https://forms.gle/cjoA5SG9cxegKsh29",
+    socioFamiliar: "https://appuntame.abanca.com/portal/plan/edvalminornigran/16jb92bdys",
+    socioIndividual: "https://appuntame.abanca.com/portal/plan/edvalminornigran/16jb92b68z",
+    entrenamientos: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6VmFqMJzItjbnA8cCWYEo3K6CSpMQ5AMVMxlnPyZnWvQNJwe-uv5QtbmTuvv3BvPCRB-XBAElLEgn/pubhtml",
+    horarioOficina: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSt-LUR4JlfVsa8c1GNYM0hDPNobHOI5VIJgl3MNtHfvUWQjf5b7DaTyj_L6tctOKmYazl2WC1YLAON/pubhtml",
+    partidos: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTLEfEYHDObmqbKK1Y73tVUbXIxRWmyuykG4MeoABWpaG79R2F9p9BXAAtRSOrvfkRuL9Dl0_T9kugh/pubhtml",
+    cuotas: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTep5vuFaqHWpr_Y86Gypoom0gSOA-vPKODF47os-rLL5eh300OABcrtSdv4bh--5pp9WtUk36iFNAG/pubhtml?gid=1374414062&single=true",
+    ropaJugadores: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRNjZlc2Jzg1QsDH3ABqg2dlszHWX4MtA8th_uBvPoXK8iDJGQbCLA49_6svjUs2gvIDTFdaPytiHkO/pubhtml?gid=842211522&single=true",
+    torneos: "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0hQyGOrsmNqoDO_g7kfxt1DtcgxmQSq6qA8_7MD6fBBihWufZ56XDcRR0IvyjK_HNlE61COMz7L1U/pubhtml",
+    xogade: "https://www.edvmnigran.com/_files/ugd/598442_e0e10e2c96754743b45dda8cbf1a007e.pdf",
+    ideario: "https://drive.google.com/drive/folders/0BxskfnPIuX9YU1VFem9Dcy1aTjQ?usp=sharing",
+    ureca: "http://www.ureca.es",
+    portalSocios: "https://appuntame.abanca.com/plan/#/index.html/16jb8lsc2k"
+  };
+
+  /* ---- Temas (intención -> respuesta) --------------------------------- */
+  var TEMAS = [
+    /* ---------- SALUDO (social) ---------- */
+    {
+      id: "saludo",
+      social: true,
+      keywords: ["hola", "buenas", "buenos dias", "buenas tardes", "buenas noches", "hey", "saludos", "ola", "boas", "que tal"],
+      respuesta:
+        "¡Hola! 🤍❤️ Soy el asistente virtual de la **E.D. Val Miñor Nigrán**. " +
+        "Estoy aquí para ayudarte con dudas sobre el club.\n\n" +
+        "¿Sobre qué te gustaría saber?",
+      sugerencias: ["Campus de verano", "Hacerme socio", "Cuotas", "Contacto"]
+    },
+
+    /* ---------- CAMPUS DE VERANO ---------- */
+    {
+      id: "campus",
+      keywords: ["campus", "campus de verano", "campus de futbol", "verano", "turno", "turnos", "campamento", "summer", "actividad verano", "campus 2026", "grupo pereira"],
+      respuesta:
+        "🏖️ **Campus de Fútbol ED Val Miñor 2026 · Grupo PEREIRA**\n\n" +
+        "• **Lugar:** Complejo Deportivo y Social URECA (Nigrán)\n" +
+        "• **1.er turno:** del 11 al 15 de agosto\n" +
+        "• **2.º turno:** del 25 al 29 de agosto (¡PLAZAS AGOTADAS!)\n" +
+        "• **Horario base:** de 09:30 h a 13:30 h\n" +
+        "• **Cuota:** 70 € por turno y alumno\n\n" +
+        "**Servicios opcionales de conciliación:**\n" +
+        "• «Buenos días» (recogida temprana 08:30–09:30 h): +20 €\n" +
+        "• Comedor / Media pensión (13:30–15:00 h): +70 €\n\n" +
+        "Disfrutaremos de fútbol, talleres y piscina. ¿Quieres saber cómo inscribirte?",
+      sugerencias: ["¿Cómo me inscribo al campus?", "Número de cuenta", "Contacto"]
+    },
+    {
+      id: "inscripcion_campus",
+      keywords: ["inscribir campus", "inscripcion campus", "apuntar campus", "apuntarme campus", "plaza campus", "formulario campus", "matricula campus", "reservar plaza", "como inscribo", "como me inscribo", "como apuntar", "apuntar", "apuntarme", "apuntar a mi hijo", "inscribir", "inscripcion", "inscribirme", "anotar", "anotarme", "como apunto"],
+      respuesta:
+        "📝 **Inscripción al Campus de Verano**\n\n" +
+        "1. Rellena el formulario oficial: [Formulario de inscripción](" + ENLACES.formularioCampus + ")\n" +
+        "2. Haz el ingreso en la cuenta " + CONTACTO.banco + ": **" + CONTACTO.iban + "**\n" +
+        "3. Envía el comprobante de pago por email a " + CONTACTO.email + "\n\n" +
+        "**Concepto de la transferencia:** nombre y apellidos del niño/a + año de nacimiento.\n" +
+        "Ejemplo: «Pedro López - 2010»\n\n" +
+        "La plaza queda **validada** solo cuando recibimos el comprobante. " +
+        "En un plazo de 2 a 3 días laborables recibirás la confirmación por email.\n\n" +
+        "📋 También puedes consultar la [circular informativa](" + ENLACES.circularCampus + ").",
+      sugerencias: ["Precio del campus", "Número de cuenta", "Contacto"]
+    },
+
+    /* ---------- APUNTARSE A LA ESCUELA (TEMPORADA) ---------- */
+    {
+      id: "inscripcion_escuela",
+      keywords: ["apuntar a la escuela", "inscribir en el club", "inscribirse en el club", "unirse al club", "jugar en el club", "apuntarse al club", "inscripcion temporada", "quiero jugar al futbol", "formar parte del club", "entrar en el club", "apuntar a mi hijo a la escuela", "como apuntarse", "plazas escuela"],
+      respuesta:
+        "⚽ **Cómo apuntarse a la escuela**\n\n" +
+        "Si quieres que tu hijo/a forme parte de la E.D. Val Miñor durante la temporada, ponte en contacto con el club:\n" +
+        "• Email: " + CONTACTO.email + "\n" +
+        "• WhatsApp: " + CONTACTO.whatsapp + "\n" +
+        "• En persona: oficina del Complejo URECA, en el horario de atención\n\n" +
+        "Te informaremos de las plazas disponibles según el año de nacimiento, las cuotas y la documentación necesaria. ¡Te esperamos! 🤍❤️",
+      sugerencias: ["Categorías", "Cuotas de la temporada", "Horario de oficina"]
+    },
+
+    /* ---------- HAZTE SOCIO ---------- */
+    {
+      id: "socios",
+      keywords: ["socio", "socia", "socios", "hacerme socio", "hazte socio", "abono", "carnet", "carne", "colaborar", "apoyar el club", "ser socio", "cuota socio", "abonado"],
+      respuesta:
+        "🤝 **Hazte socio y colabora con tu Escuela**\n\n" +
+        "• **Abono familiar:** 30 € / temporada\n" +
+        "• **Abono individual:** 20 € / temporada\n\n" +
+        "**Cómo darte de alta:**\n" +
+        "• Familiar: [Tramitar abono familiar](" + ENLACES.socioFamiliar + ")\n" +
+        "• Individual: [Tramitar abono individual](" + ENLACES.socioIndividual + ")\n\n" +
+        "Una vez dado de alta, escríbenos a " + CONTACTO.email + " indicando dónde quieres recoger el carnet:\n" +
+        "• Oficina EDVM (URECA)\n" +
+        "• Taquilla de Condomínguez\n\n" +
+        "Tu cuota nos ayuda a mantener instalaciones, material, seguros y el futuro de más de 27 equipos. ¡Gracias! 🤍❤️",
+      sugerencias: ["Contacto", "Instalaciones", "Cuotas de la temporada"]
+    },
+
+    /* ---------- CAMISETAS DE RECUERDO ---------- */
+    {
+      id: "camisetas",
+      keywords: ["camiseta", "camisetas", "camiseta recuerdo", "camiseta de recuerdo", "recuerdo temporada", "talla", "tallas"],
+      respuesta:
+        "👕 **Camiseta de recuerdo de la temporada**\n\n" +
+        "• **Tallas 2 a 14:** 40 €\n" +
+        "• **Tallas S a 3XXL:** 45 €\n" +
+        "• Marcaje del nombre: **incluido**\n\n" +
+        "**Cómo solicitarla:**\n" +
+        "1. Rellena la [solicitud de camiseta](" + ENLACES.formularioCamisetas + ")\n" +
+        "2. Ingresa el importe en la cuenta: **" + CONTACTO.iban + "**\n" +
+        "3. Envía el comprobante a " + CONTACTO.email + "\n\n" +
+        "Indica nombre y apellidos del solicitante y la talla. Ejemplo: «Pedro Miguel Álvarez - Talla 6».\n\n" +
+        "ℹ️ El plazo de pedidos se cerró el 19 de mayo. Si llegas más tarde, escríbenos por email para confirmar disponibilidad.",
+      sugerencias: ["Ropa oficial", "Número de cuenta", "Contacto"]
+    },
+    {
+      id: "ropa_oficial",
+      keywords: ["ropa oficial", "ropa de jugador", "ropa jugador", "ropa portero", "ropa de portero", "portero", "equipacion oficial", "equipacion", "equipamiento", "material deportivo"],
+      respuesta:
+        "🧤 **Ropa y equipación oficial**\n\n" +
+        "Disponemos de ropa oficial de jugador y de portero. Puedes consultar el catálogo y las tallas aquí:\n" +
+        "• [Catálogo de equipación de jugadores](" + ENLACES.ropaJugadores + ")\n\n" +
+        "Para pedidos o dudas sobre la ropa de portero, escríbenos a " + CONTACTO.email + " o por WhatsApp al " + CONTACTO.whatsapp + ".",
+      sugerencias: ["Camisetas de recuerdo", "Contacto"]
+    },
+
+    /* ---------- FIESTA FIN DE TEMPORADA ---------- */
+    {
+      id: "fiesta",
+      keywords: ["fiesta", "fin de temporada", "fiesta fin de temporada", "evento", "celebracion", "fiesta del club", "27 de junio", "que dia es la fiesta"],
+      respuesta:
+        "🎉 **Gran fiesta de fin de temporada**\n\n" +
+        "• **Fecha:** sábado 27 de junio\n" +
+        "• **Lugar:** Condomínguez\n\n" +
+        "Un día especial para reunir a todo el club: jugadores, amigos y familias. Habrá fútbol, diversión acuática, baile, sorpresas y mucha risa. 🤍❤️⚽\n\n" +
+        "El programa completo de actividades se anuncia a mediados de junio. ¡Reserva la fecha y no te lo pierdas!",
+      sugerencias: ["Instalaciones", "Contacto"]
+    },
+
+    /* ---------- CUOTAS DE LA TEMPORADA ---------- */
+    {
+      id: "cuotas",
+      keywords: ["cuota", "cuotas", "precio temporada", "cuotas temporada", "precio", "precios", "pago temporada", "mensualidad", "cuanto cuesta jugar", "cuanto vale"],
+      respuesta:
+        "💶 **Cuotas de la temporada**\n\n" +
+        "Los importes, plazos y modalidades de pago de cada equipo y categoría están detallados en la tabla oficial:\n" +
+        "• [Ver cuotas por categoría](" + ENLACES.cuotas + ")\n\n" +
+        "Si tienes dudas sobre tu cuota concreta, escríbenos a " + CONTACTO.email + " o pásate por la oficina (URECA).",
+      sugerencias: ["Horario de oficina", "Número de cuenta", "Contacto"]
+    },
+
+    /* ---------- ENTRENAMIENTOS ---------- */
+    {
+      id: "entrenamientos",
+      keywords: ["entrenamiento", "entrenamientos", "entreno", "entrenos", "entrena", "entrenan", "entrenamos", "horario entreno", "hora de entreno", "dias de entreno", "cuando entrena", "cuando entrenan", "a que hora entrenan", "horario entrenamiento"],
+      respuesta:
+        "📋 **Entrenamientos**\n\n" +
+        "Los días y horas de entrenamiento de cada equipo se actualizan en esta hoja:\n" +
+        "• [Consultar entrenamientos](" + ENLACES.entrenamientos + ")\n\n" +
+        "Si no encuentras tu equipo o tienes dudas, escríbenos a " + CONTACTO.email + ".",
+      sugerencias: ["Calendario de partidos", "Contacto"]
+    },
+
+    /* ---------- PARTIDOS ---------- */
+    {
+      id: "partidos",
+      keywords: ["partido", "partidos", "calendario", "calendario partidos", "convocatoria", "cuando juega", "cuando jugamos", "donde juega", "proximo partido"],
+      respuesta:
+        "⚽ **Calendario de partidos**\n\n" +
+        "Consulta dónde y cuándo juegan nuestros equipos este fin de semana:\n" +
+        "• [Calendario de partidos](" + ENLACES.partidos + ")\n\n" +
+        "Los partidos oficiales como local se disputan en el Campo Municipal de Nigrán.",
+      sugerencias: ["Entrenamientos", "Instalaciones", "Torneos"]
+    },
+
+    /* ---------- HORARIO DE OFICINA ---------- */
+    {
+      id: "horario_oficina",
+      keywords: ["oficina", "horario oficina", "horario de oficina", "atencion", "cuando atienden", "horario atencion", "secretaria", "administracion"],
+      respuesta:
+        "🕐 **Horario de oficina**\n\n" +
+        "Nuestro equipo administrativo te atiende presencialmente en el Complejo URECA (Nigrán). Consulta el horario actualizado aquí:\n" +
+        "• [Horario de oficina](" + ENLACES.horarioOficina + ")\n\n" +
+        "También puedes escribirnos a " + CONTACTO.email + " o por WhatsApp al " + CONTACTO.whatsapp + ".",
+      sugerencias: ["Contacto", "Instalaciones"]
+    },
+
+    /* ---------- CONTACTO ---------- */
+    {
+      id: "contacto",
+      keywords: ["contacto", "contactar", "telefono", "email", "correo", "whatsapp", "llamar", "escribir", "direccion", "donde estais", "ubicacion", "como os contacto", "numero"],
+      respuesta:
+        "📬 **Contacto E.D. Val Miñor Nigrán**\n\n" +
+        "• **Email:** " + CONTACTO.email + "\n" +
+        "• **WhatsApp / Teléfono:** " + CONTACTO.whatsapp + "\n" +
+        "• **Entrenadores y competición:** " + CONTACTO.director + " · " + CONTACTO.telefonoDirector + "\n" +
+        "• **Dirección:** " + CONTACTO.direccion + "\n" +
+        "• **Instagram:** [" + CONTACTO.instagram + "](" + CONTACTO.instagramUrl + ")\n\n" +
+        "Estamos encantados de ayudarte. 🤍❤️",
+      sugerencias: ["Horario de oficina", "Instalaciones"]
+    },
+
+    /* ---------- CUENTA BANCARIA ---------- */
+    {
+      id: "cuenta",
+      keywords: ["cuenta", "iban", "numero de cuenta", "transferencia", "ingreso", "como pago", "donde pago", "abanca", "datos bancarios", "como ingreso"],
+      respuesta:
+        "💳 **Número de cuenta (" + CONTACTO.banco + ")**\n\n" +
+        "**" + CONTACTO.iban + "**\n\n" +
+        "Recuerda indicar siempre el concepto correcto (por ejemplo, nombre y apellidos del niño/a + año de nacimiento) y enviar el comprobante de pago a " + CONTACTO.email + " para validar tu solicitud.",
+      sugerencias: ["Inscripción al campus", "Cuotas", "Camisetas de recuerdo"]
+    },
+
+    /* ---------- INSTALACIONES ---------- */
+    {
+      id: "instalaciones",
+      keywords: ["instalacion", "instalaciones", "campo", "campos", "ureca", "condominguez", "donde juegan", "donde entrenan", "donde se juega", "complejo", "estadio"],
+      respuesta:
+        "🏟️ **Nuestras instalaciones**\n\n" +
+        "• **Campo Municipal de Nigrán:** campo base donde disputamos los partidos oficiales como local.\n" +
+        "• **Complejo Deportivo URECA:** sede de la oficina, entrenamientos entre semana y el Campus de Verano. [Web URECA](" + ENLACES.ureca + ")\n" +
+        "• **Taquilla Condomínguez:** punto de atención los días de partido y recogida de carnets de socios.",
+      sugerencias: ["Partidos", "Horario de oficina", "Contacto"]
+    },
+
+    /* ---------- CATEGORÍAS / EQUIPOS ---------- */
+    {
+      id: "categorias",
+      keywords: ["categoria", "categorias", "edad", "edades", "equipo", "equipos", "prebenjamin", "benjamin", "alevin", "infantil", "cadete", "juvenil", "biberon", "biberones", "aficionados", "que edad", "que categoria"],
+      respuesta:
+        "👦👧 **Categorías y equipos**\n\n" +
+        "Contamos con cerca de una treintena de equipos que cubren todo el ciclo formativo:\n" +
+        "• Biberones · Prebenjamín · Benjamín · Alevín · Infantil · Cadete · Juvenil · Aficionados\n\n" +
+        "**Equivalencias por edad (orientativas):** Benjamín (sub-8), Alevín (sub-10), Infantil (sub-12), Cadete (sub-16), Juvenil (sub-18). Tenemos equipos compitiendo en categorías de honor del fútbol base gallego.\n\n" +
+        "Acogemos a jugadores y jugadoras desde sus primeros toques al balón hasta la etapa de aficionados. " +
+        "Para saber qué categoría corresponde a tu hijo/a y cómo inscribirlo, escríbenos a " + CONTACTO.email + " o por WhatsApp al " + CONTACTO.whatsapp + ".",
+      sugerencias: ["Cuotas", "Entrenamientos", "Contacto"]
+    },
+
+    /* ---------- IDEARIO Y RRI ---------- */
+    {
+      id: "ideario",
+      keywords: ["ideario", "rri", "normativa", "reglamento", "valores", "normas", "regimen interno", "filosofia"],
+      respuesta:
+        "📖 **Ideario y Reglamento de Régimen Interno (RRI)**\n\n" +
+        "Nuestro trabajo se sustenta en formar excelentes personas, no solo futbolistas: respeto, compromiso, esfuerzo y trabajo en equipo.\n\n" +
+        "Puedes consultar el ideario y la normativa completa aquí:\n" +
+        "• [Ideario & RRI](" + ENLACES.ideario + ")",
+      sugerencias: ["Sobre el club", "Contacto"]
+    },
+
+    /* ---------- XOGADE / SEGURO ---------- */
+    {
+      id: "xogade",
+      keywords: ["xogade", "seguro", "seguro deportivo", "protocolo", "lesion", "mutua", "cobertura", "accidente"],
+      respuesta:
+        "📄 **Protocolo Xogade (seguro deportivo)**\n\n" +
+        "Documento oficial de la Xunta de Galicia para el deporte base, con la normativa y seguros vigentes:\n" +
+        "• [Descargar protocolo Xogade (PDF)](" + ENLACES.xogade + ")\n\n" +
+        "Para cualquier gestión relacionada con una lesión o el seguro, contacta con " + CONTACTO.email + ".",
+      sugerencias: ["Contacto", "Ideario & RRI"]
+    },
+
+    /* ---------- TORNEOS ---------- */
+    {
+      id: "torneos",
+      keywords: ["torneo", "torneos", "competicion externa", "competiciones", "campeonato"],
+      respuesta:
+        "🏆 **Torneos y competiciones**\n\n" +
+        "Seguimiento de los torneos locales, regionales o nacionales en los que participan nuestros equipos fuera de su liga:\n" +
+        "• [Ver torneos](" + ENLACES.torneos + ")",
+      sugerencias: ["Partidos", "Contacto"]
+    },
+
+    /* ---------- CONGRESO DE ENTRENADORES ---------- */
+    {
+      id: "congreso",
+      keywords: ["congreso", "congreso de entrenadores", "formacion entrenadores", "femxa", "ponencia", "jornada tecnica", "curso entrenadores"],
+      respuesta:
+        "🎓 **I Congreso de Entrenadores de Fútbol Base FEMXA**\n\n" +
+        "• **Fechas:** jueves 26 y viernes 27 de diciembre\n" +
+        "• **Horario:** mañana 10:00–14:00 h · tarde 16:00–21:00 h\n" +
+        "• **Lugar:** Auditorio del Concello de Nigrán\n" +
+        "• **Pase completo:** 50 € · **½ jornada:** 30 €\n" +
+        "• **Director:** " + CONTACTO.director + " · Información: " + CONTACTO.telefonoDirector + "\n\n" +
+        "Organizado por la EDVM con el apoyo de la Federación Galega de Fútbol y el Concello de Nigrán.",
+      sugerencias: ["Contacto"]
+    },
+
+    /* ---------- PATROCINADORES ---------- */
+    {
+      id: "patrocinadores",
+      keywords: ["patrocinador", "patrocinadores", "patrocinio", "sponsor", "colaborador", "colaboradores", "empresa", "publicidad", "anunciarme"],
+      respuesta:
+        "🤝 **Patrocinadores y colaboradores**\n\n" +
+        "Gracias al tejido empresarial que apuesta por el deporte base. Patrocinador principal: **Grupo Pereira**. " +
+        "Nos acompañan Kömmerling, Several Energy, GADIS, Clínica Nimo, Aceites Abril y Pescanova, además de la Diputación de Pontevedra, el Concello de Nigrán y URECA.\n\n" +
+        "¿Tienes una empresa y quieres vincular tu marca a nuestros valores? Escríbenos a " + CONTACTO.email + ".",
+      sugerencias: ["Sobre el club", "Contacto"]
+    },
+
+    /* ---------- SOBRE EL CLUB / HISTORIA ---------- */
+    {
+      id: "historia",
+      keywords: ["historia", "fundacion", "desde cuando", "1996", "quienes sois", "quien sois", "sobre el club", "sobre vosotros", "que es edvm", "informacion del club", "quienes somos", "club", "trayectoria", "caixanova", "anos de historia", "cuantos anos"],
+      respuesta:
+        "🏅 **Sobre la E.D. Val Miñor Nigrán**\n\n" +
+        "Somos una escuela de fútbol fundada en **1996**, referente del fútbol base en Nigrán, el Val Miñor y toda Galicia. " +
+        "Contamos con cerca de **una treintena de equipos** (más de 27) y más de **300 jugadores**, desde la categoría de biberones hasta aficionados.\n\n" +
+        "Tenemos nuestra sede en **A Ramallosa (Nigrán)** y estamos federados en la **Real Federación Galega de Fútbol**. Históricamente también se nos ha conocido como «Val Miñor - Caixanova». Vestimos de **blanco y rojo** 🤍❤️.\n\n" +
+        "Nuestro principal objetivo es formar excelentes personas, no solo futbolistas.",
+      sugerencias: ["¿Qué es el Val Miñor?", "Categorías", "Hacerme socio"]
+    },
+
+    /* ---------- COMARCA VAL MIÑOR ---------- */
+    {
+      id: "comarca",
+      keywords: ["val minor", "valle minor", "comarca", "que es el val minor", "rio minor", "mancomunidad", "baiona", "gondomar", "rias baixas", "ria de vigo", "donde esta el val minor"],
+      respuesta:
+        "🗺️ **El Val Miñor**\n\n" +
+        "El **Val Miñor** es una comarca natural del sur de Galicia, en la provincia de Pontevedra, formada por los municipios de **Nigrán**, **Baiona** y **Gondomar**. Toma su nombre del **río Miñor**, que da forma al valle.\n\n" +
+        "Está en plena **Ría de Vigo**, dentro de las **Rías Baixas**, una de las zonas más turísticas de Galicia por sus playas, su naturaleza y su cultura. Los tres concellos forman la **Mancomunidade do Val Miñor**.\n\n" +
+        "Nuestro club lleva con orgullo el nombre de esta tierra. 🤍❤️",
+      sugerencias: ["Nigrán y sus playas", "Sobre el club", "Instalaciones"]
+    },
+
+    /* ---------- NIGRÁN ---------- */
+    {
+      id: "nigran",
+      keywords: ["nigran", "playa", "playas", "playa america", "patos", "panxon", "ramallosa", "que ver en nigran", "turismo", "que hacer en nigran"],
+      respuesta:
+        "🏖️ **Nigrán**\n\n" +
+        "Nigrán es el municipio donde tiene su sede la E.D. Val Miñor, situado entre **Vigo y Baiona**, en la comarca del Val Miñor. Tiene unos **18.000 habitantes** repartidos en 7 parroquias (Nigrán, Panxón, A Ramallosa, Parada, Camos, Chandebrito y Priegue), y en verano casi triplica su población.\n\n" +
+        "Es famoso por sus **playas**: **Playa América** (familiar, de arena fina y aguas tranquilas), **Patos** (todo un referente del surf) y **Panxón**. 🌊\n\n" +
+        "**Fiestas y planes:** San Xoán de Panxón (en torno al 24 de junio), Virxe do Carme en Playa América (último fin de semana de julio), surf en Patos y la ruta de senderismo del **Río Muíños** (circular de unos 8 km desde Playa América).",
+      sugerencias: ["¿Qué es el Val Miñor?", "Instalaciones", "Campus de verano"]
+    },
+
+    /* ---------- BAIONA ---------- */
+    {
+      id: "baiona",
+      keywords: ["baiona", "bayona", "monterreal", "parador", "carabela", "pinta", "arribada", "virgen de la roca", "virxe da rocha", "que ver en baiona"],
+      respuesta:
+        "⛵ **Baiona**\n\n" +
+        "Baiona es uno de los tres concellos del Val Miñor (junto a Nigrán y Gondomar), una histórica villa marinera de las Rías Baixas.\n\n" +
+        "Qué ver:\n" +
+        "• **Fortaleza de Monterreal**: castillo sobre el monte Boi, hoy Parador de Turismo; su muralla (unos 3 km) es transitable.\n" +
+        "• **Réplica de la Carabela Pinta**: en el puerto; aquí llegó en 1493 la noticia del descubrimiento de América.\n" +
+        "• **La Arribada**: fiesta histórica (primer fin de semana de marzo) que recrea aquella llegada.\n" +
+        "• Casco histórico, playas y la **Virxe da Rocha**.\n\n" +
+        "Un plan perfecto para antes o después de un partido. ⚽",
+      sugerencias: ["¿Qué es el Val Miñor?", "Gondomar", "Nigrán y sus playas"]
+    },
+
+    /* ---------- GONDOMAR ---------- */
+    {
+      id: "gondomar",
+      keywords: ["gondomar", "pazo", "conde de gondomar", "pazos de ulloa", "castro", "pedra moura", "ponte das animas", "que ver en gondomar"],
+      respuesta:
+        "🏛️ **Gondomar**\n\n" +
+        "Gondomar completa la comarca del Val Miñor junto a Nigrán y Baiona. Tiene una historia antiquísima y un rico patrimonio.\n\n" +
+        "Qué ver:\n" +
+        "• **Pazo do Conde de Gondomar** (declarado Bien de Interés Cultural): sirvió de escenario para la serie «Los pazos de Ulloa».\n" +
+        "• **Castro de Pedra Moura** (Borreiros): asentamiento castreño con vistas a la bahía de Baiona y al valle del Miñor.\n" +
+        "• **Ponte das Ánimas** sobre el río Miñor, inicio de la Ruta das Ánimas.\n\n" +
+        "🤍❤️",
+      sugerencias: ["Baiona", "¿Qué es el Val Miñor?", "Nigrán y sus playas"]
+    },
+
+    /* ---------- REDES SOCIALES ---------- */
+    {
+      id: "redes",
+      keywords: ["instagram", "redes", "redes sociales", "seguir", "rrss", "facebook", "twitter", "x", "tiktok"],
+      respuesta:
+        "📸 **Síguenos en redes**\n\n" +
+        "Toda la actualidad diaria del club:\n" +
+        "• Instagram: [" + CONTACTO.instagram + "](" + CONTACTO.instagramUrl + ")\n" +
+        "• Facebook: [ED Val Miñor Nigrán](https://www.facebook.com/edvalminor/)\n" +
+        "• X (Twitter): [" + CONTACTO.instagram + "](https://x.com/edvalminor)\n\n" +
+        "Web oficial: " + CONTACTO.web,
+      sugerencias: ["Contacto", "Sobre el club"]
+    },
+
+    /* ---------- AGRADECIMIENTO (social) ---------- */
+    {
+      id: "agradecimiento",
+      social: true,
+      keywords: ["gracias", "muchas gracias", "genial", "perfecto", "estupendo", "vale gracias", "mil gracias", "grazas"],
+      respuesta:
+        "¡De nada! 🤍❤️ Si te surge cualquier otra duda, aquí estaré. ¡Aúpa Val Miñor! ⚽",
+      sugerencias: ["Campus de verano", "Hacerme socio", "Contacto"]
+    },
+
+    /* ---------- DESPEDIDA (social) ---------- */
+    {
+      id: "despedida",
+      social: true,
+      keywords: ["adios", "hasta luego", "chao", "chau", "nada mas", "eso es todo", "hasta pronto", "me voy"],
+      respuesta:
+        "¡Hasta pronto! Gracias por contactar con la E.D. Val Miñor Nigrán. 🤍❤️⚽",
+      sugerencias: []
+    }
+  ];
+
+  /* ---- Respuesta cuando no se reconoce la pregunta --------------------- */
+  var FALLBACK =
+    "Lo siento, no estoy seguro de haber entendido tu pregunta. 🤔\n\n" +
+    "Puedo ayudarte con: **campus de verano**, **inscripciones**, **hacerte socio**, " +
+    "**cuotas**, **camisetas**, **entrenamientos**, **partidos**, **instalaciones** o **contacto**.\n\n" +
+    "Si lo prefieres, escríbenos directamente a " + CONTACTO.email + " o por WhatsApp al " + CONTACTO.whatsapp + " y te atenderemos personalmente.";
+
+  /* ---- Mensaje de bienvenida del asistente ---------------------------- */
+  var BIENVENIDA =
+    "¡Hola! 👋 Soy el **asistente virtual** de la E.D. Val Miñor Nigrán. " +
+    "Pregúntame lo que necesites sobre el club y te ayudaré al instante.";
+
+  var SUGERENCIAS_INICIALES = [
+    "Campus de verano 2026",
+    "¿Cómo me hago socio?",
+    "¿Qué es el Val Miñor?",
+    "Cuotas de la temporada",
+    "Contacto"
+  ];
+
+  /* ====================================================================
+     CONTEXTO_IA
+     Versión en prosa de toda la información, pensada para usarse como
+     "system prompt" cuando se activa el modo avanzado con la API de Claude.
+     Mantén esta sección coherente con los temas de arriba.
+     ==================================================================== */
+  var CONTEXTO_IA = [
+    "# E.D. Val Miñor Nigrán — Información oficial del club",
+    "",
+    "## El club",
+    "Escuela de fútbol fundada en 1996. Referente del fútbol base en Nigrán, el Val Miñor y Galicia.",
+    "Cuenta con cerca de una treintena de equipos (más de 27) y más de 300 jugadores. Categorías:",
+    "biberones, prebenjamín, benjamín, alevín, infantil, cadete, juvenil y aficionados.",
+    "El objetivo es formar excelentes personas, no solo futbolistas.",
+    "Sede en A Ramallosa (Nigrán). Federado en la Real Federación Galega de Fútbol; históricamente",
+    "conocido también como 'Val Miñor - Caixanova'. Colores del club: blanco y rojo.",
+    "",
+    "## Contacto",
+    "- Email (vía principal): " + CONTACTO.email,
+    "- WhatsApp / Teléfono: " + CONTACTO.whatsapp,
+    "- Atención a entrenadores y competición: " + CONTACTO.director + " (" + CONTACTO.telefonoDirector + ")",
+    "- Dirección: " + CONTACTO.direccion,
+    "- Instagram: " + CONTACTO.instagram + " (" + CONTACTO.instagramUrl + ")",
+    "- Web: " + CONTACTO.web,
+    "- Número de cuenta " + CONTACTO.banco + ": " + CONTACTO.iban,
+    "",
+    "## Campus de Fútbol 2026 (Grupo PEREIRA)",
+    "- Lugar: Complejo Deportivo y Social URECA (Nigrán).",
+    "- 1.er turno: del 11 al 15 de agosto.",
+    "- 2.º turno: del 25 al 29 de agosto (PLAZAS AGOTADAS).",
+    "- Horario base: 09:30 a 13:30 h.",
+    "- Cuota: 70 € por turno y alumno.",
+    "- Servicio opcional «Buenos días» (recogida 08:30–09:30): +20 €.",
+    "- Servicio opcional de comedor / media pensión (13:30–15:00): +70 €.",
+    "- Inscripción: rellenar el formulario oficial (" + ENLACES.formularioCampus + ") e ingresar la cuota en la cuenta " + CONTACTO.iban + ".",
+    "  La plaza solo queda validada cuando se recibe el comprobante de pago por email a " + CONTACTO.email + ".",
+    "  Concepto de la transferencia: nombre y apellidos del niño/a + año de nacimiento. Ejemplo: 'Pedro López - 2010'.",
+    "  La confirmación se recibe por email en un plazo de 2 a 3 días laborables.",
+    "",
+    "## Hazte socio",
+    "- Abono familiar: 30 € por temporada.",
+    "- Abono individual: 20 € por temporada.",
+    "- Alta: familiar (" + ENLACES.socioFamiliar + ") o individual (" + ENLACES.socioIndividual + ").",
+    "- Tras el alta, escribir a " + CONTACTO.email + " indicando dónde recoger el carnet: Oficina EDVM (URECA) o Taquilla de Condomínguez.",
+    "",
+    "## Camiseta de recuerdo de la temporada",
+    "- Tallas 2 a 14: 40 €. Tallas S a 3XXL: 45 €. Marcaje del nombre incluido.",
+    "- Solicitud: " + ENLACES.formularioCamisetas + ". Ingreso en la cuenta " + CONTACTO.iban + " y comprobante a " + CONTACTO.email + ".",
+    "- Indicar nombre y apellidos del solicitante y la talla. Ejemplo: 'Pedro Miguel Álvarez - Talla 6'.",
+    "- El plazo de pedidos se cerró el 19 de mayo; para pedidos posteriores, confirmar disponibilidad por email.",
+    "- También hay ropa oficial de jugador y de portero (catálogo de jugadores: " + ENLACES.ropaJugadores + ").",
+    "",
+    "## Fiesta de fin de temporada",
+    "- Sábado 27 de junio, en Condomínguez. Programa completo a mediados de junio.",
+    "- Habrá fútbol, diversión acuática, baile y sorpresas para jugadores, amigos y familias.",
+    "",
+    "## Recursos y enlaces",
+    "- Cuotas de la temporada: " + ENLACES.cuotas,
+    "- Entrenamientos: " + ENLACES.entrenamientos,
+    "- Calendario de partidos: " + ENLACES.partidos,
+    "- Horario de oficina: " + ENLACES.horarioOficina,
+    "- Torneos: " + ENLACES.torneos,
+    "- Protocolo Xogade (seguro, PDF): " + ENLACES.xogade,
+    "- Ideario y RRI: " + ENLACES.ideario,
+    "",
+    "## Instalaciones",
+    "- Campo Municipal de Nigrán: partidos oficiales como local.",
+    "- Complejo Deportivo URECA: oficina, entrenamientos entre semana y campus.",
+    "- Taquilla Condomínguez: atención los días de partido y recogida de carnets de socios.",
+    "",
+    "## Congreso de Entrenadores (I edición, FEMXA)",
+    "- Jueves 26 y viernes 27 de diciembre. Mañana 10:00–14:00, tarde 16:00–21:00. Auditorio del Concello de Nigrán.",
+    "- Pase completo: 50 €. Media jornada: 30 €. Director: " + CONTACTO.director + " (" + CONTACTO.telefonoDirector + ").",
+    "",
+    "## Patrocinadores",
+    "- Principal: Grupo Pereira. También: Kömmerling, Several Energy, GADIS, Clínica Nimo, Aceites Abril, Pescanova.",
+    "- Instituciones: Diputación de Pontevedra, Concello de Nigrán y URECA.",
+    "",
+    "## El Val Miñor (comarca)",
+    "El Val Miñor es una comarca natural del sur de Galicia (provincia de Pontevedra) formada por los",
+    "municipios de Nigrán, Baiona y Gondomar. Toma su nombre del río Miñor, que forma el valle.",
+    "Se encuentra en la Ría de Vigo, dentro de las Rías Baixas, una de las zonas más turísticas de Galicia.",
+    "Los tres concellos forman la Mancomunidade do Val Miñor. El club lleva el nombre de esta comarca.",
+    "",
+    "## Nigrán (sede del club)",
+    "Municipio situado entre Vigo y Baiona, en el Val Miñor. Unos 18.000 habitantes en 7 parroquias",
+    "(Nigrán, Panxón, A Ramallosa, Parada, Camos, Chandebrito y Priegue); en verano casi triplica su población.",
+    "Playas destacadas: Playa América (familiar), Patos (referente del surf) y Panxón.",
+    "Fiestas: San Xoán de Panxón (en torno al 24 de junio) y Virxe do Carme en Playa América (último fin de semana de julio).",
+    "Senderismo: ruta del Río Muíños, circular de unos 8 km desde Playa América.",
+    "",
+    "## Baiona (comarca del Val Miñor)",
+    "Histórica villa marinera. Destaca la Fortaleza de Monterreal (hoy Parador de Turismo, con muralla transitable),",
+    "la réplica de la Carabela Pinta (en 1493 llegó aquí la noticia del descubrimiento de América) y la fiesta de",
+    "La Arribada (primer fin de semana de marzo).",
+    "",
+    "## Gondomar (comarca del Val Miñor)",
+    "Concello con rico patrimonio: el Pazo do Conde de Gondomar (Bien de Interés Cultural, escenario de 'Los pazos",
+    "de Ulloa'), el Castro de Pedra Moura (Borreiros) y la Ponte das Ánimas sobre el río Miñor."
+  ].join("\n");
+
+  return {
+    CONTACTO: CONTACTO,
+    ENLACES: ENLACES,
+    TEMAS: TEMAS,
+    FALLBACK: FALLBACK,
+    BIENVENIDA: BIENVENIDA,
+    SUGERENCIAS_INICIALES: SUGERENCIAS_INICIALES,
+    CONTEXTO_IA: CONTEXTO_IA
+  };
+});
+
+</script>
+<script>
+/* edvm-chat.js */
+/* ============================================================================
+   Asistente Virtual E.D. Val Miñor Nigrán — Motor del chat
+   ----------------------------------------------------------------------------
+   - Funciona 100% en el navegador, sin servidor ni claves (modo local):
+     busca la mejor respuesta dentro de base-conocimiento.js.
+   - Opcionalmente puede usar la API de Claude para conversaciones más
+     naturales: basta con definir window.EDVM_CONFIG.apiEndpoint con la URL
+     del backend (ver carpeta /api). Si el backend falla, vuelve al modo local.
+
+   Uso:
+     EDVMChat.iniciarWidget();              // burbuja flotante (esquina)
+     EDVMChat.iniciarInline("#mi-div");     // chat incrustado en la página
+   ============================================================================ */
+
+window.EDVMChat = (function () {
+  "use strict";
+
+  var KB = window.EDVM_KB;
+  if (!KB) {
+    console.error("[EDVMChat] No se encontro base-conocimiento.js (window.EDVM_KB). Cargalo antes que edvm-chat.js.");
+    return { iniciarWidget: function () {}, iniciarInline: function () {} };
+  }
+
+  var CONFIG = window.EDVM_CONFIG || {};
+  var API_ENDPOINT = CONFIG.apiEndpoint || "";        // "" => modo local
+  var TITULO = CONFIG.titulo || "E.D. Val Miñor";
+  var LOGO_URL = CONFIG.logoUrl || "";
+  var SUBTITULO = CONFIG.subtitulo || "En linea · respuesta inmediata";
+
+  /* ====================================================================
+     ICONOS (SVG en linea)
+     ==================================================================== */
+  // Escudo oficial del club (SVG vectorial). Se inserta en línea para que use
+  // las tipografías de la página (Barlow). logoSVG() devuelve una copia con IDs
+  // únicos, de modo que se puede repetir sin colisiones de identificadores.
+  var LOGO_TEMPLATE =
+    '<svg class="edvm-logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+    '<defs>' +
+    '<path id="EDVMTOP" d="M 24.8,72.6 A 80,80 0 0 1 175.2,72.6"/>' +
+    '<path id="EDVMBOT" d="M 34.5,145.9 A 80,80 0 0 0 165.5,145.9"/>' +
+    '</defs>' +
+    '<circle cx="100" cy="100" r="98" fill="#cc1f1f"/>' +
+    '<g fill="#ffffff" font-family="\'Barlow Condensed\',\'Arial Narrow\',Arial,Helvetica,sans-serif" font-weight="700">' +
+    '<text font-size="16" letter-spacing="1.2"><textPath href="#EDVMTOP" startOffset="50%" text-anchor="middle">ED VAL MIÑOR</textPath></text>' +
+    '<text font-size="17" letter-spacing="3"><textPath href="#EDVMBOT" startOffset="50%" text-anchor="middle">NIGRÁN</textPath></text>' +
+    '</g>' +
+    '<path d="M 52,80 C 66,68 78,68 90,78 C 98,84 102,84 110,78 C 122,68 134,68 148,80" fill="none" stroke="#ffffff" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '<path d="M 56,88 L 144,88 L 100,160 Z M 100,88 L 78,124 L 122,124 Z" fill="#ffffff" fill-rule="evenodd"/>' +
+    '<polygon points="100,100 110,119 90,119" fill="#ffffff"/>' +
+    "</svg>";
+
+  var _logoSeq = 0;
+  function logoSVG() {
+    if (LOGO_URL) {
+      return '<img class="edvm-logo" src="' + LOGO_URL + '" alt="Escudo E.D. Val Miñor Nigrán">';
+    }
+    _logoSeq++;
+    return LOGO_TEMPLATE.replace(/EDVMTOP/g, "edvmT" + _logoSeq).replace(/EDVMBOT/g, "edvmB" + _logoSeq);
+  }
+
+  var ICONO_ENVIAR =
+    '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+    '<path d="M3.4 20.4l17.45-7.48a1 1 0 000-1.84L3.4 3.6a.993.993 0 00-1.39.91L2 9.12c0 .5.37.93.87.99L17 12 2.87 13.88c-.5.07-.87.5-.87 1l.01 4.61c0 .71.73 1.2 1.39.91z" fill="currentColor"/>' +
+    "</svg>";
+
+  /* ====================================================================
+     UTILIDADES DE TEXTO
+     ==================================================================== */
+
+  // Normaliza: minusculas, sin tildes, sin signos -> para comparar palabras
+  function normalizar(texto) {
+    return (texto || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[̀-ͯ]/g, "")   // quita acentos y diacriticos
+      .replace(/[^a-z0-9\s]/g, " ")      // signos -> espacio
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function escaparHtml(texto) {
+    return (texto || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  // Distancia de edición (Levenshtein) acotada: tolera erratas al buscar.
+  function distancia(a, b) {
+    var m = a.length, n = b.length;
+    if (Math.abs(m - n) > 1) return 2; // basta con saber si es <= 1
+    var fila = [], i, j;
+    for (j = 0; j <= n; j++) fila[j] = j;
+    for (i = 1; i <= m; i++) {
+      var prev = fila[0];
+      fila[0] = i;
+      for (j = 1; j <= n; j++) {
+        var tmp = fila[j];
+        fila[j] = Math.min(
+          fila[j] + 1,
+          fila[j - 1] + 1,
+          prev + (a.charAt(i - 1) === b.charAt(j - 1) ? 0 : 1)
+        );
+        prev = tmp;
+      }
+    }
+    return fila[n];
+  }
+
+  // Convierte el formato sencillo de la base de conocimiento a HTML seguro.
+  function formatear(texto) {
+    var html = escaparHtml(texto);
+
+    // Enlaces [texto](url): se reservan como tokens con un marcador exclusivo
+    // (@@@indice@@@) que no puede colisionar con numeros reales del texto
+    // (p. ej. "70") ni volver a enlazarse en los pasos siguientes.
+    var tokens = [];
+    html = html.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (_, etiqueta, url) {
+      var i = tokens.length;
+      tokens.push('<a href="' + url + '" target="_blank" rel="noopener">' + etiqueta + "</a>");
+      return "@@@" + i + "@@@";
+    });
+
+    // Autoenlazar emails sueltos
+    html = html.replace(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g,
+      '<a href="mailto:$1">$1</a>');
+
+    // Autoenlazar URLs sueltas (http/https)
+    html = html.replace(/(^|[\s(])((?:https?:\/\/)[^\s<]+)/g, function (_, pre, url) {
+      return pre + '<a href="' + url + '" target="_blank" rel="noopener">' + url + "</a>";
+    });
+
+    // Negritas **texto**
+    html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+
+    // Restaurar los tokens de enlaces
+    html = html.replace(/@@@(\d+)@@@/g, function (_, i) {
+      return tokens[+i];
+    });
+
+    // Construir parrafos y listas a partir de los saltos de linea
+    var lineas = html.split("\n");
+    var salida = [];
+    var parr = [];
+    var lista = [];
+
+    function volcarParrafo() {
+      if (parr.length) {
+        salida.push("<p>" + parr.join("<br>") + "</p>");
+        parr = [];
+      }
+    }
+    function volcarLista() {
+      if (lista.length) {
+        salida.push("<ul>" + lista.map(function (li) { return "<li>" + li + "</li>"; }).join("") + "</ul>");
+        lista = [];
+      }
+    }
+
+    lineas.forEach(function (linea) {
+      var t = linea.trim();
+      if (t === "") {
+        volcarParrafo();
+        volcarLista();
+      } else if (t.charAt(0) === "•") {   // vineta "•"
+        volcarParrafo();
+        lista.push(t.replace(/^•\s*/, ""));
+      } else {
+        volcarLista();
+        parr.push(t);
+      }
+    });
+    volcarParrafo();
+    volcarLista();
+
+    return salida.join("");
+  }
+
+  /* ====================================================================
+     MOTOR DE BUSQUEDA (modo local)
+     ==================================================================== */
+
+  // Devuelve { texto, sugerencias, id } con la mejor coincidencia.
+  function buscarRespuesta(consulta) {
+    var norm = normalizar(consulta);
+    var q = " " + norm + " ";
+    var qTokens = norm ? norm.split(" ") : [];
+    var mejorContenido = null, mejorContenidoPunt = 0;
+    var mejorSocial = null, mejorSocialPunt = 0;
+
+    KB.TEMAS.forEach(function (tema) {
+      var punt = 0;
+      tema.keywords.forEach(function (kw) {
+        var k = normalizar(kw);
+        if (!k) return;
+        // coincidencia por palabra/expresion completa
+        if (q.indexOf(" " + k + " ") !== -1) {
+          punt += k.length + (k.indexOf(" ") !== -1 ? 4 : 0); // bonus a expresiones
+        } else if (k.indexOf(" ") === -1 && k.length >= 4) {
+          // tolerancia a erratas: palabra simple con distancia de edicion <= 1
+          for (var ti = 0; ti < qTokens.length; ti++) {
+            var t = qTokens[ti];
+            if (t.length >= 4 && Math.abs(t.length - k.length) <= 1 && distancia(t, k) <= 1) {
+              punt += k.length - 1;
+              break;
+            }
+          }
+        }
+      });
+      if (punt === 0) return;
+      if (tema.social) {
+        if (punt > mejorSocialPunt) { mejorSocialPunt = punt; mejorSocial = tema; }
+      } else {
+        if (punt > mejorContenidoPunt) { mejorContenidoPunt = punt; mejorContenido = tema; }
+      }
+    });
+
+    var UMBRAL = 4; // longitud minima de palabra reconocida
+    var elegido = null;
+    if (mejorContenido && mejorContenidoPunt >= UMBRAL) {
+      elegido = mejorContenido;
+    } else if (mejorSocial) {
+      elegido = mejorSocial;
+    } else if (mejorContenido) {
+      elegido = mejorContenido; // coincidencia debil, mejor que nada
+    }
+
+    if (elegido) {
+      return { texto: elegido.respuesta, sugerencias: elegido.sugerencias || [], id: elegido.id };
+    }
+    return { texto: KB.FALLBACK, sugerencias: KB.SUGERENCIAS_INICIALES.slice(0, 4), id: "fallback" };
+  }
+
+  /* ====================================================================
+     LLAMADA A LA API DE CLAUDE (modo avanzado, opcional)
+     ==================================================================== */
+  function consultarAPI(historial) {
+    return fetch(API_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: historial })
+    })
+      .then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      })
+      .then(function (data) {
+        if (!data || !data.reply) throw new Error("Respuesta vacia");
+        return data.reply;
+      });
+  }
+
+  /* ====================================================================
+     INSTANCIA DE CHAT
+     ==================================================================== */
+  function crearChat(opciones) {
+    opciones = opciones || {};
+    var inline = !!opciones.inline;
+    var contenedorObjetivo = opciones.contenedor || null;
+
+    var historial = [];   // para el modo API: [{role, content}]
+    var raiz, messagesEl, suggestionsEl, inputEl, sendBtn, launcher, panel, badge, callout;
+    var abierto = inline;
+
+    /* ---- Construccion del DOM ---- */
+    raiz = document.createElement("div");
+    raiz.className = "edvm-chat" + (inline ? " edvm-inline" : "");
+
+    panel = document.createElement("div");
+    panel.className = "edvm-panel";
+    panel.setAttribute("role", "dialog");
+    panel.setAttribute("aria-label", "Asistente virtual E.D. Val Miñor Nigrán");
+    panel.innerHTML =
+      '<div class="edvm-header">' +
+        '<div class="edvm-header-shield">' + logoSVG() + "</div>" +
+        '<div class="edvm-header-info">' +
+          '<div class="edvm-header-title">' + escaparHtml(TITULO) + "</div>" +
+          '<div class="edvm-header-status">' + escaparHtml(SUBTITULO) + "</div>" +
+        "</div>" +
+        '<button class="edvm-header-min" type="button" aria-label="Minimizar">&#8211;</button>' +
+      "</div>" +
+      '<div class="edvm-messages" aria-live="polite"></div>' +
+      '<div class="edvm-suggestions"></div>' +
+      '<div class="edvm-input-bar">' +
+        '<textarea class="edvm-input" rows="1" placeholder="Escribe tu pregunta..." aria-label="Escribe tu pregunta"></textarea>' +
+        '<button class="edvm-send" type="button" aria-label="Enviar">' + ICONO_ENVIAR + "</button>" +
+      "</div>" +
+      '<div class="edvm-footer">Asistente de <strong>E.D. Val Miñor Nigrán</strong></div>';
+
+    messagesEl = panel.querySelector(".edvm-messages");
+    suggestionsEl = panel.querySelector(".edvm-suggestions");
+    inputEl = panel.querySelector(".edvm-input");
+    sendBtn = panel.querySelector(".edvm-send");
+
+    if (inline) {
+      raiz.appendChild(panel);
+      (contenedorObjetivo || document.body).appendChild(raiz);
+    } else {
+      launcher = document.createElement("button");
+      launcher.className = "edvm-launcher";
+      launcher.type = "button";
+      launcher.setAttribute("aria-label", "Abrir asistente virtual");
+      launcher.innerHTML = '<span class="edvm-launcher-logo">' + logoSVG() + "</span>" +
+        '<span class="edvm-launcher-close">&times;</span>' +
+        '<span class="edvm-launcher-badge">1</span>';
+      badge = launcher.querySelector(".edvm-launcher-badge");
+      raiz.appendChild(panel);
+      raiz.appendChild(launcher);
+
+      // Aviso de atención junto a la burbuja (para que la IA se vea bien)
+      callout = document.createElement("div");
+      callout.className = "edvm-callout";
+      callout.innerHTML = '<button class="edvm-callout-x" type="button" aria-label="Cerrar">&times;</button>' +
+        '👋 ¿Tienes dudas? <strong>Pregúntame</strong>';
+      raiz.appendChild(callout);
+      setTimeout(function () { if (!abierto && callout) callout.classList.add("show"); }, 1800);
+      callout.addEventListener("click", function (e) {
+        if (e.target && e.target.className === "edvm-callout-x") {
+          if (callout && callout.parentNode) { callout.parentNode.removeChild(callout); callout = null; }
+          return;
+        }
+        abrir();
+      });
+
+      document.body.appendChild(raiz);
+
+      launcher.addEventListener("click", alternar);
+      panel.querySelector(".edvm-header-min").addEventListener("click", cerrar);
+    }
+
+    /* ---- Render de mensajes ---- */
+    function avatarBot() {
+      return '<div class="edvm-msg-avatar">' + logoSVG() + "</div>";
+    }
+
+    function pintarMensaje(rol, contenido, esHtmlPlano) {
+      var msg = document.createElement("div");
+      msg.className = "edvm-msg " + (rol === "user" ? "user" : "bot");
+      var cuerpo = esHtmlPlano ? contenido : formatear(contenido);
+      msg.innerHTML =
+        (rol === "bot" ? avatarBot() : "") +
+        '<div class="edvm-bubble">' + cuerpo + "</div>";
+      messagesEl.appendChild(msg);
+      desplazar();
+      return msg;
+    }
+
+    function pintarSugerencias(lista) {
+      suggestionsEl.innerHTML = "";
+      (lista || []).forEach(function (txt) {
+        var chip = document.createElement("button");
+        chip.className = "edvm-chip";
+        chip.type = "button";
+        chip.textContent = txt;
+        chip.addEventListener("click", function () {
+          enviar(txt);
+        });
+        suggestionsEl.appendChild(chip);
+      });
+    }
+
+    var typingEl = null;
+    function mostrarTyping() {
+      ocultarTyping();
+      typingEl = document.createElement("div");
+      typingEl.className = "edvm-msg bot";
+      typingEl.innerHTML = avatarBot() +
+        '<div class="edvm-bubble"><div class="edvm-typing"><span></span><span></span><span></span></div></div>';
+      messagesEl.appendChild(typingEl);
+      desplazar();
+    }
+    function ocultarTyping() {
+      if (typingEl && typingEl.parentNode) typingEl.parentNode.removeChild(typingEl);
+      typingEl = null;
+    }
+
+    function desplazar() {
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    /* ---- Logica de envio ---- */
+    function enviar(textoForzado) {
+      var texto = (typeof textoForzado === "string" ? textoForzado : inputEl.value).trim();
+      if (!texto) return;
+
+      pintarMensaje("user", escaparHtml(texto), true);
+      inputEl.value = "";
+      ajustarAltura();
+      pintarSugerencias([]);
+      historial.push({ role: "user", content: texto });
+      mostrarTyping();
+
+      var demora = 350 + Math.min(texto.length * 12, 650); // sensacion natural
+
+      if (API_ENDPOINT) {
+        // Modo avanzado: API de Claude (con respaldo local si falla)
+        consultarAPI(historial.slice(-12))
+          .then(function (reply) {
+            ocultarTyping();
+            historial.push({ role: "assistant", content: reply });
+            pintarMensaje("bot", reply);
+            pintarSugerencias([]);
+          })
+          .catch(function (err) {
+            console.warn("[EDVMChat] Fallo la API, uso respuesta local:", err.message);
+            ocultarTyping();
+            var res = buscarRespuesta(texto);
+            historial.push({ role: "assistant", content: res.texto });
+            pintarMensaje("bot", res.texto);
+            pintarSugerencias(res.sugerencias);
+          });
+      } else {
+        // Modo local
+        setTimeout(function () {
+          ocultarTyping();
+          var res = buscarRespuesta(texto);
+          historial.push({ role: "assistant", content: res.texto });
+          pintarMensaje("bot", res.texto);
+          pintarSugerencias(res.sugerencias);
+        }, demora);
+      }
+    }
+
+    /* ---- Entrada de texto ---- */
+    function ajustarAltura() {
+      inputEl.style.height = "auto";
+      inputEl.style.height = Math.min(inputEl.scrollHeight, 110) + "px";
+    }
+    inputEl.addEventListener("input", ajustarAltura);
+    inputEl.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        enviar();
+      }
+    });
+    sendBtn.addEventListener("click", function () { enviar(); });
+
+    /* ---- Apertura / cierre (solo widget flotante) ---- */
+    function abrir() {
+      abierto = true;
+      raiz.classList.add("is-open");
+      if (badge) badge.style.display = "none";
+      if (callout && callout.parentNode) { callout.parentNode.removeChild(callout); callout = null; }
+      setTimeout(function () { inputEl.focus(); }, 250);
+    }
+    function cerrar() {
+      abierto = false;
+      raiz.classList.remove("is-open");
+    }
+    function alternar() { if (abierto) { cerrar(); } else { abrir(); } }
+
+    /* ---- Mensaje de bienvenida inicial ---- */
+    pintarMensaje("bot", KB.BIENVENIDA);
+    pintarSugerencias(KB.SUGERENCIAS_INICIALES);
+
+    return { abrir: abrir, cerrar: cerrar, enviar: enviar, raiz: raiz };
+  }
+
+  /* ====================================================================
+     API PUBLICA
+     ==================================================================== */
+  var instanciaWidget = null;
+
+  function iniciarWidget() {
+    if (instanciaWidget) return instanciaWidget;
+    function arranque() {
+      if (!instanciaWidget) instanciaWidget = crearChat({ inline: false });
+    }
+    // Si el <body> ya existe (script al final del body), créalo al momento para
+    // que quien llame reciba la instancia (y los botones puedan abrir el chat).
+    if (document.body) {
+      arranque();
+    } else {
+      document.addEventListener("DOMContentLoaded", arranque);
+    }
+    return instanciaWidget;
+  }
+
+  function iniciarInline(selectorOContenedor) {
+    var creado = null;
+    var run = function () {
+      var cont = typeof selectorOContenedor === "string"
+        ? document.querySelector(selectorOContenedor)
+        : selectorOContenedor;
+      if (!cont) {
+        console.error("[EDVMChat] No se encontro el contenedor:", selectorOContenedor);
+        return;
+      }
+      creado = crearChat({ inline: true, contenedor: cont });
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", run);
+    } else {
+      run();
+    }
+    return creado;
+  }
+
+  return {
+    iniciarWidget: iniciarWidget,
+    iniciarInline: iniciarInline,
+    // Expuesto por si se quiere usar el motor desde fuera:
+    buscarRespuesta: buscarRespuesta,
+    normalizar: normalizar,
+    formatear: formatear
+  };
+})();
+
+</script>
+<script>(function(){try{EDVMChat.iniciarInline("#chat-full");}catch(e){if(window.console&&console.error)console.error("Asistente EDVM:",e);}})();</script>
+</body>
+</html>
