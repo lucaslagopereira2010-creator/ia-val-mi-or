@@ -28,8 +28,14 @@ const motor = leer("asistente/edvm-chat.js");
 const logoB64 = fs.readFileSync(path.join(RAIZ, "asistente/logo-original.jpg")).toString("base64");
 const logoDataUri = "data:image/jpeg;base64," + logoB64;
 
-/* URL pública (GitHub Pages) para la vista previa al compartir */
-const SITE_URL = "https://lucaslagopereira2010-creator.github.io/ia-val-mi-or/";
+/* Dominio propio (opcional). Si se define EDVM_DOMAIN (p.ej. "edvalminor.es"):
+   - todas las direcciones públicas usan ese dominio (oculta la cuenta de GitHub),
+   - se genera el archivo CNAME para GitHub Pages.
+   Si no, se usa la URL de GitHub Pages por defecto. */
+const DOMAIN = (process.env.EDVM_DOMAIN || "").trim().replace(/^https?:\/\//, "").replace(/\/+$/, "");
+const SITE_URL = DOMAIN
+  ? "https://" + DOMAIN + "/"
+  : "https://lucaslagopereira2010-creator.github.io/ia-val-mi-or/";
 
 /* Seguridad: política de contenido (CSP) estricta + sin fuga de referente.
    - Solo se permite lo que la web necesita (fuentes de Google y datos embebidos).
@@ -66,8 +72,9 @@ const L = {
 
 /* Enlace al asistente alojado: si se define, el botón "Asistente" será un ENLACE
    a esa página (abre el navegador real, donde el JS funciona aunque el visor del
-   móvil lo bloquee). Se pasa por variable de entorno EDVM_ASIST_URL. */
-const ASIST_URL = process.env.EDVM_ASIST_URL || "";
+   móvil lo bloquee). Se pasa por EDVM_ASIST_URL; con dominio propio se usa
+   automáticamente https://<dominio>/asistente.html (sin tu cuenta en el enlace). */
+const ASIST_URL = process.env.EDVM_ASIST_URL || (DOMAIN ? SITE_URL + "asistente.html" : "");
 const asistNav = ASIST_URL
   ? '<a href="' + ASIST_URL + '" target="_blank" rel="noopener noreferrer" class="nav-btn asist">💬 Asistente</a>'
   : '<a href="#" class="nav-btn asist" data-abrir-asistente>💬 Asistente</a>';
@@ -395,4 +402,10 @@ fs.writeFileSync(path.join(RAIZ, "index.html"),
   construir("asistente/logo-original.jpg", SITE_URL + "asistente/logo-original.jpg", assets("asistente/logo-original.jpg", false)), "utf8");
 // Página del asistente a pantalla completa (destino del enlace "Asistente")
 fs.writeFileSync(path.join(RAIZ, "asistente.html"), paginaAsistente(), "utf8");
-console.log("Generado: asistente-edvm.html, index.html y asistente.html" + (ASIST_URL ? " (enlace: " + ASIST_URL + ")" : ""));
+// Dominio propio: GitHub Pages necesita el archivo CNAME con el dominio
+if (DOMAIN) {
+  fs.writeFileSync(path.join(RAIZ, "CNAME"), DOMAIN + "\n", "utf8");
+}
+console.log("Generado: asistente-edvm.html, index.html y asistente.html" +
+  (DOMAIN ? " + CNAME (" + DOMAIN + ")" : "") +
+  (ASIST_URL ? "\nEnlace del asistente: " + ASIST_URL : ""));
