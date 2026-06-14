@@ -402,11 +402,14 @@ fs.writeFileSync(path.join(RAIZ, "asistente-edvm.html"),
 //    (ideal para un subdominio tipo asistente.midominio.com: abre la IA directa)
 //  - por defecto          -> la web completa del club (modular)
 var HOME_ASISTENTE = process.env.EDVM_HOME === "asistente";
-fs.writeFileSync(path.join(RAIZ, "index.html"),
-  HOME_ASISTENTE
-    ? paginaAsistente()
-    : construir("asistente/logo-original.jpg", SITE_URL + "asistente/logo-original.jpg", assets("asistente/logo-original.jpg", false)),
-  "utf8");
+var idxHtml = HOME_ASISTENTE
+  ? paginaAsistente()
+  : construir("asistente/logo-original.jpg", SITE_URL + "asistente/logo-original.jpg", assets("asistente/logo-original.jpg", false));
+// En la web alojada (GitHub Pages / dominio propio), el botón del asistente
+// apunta RELATIVO al mismo sitio: así funciona sin mostrar la cuenta en el
+// enlace ni pasar por redirecciones. (El archivo único usa la URL absoluta.)
+if (ASIST_URL && !HOME_ASISTENTE) idxHtml = idxHtml.split(ASIST_URL).join("asistente.html");
+fs.writeFileSync(path.join(RAIZ, "index.html"), idxHtml, "utf8");
 // Página del asistente a pantalla completa (destino del enlace "Asistente")
 fs.writeFileSync(path.join(RAIZ, "asistente.html"), paginaAsistente(), "utf8");
 // Dominio propio: GitHub Pages necesita el archivo CNAME con el dominio
