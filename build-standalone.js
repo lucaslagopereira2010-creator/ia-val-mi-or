@@ -397,9 +397,16 @@ function construir(logoSrc, ogImg, bloque) {
 // Archivo único: logo y vista previa con data URI (autónomo)
 fs.writeFileSync(path.join(RAIZ, "asistente-edvm.html"),
   construir(logoDataUri, logoDataUri, assets(logoDataUri, true)), "utf8");
-// Modular (GitHub Pages): favicon relativo + og:image absoluta para compartir
+// Página de inicio (index.html):
+//  - EDVM_HOME=asistente  -> la raíz ES el asistente a pantalla completa
+//    (ideal para un subdominio tipo asistente.midominio.com: abre la IA directa)
+//  - por defecto          -> la web completa del club (modular)
+var HOME_ASISTENTE = process.env.EDVM_HOME === "asistente";
 fs.writeFileSync(path.join(RAIZ, "index.html"),
-  construir("asistente/logo-original.jpg", SITE_URL + "asistente/logo-original.jpg", assets("asistente/logo-original.jpg", false)), "utf8");
+  HOME_ASISTENTE
+    ? paginaAsistente()
+    : construir("asistente/logo-original.jpg", SITE_URL + "asistente/logo-original.jpg", assets("asistente/logo-original.jpg", false)),
+  "utf8");
 // Página del asistente a pantalla completa (destino del enlace "Asistente")
 fs.writeFileSync(path.join(RAIZ, "asistente.html"), paginaAsistente(), "utf8");
 // Dominio propio: GitHub Pages necesita el archivo CNAME con el dominio
